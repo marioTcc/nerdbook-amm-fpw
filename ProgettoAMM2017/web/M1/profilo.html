@@ -2,13 +2,49 @@
 
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>NerdBook - Modifica profilo</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Mario Taccori">
+        <meta name="keywords" content="NerdBook profilo social network">
     </head>
     <body>
+                
+        <nav>
+            <ol>
+                <li>Descrizione</li>
+                <li>Login</li>
+            </ol>
+        </nav>
+        
         <div>
+            <form id="formDatiProfilo">
+                Nome:
+                <input type="text" name="userNameInput">
+                <br/>
+                Cognome:
+                <input type="text" name="userSurnameInput">
+                <br/>
+                Url immagine profilo:
+                <input type="text" name="profilePicUrlInput">
+                <br/>
+                Presentazione:
+                <input type="text" name="presInput">
+                <br/>
+                Data di nascita:
+                <input type="text" name="bDateInput">
+                <br/>
+                <br/>
+                Password:
+                <input type="password" name="passwordInput">
+                <br/>
+                Conferma password:
+                <input type="password" name="passwordConfirmInput">
+                <br/>
+            </form>
             
+            <input type="submit" form="formDatiProfilo" value="Modifica">
         </div>
+        
     </body>
 </html>

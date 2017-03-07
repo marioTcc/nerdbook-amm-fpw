@@ -2,13 +2,33 @@
 
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>NerdBook - Login</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Mario Taccori">
+        <meta name="keywords" content="NerdBook descrizione social network">
     </head>
     <body>
+        
+        <nav>
+            <ol>
+                <li>Descrizione</li>
+                <li>Profilo</li>
+                <li>Bacheca</li>
+            </ol>
+        </nav>
+
         <div>
+            <form id="loginForm">
+                Username:
+                <input type="text" name="usernameInput">
+                <br/>
+                Password:
+                <input type="password" name="passwordInput">
+                <br/>
+            </form>
             
+            <input type="submit" form="loginForm" value="Login">
         </div>
     </body>
 </html>
