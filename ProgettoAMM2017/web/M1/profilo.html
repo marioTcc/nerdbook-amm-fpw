@@ -9,42 +9,67 @@
         <meta name="keywords" content="NerdBook profilo social network">
     </head>
     <body>
-                
-        <nav>
+        
+        <header> <!-- Titolo -->
+            <div id="title">
+                Profilo personale
+            </div>
+        </header>        
+        
+        <nav> <!-- Menu di navigazione -->
             <ol>
-                <li>Descrizione</li>
-                <li>Login</li>
+                <li><a href="descrizione.html">Descrizione</a></li>
+                <li><a href="login.html">Login</a></li>
             </ol>
         </nav>
         
-        <div>
-            <form id="formDatiProfilo">
-                Nome:
-                <input type="text" name="userNameInput">
-                <br/>
-                Cognome:
-                <input type="text" name="userSurnameInput">
-                <br/>
-                Url immagine profilo:
-                <input type="text" name="profilePicUrlInput">
-                <br/>
-                Presentazione:
-                <input type="text" name="presInput">
-                <br/>
-                Data di nascita:
-                <input type="text" name="bDateInput">
-                <br/>
-                <br/>
-                Password:
-                <input type="password" name="passwordInput">
-                <br/>
-                Conferma password:
-                <input type="password" name="passwordConfirmInput">
-                <br/>
-            </form>
+        <div id="divBody">
             
-            <input type="submit" form="formDatiProfilo" value="Modifica">
+            <div id="divForm"> <!-- Form dati profilo -->
+                <form id="formDatiProfilo" action="#" method="post">
+                    
+                    <div> <!-- Nome utente -->
+                        <label for="userName">Nome:</label>
+                        <input type="text" name="userName" id="userName">
+                    </div>
+                    
+                    <div> <!-- Cognome utente -->
+                        <label for="userName">Cognome:</label>
+                        <input type="text" name="userSurname" id="userSurname">
+                    </div>
+                    
+                    <div> <!-- Immagine profilo -->
+                        <label for="profilePic">Url immagine profilo:</label>
+                        <input type="url" name="profilePic" id="profilePic">
+                    </div>
+                    
+                    <div> <!-- Presentazione -->
+                        <label for="presentazione">Presentazione:</label>
+                        <textarea name="presentazione" id="presentazione"></textarea>
+                    </div>
+                    
+                    <div> <!-- Data di nascita -->
+                        <label for="bDate">Data di nascita:</label>
+                        <input type="date" name="bDate" id="bDate">
+                    </div>
+                    
+                    <div> <!-- Password -->
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+                    
+                    <div> <!-- Conferma password -->
+                        <label for="passwordConfirm">Conferma password:</label>
+                        <input type="password" name="passwordConfirm" id="passwordConfirm">
+                    </div>
+                    
+                    <div>
+                        <input type="submit" form="formDatiProfilo" value="Modifica">
+                    </div>
+                </form> 
+            </div> <!-- Fine form login -->
+            
         </div>
-        
+
     </body>
 </html>
