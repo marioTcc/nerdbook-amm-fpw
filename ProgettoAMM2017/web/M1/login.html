@@ -6,29 +6,42 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Mario Taccori">
-        <meta name="keywords" content="NerdBook descrizione social network">
+        <meta name="keywords" content="NerdBook login social network">
     </head>
+    
     <body>
+        <header> <!-- Titolo -->
+            <div id="title">
+                Pagina di login per NerdBook
+            </div>
+        </header>
         
-        <nav>
+        <nav> <!-- Menu di navigazione -->
             <ol>
-                <li>Descrizione</li>
-                <li>Profilo</li>
-                <li>Bacheca</li>
+                <li><a href="descrizione.html">Descrizione</a></li>
+                <li><a href="profilo.html">Profilo</a></li>
+                <li><a href="bacheca.html">Bacheca</a></li>
             </ol>
         </nav>
 
-        <div>
-            <form id="loginForm">
-                Username:
-                <input type="text" name="usernameInput">
-                <br/>
-                Password:
-                <input type="password" name="passwordInput">
-                <br/>
-            </form>
+        <div id="divBody">
             
-            <input type="submit" form="loginForm" value="Login">
+            <div> <!-- Contenitore form di login -->
+                <form id="loginForm" method="post" action="#">
+                    <div>
+                        <label for="username">Username:</label>
+                        <input type="text" name="username" id="username">
+                    </div>
+                    <div>
+                        <label for="password">Password:</label>
+                        <input type="password" name="password" id="password">
+                    </div>
+                    <div>
+                        <input type="submit">
+                    </div>
+                </form>
+            </div> <!-- Fine form di login -->
+            
         </div>
     </body>
 </html>
