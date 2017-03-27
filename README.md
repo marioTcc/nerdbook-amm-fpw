@@ -58,12 +58,12 @@ Per questa milestone dovete creare solo il contenuto HTML statico. Non preoccupa
 
 ### Task 1 ###
 
-Creare nel proprio repository Git Hub un progetto Netbeans del tipo Java -> Web Application per contenere i file da consegnare. Aggiungere una sottocartella di nome “M1” all’interno di “Web Pages”.
+Creare nel proprio repository GitHub un progetto Netbeans del tipo Java -> Web Application per contenere i file da consegnare. Aggiungere una sottocartella di nome “M1” all'interno di “Web Pages”.
 
 
 ### Task 2 ###
 
-Creare 4 pagine HTML vuote all’interno della cartella M1:
+Creare 4 pagine HTML vuote all'interno della cartella M1:
 
 * descrizione.html
 * login.html
@@ -73,18 +73,18 @@ Creare 4 pagine HTML vuote all’interno della cartella M1:
 
 ### Task 3 ###
 
-Inserire all’interno della pagina descrizione.html una breve descrizione del social network: a chi sia rivolto, come iscriversi, se sia gratis o a pagamento. Non è molto importante quello che scriverete, dovete creare un testo con una gerarchia di sezioni e titoli, che arrivi almeno al livello h3. Inserite un sommario con link interni alle sezioni all’inizio della pagina. 
+Inserire all'interno della pagina descrizione.html una breve descrizione del social network: a chi sia rivolto, come iscriversi, se sia gratis o a pagamento. Non è molto importante quello che scriverete, dovete creare un testo con una gerarchia di sezioni e titoli, che arrivi almeno al livello h3. Inserite un sommario con link interni alle sezioni all'inizio della pagina. 
 
 Create una sezione di navigazione che permetta di raggiungere la pagina login.html. 
-Inserite le metainformazioni sulla pagina e validatela. 
+Inserite le meta-informazioni sulla pagina e validatela. 
 
 
 ### Task 4 ###
 
-Inserire all’interno della pagina di login.html un form per richiedere username e password all’utente, utilizzando i campi di input corretti. 
+Inserire all'interno della pagina di login.html un form per richiedere username e password all'utente, utilizzando i campi di input corretti. 
 
 Create una sezione di navigazione che permetta di raggiungere la pagina descrizione.html, profilo.html e bacheca.html.
-Inserite le metainformazioni sulla pagina e validatela. 
+Inserite le meta-informazioni sulla pagina e validatela. 
 
 
 ### Task 5 ###
@@ -92,11 +92,11 @@ includa: nome dell’utente che ha postato qualcosa, con una foto del suo profil
 
 Create una sezione di navigazione che permetta di raggiungere la pagina descrizione.html e login.html.
 
-Inserite le metainformazioni sulla pagina e validatela.Inserite una sezione nella pagina bacheca.html che contenga la descrizione di almeno 3 post, che  
+Inserite le meta-informazioni sulla pagina e validatela.Inserite una sezione nella pagina bacheca.html che contenga la descrizione di almeno 3 post, che  
 
 
 ### Task 6 ###
-Create un form per l’inserimento dei dati del profilo all’interno della pagina profilo.html. Il form deve richiedere all’utente le seguenti informazioni, utilizzando le tipologie di input corrette:
+Create un form per l’inserimento dei dati del profilo all'interno della pagina profilo.html. Il form deve richiedere all'utente le seguenti informazioni, utilizzando le tipologie di input corrette:
 
 * Nome dell’utente
 * Cognome dell’utente
@@ -107,8 +107,91 @@ Create un form per l’inserimento dei dati del profilo all’interno della pagi
 * Conferma password
 
 Create una sezione di navigazione che permetta di raggiungere la pagina descrizione.html e login.html.
-Inserite le metainformazioni sulla pagina e validatela. 
+Inserite le meta-informazioni sulla pagina e validatela. 
 
 
 ### Task 7 ###
-Eseguite il commit finale su Git Hub per la consegna, utilizzando come messaggio “consegna M1”
+Eseguite il commit finale su GitHub per la consegna, utilizzando come messaggio “consegna M1”
+
+
+-----------------------------------------------------------------------------------------------
+
+
+## Milestone 2: CSS ##
+
+
+
+Per questa milestone dovete creare il layout grafico per il vostro sito web. 
+Regole:
+
+* Non si possono usare librerie di terze parti per la creazione del layout (es. bootstrap).
+* Potete modificare l’HTML delle pagine della milestone precedente. Prima di farlo però chiedetevi se sia strettamente necessario e, soprattutto, attenzione alla semantica del documento. 
+
+
+### Task 1 ###
+
+Creare nel progetto Netbeans utilizzato per la scorsa milestone una nuova cartella di nome “M2” all’interno di “Web Pages”.  Copiare le pagine create per la milestone precedente nella cartella M2.
+
+
+### Task 2 ###
+
+Creare un file di nome style.css all’interno della cartella M2. Collegare ognuna delle pagine al foglio di stile. 
+
+
+### Task 3 ###
+
+Impostare le caratteristiche generali di visualizzazione della pagina, facendo in modo che le regole che scrivete valgano per tutte le pagine. In particolare:
+
+* Colore di sfondo
+* Colore e font per il del testo 
+* Proprietà dei dei titoli (almeno da h1 ad h3)
+* Proprietà dei link
+* Visualizzazione dei campi di input
+
+Fate attenzione alla leggibilità ed alla gradevolezza degli stili. 
+
+
+### Task 4 ###
+
+Scrivere delle regole CSS che permetta alla struttura della pagina bacheca.html di essere visualizzata come nella seguente figura. 
+
+In particolare:
+Avete libertà sui colori e tipi di font. Non è quindi necessario che sia in bianco e nero, quello che vedete è solo una bozza. Gli stili che vedete sono anzi sconsigliati (per esempio il font è bruttissimo). 
+Vi viene richiesto di individuare quelle che nella bozza sarebbero immagini decorative (da non inserire nell’HTML) dalle immagini che portano informazione. Le immagini decorative devono essere inserite in modo opzionale tramite CSS (cioè se lo fate correttamente vi daremo uno 0.1 in più, se non lo fate potete prendere comunque il massimo). 
+Non considerate il form di ricerca e quello per l’inserimento di un nuovo post per i il momento
+
+![Senzanome.png](https://bitbucket.org/repo/758Eg8/images/3656594249-Senzanome.png)
+
+
+### Task 5 ###
+
+Rendere il form per la login ed il form per l’inserimento dei dati personali gradevoli dal punto di vista estetico, utilizzando le bozze in figura (stesse indicazioni del task 6). In particolare:
+
+* Fare in modo che le label ed i campi di input siano allineati.
+* Impostare bordi e colori per i campi di input, in particolare per il focus
+* Rendere i pulsanti individuabili e gradevoli, posizionandoli al centro dello spazio riservato al form (oppure in altre posizioni a scelta, che siano però gradevoli e coerenti per i due form).
+
+Riutilizzate il più possibile gli stessi stili per entrambi i form.
+Per il momento, non considerate la barra di ricerca. 
+
+Login
+
+![pasted image 0.png](https://bitbucket.org/repo/758Eg8/images/1698892564-pasted%20image%200.png)
+
+Profilo
+
+![pasted image 0 (1).png](https://bitbucket.org/repo/758Eg8/images/1099869546-pasted%20image%200%20(1).png)
+
+
+### Task 6 ###
+
+Create un layout responsive, da utilizzare per tutte le pagine. In particolare considerate tre configurazioni:
+* Per larghezze maggiori o uguali a 1024px utilizzare un layout a due colonne
+* Per larghezze minori o uguali a 480px utilizzare un layout ad una sola colonna
+* Per quelli intermedi utilizzare massimo due colonne. 
+* Posizionare i vari contenuti nella posizione ritenuta più appropriata.  
+
+
+### Task 7 ###
+
+Eseguite il commit finale su Git Hub per la consegna, utilizzando come messaggio “consegna M2”
