@@ -174,11 +174,11 @@ Rendere il form per la login ed il form per l’inserimento dei dati personali g
 Riutilizzate il più possibile gli stessi stili per entrambi i form.
 Per il momento, non considerate la barra di ricerca. 
 
-Login
+#### Login: ####
 
 ![pasted image 0.png](https://bitbucket.org/repo/758Eg8/images/1698892564-pasted%20image%200.png)
 
-Profilo
+#### Profilo: #####
 
 ![sgds.png](https://bitbucket.org/repo/758Eg8/images/2621833283-sgds.png)
 
