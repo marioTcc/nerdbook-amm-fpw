@@ -180,7 +180,7 @@ Login
 
 Profilo
 
-![pasted image 0 (1).png](https://bitbucket.org/repo/758Eg8/images/1099869546-pasted%20image%200%20(1).png)
+![sgds.png](https://bitbucket.org/repo/758Eg8/images/2621833283-sgds.png)
 
 
 ### Task 6 ###
