@@ -9,19 +9,19 @@ body
     font: 17px/25px "Times New Roman", Arial, sans-serif;
 }
 
-h1
+#divBody
 {
-    font-weight: bold;
+    margin-top:20px;
+    background-color: white;
 }
 
-h2
+#divBody > div
 {
-    font-weight: bold;
-}
-
-h3
-{
-    font-weight: bold;
+    width: 96%;
+    margin: auto auto;
+    padding: 0px;
+    padding-top: 20px;
+    border:0px;
 }
 
 nav ol, nav li
@@ -29,6 +29,13 @@ nav ol, nav li
     display: inline-block;
     list-style-type: none;
     font-weight: bold;
+}
+
+nav ol
+{
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 nav li
@@ -62,5 +69,44 @@ nav ol li a:hover
     color: #BBBBBB;
 }
 
+h1
+{
+    font-weight: bold;
+}
 
+h2
+{
+    font-weight: bold;
+    margin-top: 80px;
+}
 
+h3
+{
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+#sommarioDiv 
+{
+    width: auto;
+    margin: 0px;
+    padding: 0px;
+    border: 1.2px;
+    border-style: solid;
+    border-color: black;
+}
+
+#divBody a:link
+{
+    color: blue;
+}
+#divBody a:visited
+{
+    text-decoration: none;
+    color: blue;
+}
+#divBody a:hover
+{
+    font-weight: bold;
+    text-decoration: underline;
+}
