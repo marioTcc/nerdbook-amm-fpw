@@ -21,7 +21,24 @@ body
     margin: auto auto;
     padding: 0px;
     padding-top: 20px;
+    padding-bottom: 20px;        
     border:0px;
+}
+
+
+#divBody a:link
+{
+    color: blue;
+}
+#divBody a:visited
+{
+    text-decoration: none;
+    color: blue;
+}
+#divBody a:hover
+{
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 nav ol, nav li
@@ -88,7 +105,7 @@ h3
 
 #sommarioDiv 
 {
-    width: auto;
+    width: 30%;
     margin: 0px;
     padding: 0px;
     border: 1.2px;
@@ -96,17 +113,28 @@ h3
     border-color: black;
 }
 
-#divBody a:link
+
+#loginForm
 {
-    color: blue;
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 2px black;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
-#divBody a:visited
-{
-    text-decoration: none;
-    color: blue;
+
+#loginForm label{
+    font: 20px/25px "Open Sans", Arial, sans-serif;
 }
-#divBody a:hover
+
+#loginForm label:after{
+    content: '\A';
+    white-space: pre;
+}
+
+#loginForm input, #loginForm button
 {
-    font-weight: bold;
-    text-decoration: underline;
+    width: 80%;
+    margin-top: 5px;
 }
