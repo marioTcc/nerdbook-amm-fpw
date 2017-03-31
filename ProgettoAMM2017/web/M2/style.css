@@ -11,7 +11,8 @@ body
 
 #divBody
 {
-    margin-top:20px;
+    padding-top:20px;
+    padding-bottom:30px;
     background-color: white;
 }
 
@@ -124,8 +125,15 @@ h3
     padding-bottom: 20px;
 }
 
+#loginForm *
+{
+    display: block;
+    margin: auto;
+}
+
 #loginForm label{
-    font: 20px/25px "Open Sans", Arial, sans-serif;
+    font: 20px "Open Sans", Arial, sans-serif;
+    width:80%;
 }
 
 #loginForm label:after{
@@ -137,4 +145,22 @@ h3
 {
     width: 80%;
     margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#loginFormDiv > div:first-child 
+{
+    width:30%;
+    margin: auto;
+}
+
+#loginFormDiv > div:first-child *
+{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#loginFormDiv > div:first-child h1
+{
+    margin-left: 30px;
 }
