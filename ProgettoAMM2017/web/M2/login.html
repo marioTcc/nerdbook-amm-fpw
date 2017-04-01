@@ -11,19 +11,23 @@
     </head>
     
     <body>
-        <header> <!-- Titolo -->
-            <div id="title">
-                NerdBook - Login
-            </div>
-        </header>
-        
-        <nav> <!-- Menu di navigazione -->
-            <ol>
-                <li><a href="descrizione.html">Descrizione</a></li>
-                <li><a href="profilo.html">Profilo</a></li>
-                <li><a href="bacheca.html">Bacheca</a></li>
-            </ol>
-        </nav>
+
+        <div class="headerBar">
+            <header> <!-- Titolo -->
+                <div id="title">
+                    <div id="logo"></div> NerdBook
+                </div>
+            </header>
+
+            <nav> <!-- Menu di navigazione -->
+                <ol>   
+                    <li><a id="profiloLink" href="profilo.html">Profilo</a></li>
+                    <li><a id="bachecaLink" href="bacheca.html">Bacheca</a></li>
+                    <li><a id="descrizioneLink" href="descrizione.html">Descrizione</a></li>
+                    <li><a class="active" id="loginLink" href="login.html">Login</a></li>
+                </ol>
+            </nav>       
+        </div>
         
         <div id="sidebar1"></div>
         <div id="sidebar2"></div>
@@ -32,7 +36,7 @@
 
             <div id="loginFormDiv"> <!-- Contenitore form di login -->
                 <div>
-                    <img src="" width="54" height="44" />
+                    <img src="../Assets/ICONS/NerdBook_logo.svg" width="54" height="44" />
                     <h1> NerdBook </h1>
                 </div>
                 <form id="loginForm" method="post" action="#">

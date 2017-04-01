@@ -38,7 +38,6 @@ body
 #divBody
 {
     width:66%;
-    padding-top:20px;
     padding-bottom:30px;
     background-color: white;
     margin: auto;
@@ -49,7 +48,7 @@ body
     width: 96%;
     margin: auto auto;
     padding: 0px;
-    padding-top: 20px;
+    padding-top: 50px;
     padding-bottom: 20px;        
     border:0px;
 }
@@ -224,8 +223,6 @@ nav #bachecaLink::before
     margin-right: 6px;
 }
 
-
-
 h1
 {
     font-weight: bold;
@@ -301,9 +298,4 @@ h3
 #loginFormDiv > div:first-child h1
 {
     margin-left: 30px;
-}
-
-#sidebar1, #sidebar2, #divBody
-{
-    margin-top:10px;
 }
