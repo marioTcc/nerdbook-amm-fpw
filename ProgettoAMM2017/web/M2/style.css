@@ -11,13 +11,13 @@ body
 
 .clear
 {
-    clear:both;
+    clear: both;
 }
 
 #sidebar1, #sidebar2
 {
     background-color: white;
-    height: 100px;
+    height: 1000px;
 }
 
 #sidebar1
@@ -37,7 +37,7 @@ body
 
 #divBody
 {
-    width:65%;
+    width:66%;
     padding-top:20px;
     padding-bottom:30px;
     background-color: white;
@@ -69,6 +69,15 @@ body
     text-decoration: underline;
 }
 
+.headerBar
+{
+    background-color: inherit;
+    width: 100%;
+    position: fixed;
+    top: 0px;
+}
+
+
 header, nav
 {
     float:left;
@@ -76,23 +85,47 @@ header, nav
 
 header
 {
-    width:17.5%;
-    height:40px;
-}
-
-nav
-{
-    width:82.5%;
+    width: 16.5%;
+    height: 40px;
 }
 
 #title
 {
+    margin: 0px;
+    text-align: center;
+    padding: 0px;
+    border: 0px;
     min-width: 30px;
     width:100%;
     line-height: 40px;
-    text-align: center;
-    border-right: solid 2px #7d84b2; /* ?? */
-    border-bottom: solid 2px #7d84b2; /* ?? */
+    border-right: solid 2px #7d84b2; 
+    border-bottom: solid 2px #7d84b2; 
+    border-top: solid 2px #7d84b2; 
+    display: inline-block;
+    font: 20px/40px "Times New Roman", Arial, sans-serif;
+    font-weight: bold;
+    color: #BBBBBB;
+}
+
+#logo
+{
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+    background-image: url('../Assets/ICONS/NerdBook_logo.svg');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    display: inline-block;
+    width: 30px; 
+    height: 30px;
+    vertical-align: middle;
+}
+
+nav
+{
+    width: 82%;
+    border-bottom: solid 2px #7d84b2;
+    border-top: solid 2px #7d84b2; 
 }
 
 nav ol, nav li
@@ -113,7 +146,7 @@ nav ol
 nav li
 {
     background-color: #445E93;
-    width: 100px;
+    width: 130px;
     height: 40px;
     text-align: center;
 }
@@ -121,6 +154,7 @@ nav li
 nav ol li a
 {
     line-height: 40px;
+    display: inline-block;
 }
 
 nav ol li a:link
@@ -143,9 +177,8 @@ nav ol li a:hover
 
 nav ol
 {
-    width: 78.5%;
-    border-bottom: solid 2px #7d84b2; /* ?? */
-    border-right: solid 2px #7d84b2; /* ?? */
+    width: 80%;
+    border-right: solid 2px #7d84b2;
 }
 
 nav li:last-child
@@ -155,8 +188,43 @@ nav li:last-child
 
 nav li:first-child
 {
-    margin-left: 2px;
+    margin-left: 0.5%;
 }
+
+nav li:last-child
+{
+    margin-right: 0.5%;
+}
+
+nav #descrizioneLink::before
+{
+    content: url("../Assets/ICONS/descrizione_icona.png");
+    vertical-align: -12%;
+    margin-right: 6px;
+}
+
+nav #loginLink::before
+{
+    content: url("../Assets/ICONS/login_icona.png");
+    vertical-align: -12%;
+    margin-right: 6px;
+}
+
+nav #profiloLink::before
+{
+    content: url("../Assets/ICONS/profilo_icona.png");
+    vertical-align: -12%;
+    margin-right: 6px;
+}
+
+nav #bachecaLink::before
+{
+    content: url("../Assets/ICONS/bacheca_icona.png");
+    vertical-align: -12%;
+    margin-right: 6px;
+}
+
+
 
 h1
 {
@@ -185,7 +253,6 @@ h3
     border-color: black;
 }
 
-
 #loginForm
 {
     width: 30%;
@@ -203,7 +270,7 @@ h3
 }
 
 #loginForm label{
-    font: 20px "Open Sans", Arial, sans-serif;
+    font: 20px "Times New Roman", Arial, sans-serif;
     width:80%;
 }
 
