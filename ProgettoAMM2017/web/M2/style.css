@@ -9,43 +9,102 @@ body
     font: 17px "Times New Roman", Arial, sans-serif;
 }
 
+h1
+{
+    font-weight: bold;
+}
+
+h2
+{
+    font-weight: bold;
+    margin-top: 80px;
+}
+
+h3
+{
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+h4
+{
+    margin:0px;
+}
+
 .clear
 {
     clear: both;
-}
-
-#sidebar1, #sidebar2
-{
-    background-color: white;
-    height: 1000px;
 }
 
 #sidebar1
 {
     width: 16.5%;
     float:left;
-    border-right: solid 1px black;
-    margin: 0px 5px 0px 0px;
+    margin: 0px;
+    background-color: white;
+    min-height: 300px;
+    border-right: solid 2px #7d84b2;
 }
 
-#sidebar2
+#sidebar1 div:first-child
 {
-    width: 16.5%;
-    float:right;
-    border-left: solid 1px black;
+    margin-top: 55px;
+}
+
+#sidebar1 div
+{
+    width:90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 10px;
+}
+
+#sidebar1 ul
+{
+    margin: 0px;
+    padding: 0px;
+    list-style-type: none;
+}
+
+#sidebar1 ul li::before
+{
+    content: url("../Assets/ICONS/noProfilePic_icona.png");
+    vertical-align: -25%;
+    margin-right: 2px;
+}
+
+#sidebar1 #searchBar
+{
+    width: 100%;
+}
+
+#sidebar1 #searchBar input
+{
+    display: block;
+    width: 80%;
+    padding: 0px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#sidebar1 #elencoGruppi h4::after
+{
+    content: url(../Assets/ICONS/gruppi_icona.png);
+    vertical-align: -25%;
+    margin-left: 10px;
 }
 
 #divBody
 {
-    width:66%;
-    padding-bottom:30px;
+    width: 66%;
+    padding-bottom: 30px;
     background-color: white;
     margin: auto;
 }
 
 #divBody > div
 {
-    width: 96%;
+    width: 100%;
     margin: auto auto;
     padding: 0px;
     padding-top: 50px;
@@ -183,16 +242,12 @@ nav ol
 nav li:last-child
 {
     float:right;
+    margin-right: 0.5%;
 }
 
 nav li:first-child
 {
     margin-left: 0.5%;
-}
-
-nav li:last-child
-{
-    margin-right: 0.5%;
 }
 
 nav #descrizioneLink::before
@@ -221,23 +276,6 @@ nav #bachecaLink::before
     content: url("../Assets/ICONS/bacheca_icona.png");
     vertical-align: -12%;
     margin-right: 6px;
-}
-
-h1
-{
-    font-weight: bold;
-}
-
-h2
-{
-    font-weight: bold;
-    margin-top: 80px;
-}
-
-h3
-{
-    margin-top: 30px;
-    font-weight: bold;
 }
 
 #sommarioDiv 
