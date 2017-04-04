@@ -38,7 +38,7 @@ h4
 
 #sidebar1
 {
-    width: 16.5%;
+    width: 16.75%;
     float:left;
     margin: 0px;
     background-color: white;
@@ -53,7 +53,7 @@ h4
 
 #sidebar1 div
 {
-    width:90%;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 10px;
@@ -96,7 +96,8 @@ h4
 
 #divBody
 {
-    width: 66%;
+    float: right;
+    width: 83%;
     padding-bottom: 30px;
     background-color: white;
     margin: auto;
@@ -154,7 +155,7 @@ header
     padding: 0px;
     border: 0px;
     min-width: 30px;
-    width:100%;
+    width: 100%;
     line-height: 40px;
     border-right: solid 2px #7d84b2; 
     border-bottom: solid 2px #7d84b2; 
@@ -181,7 +182,7 @@ header
 
 nav
 {
-    width: 82%;
+    width: 81.5%;
     border-bottom: solid 2px #7d84b2;
     border-top: solid 2px #7d84b2; 
 }
@@ -199,6 +200,7 @@ nav ol
     margin: 0px;
     padding: 0px;
     float: left;
+    width: 100%;
 }
 
 nav li
@@ -207,6 +209,7 @@ nav li
     width: 130px;
     height: 40px;
     text-align: center;
+    border-right: solid 2px #7d84b2;
 }
 
 nav ol li a
@@ -233,21 +236,15 @@ nav ol li a:hover
     color: #BBBBBB;
 }
 
-nav ol
-{
-    width: 80%;
-    border-right: solid 2px #7d84b2;
-}
-
 nav li:last-child
 {
     float:right;
-    margin-right: 0.5%;
+    border-left: solid 2px #7d84b2;
 }
 
 nav li:first-child
 {
-    margin-left: 0.5%;
+    margin-left: 2px;
 }
 
 nav #descrizioneLink::before
