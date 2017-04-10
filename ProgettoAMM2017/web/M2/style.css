@@ -45,12 +45,33 @@ input:focus
     box-shadow: 0 0 10px green;
 }
 
+nav
+{
+    width: 79%;
+}
+
+nav ol, nav li
+{
+    display: inline-block;
+    list-style-type: none;
+    font-weight: bold;
+}
+
+nav ol
+{
+    border: 0px;
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    width: 100%;
+    font-size: 0;
+}
+
 #divForm
 {
     float: left;
     width: 50%;
     min-width: 480px;
-    margin-left: 20px;
 }
 
 #formDatiProfilo
@@ -90,8 +111,8 @@ input:focus
 
 #sidebar1
 {
-    width: 16.5%;
-    float:left;
+    width: 20.5%;
+    float: left;
     margin: 0px;
     background-color: white;
     min-height: 300px;
@@ -151,8 +172,7 @@ input:focus
 #divBody
 {
     float: left;
-    width: 83%;
-    min-width: 480px;
+    width: 79%;
     padding-bottom: 30px;
     background-color: white;
     margin: auto;
@@ -160,7 +180,23 @@ input:focus
     border-bottom: solid 2px #7d84b2; 
 }
 
-#divBody > div
+#divBodyLogin
+{
+    width: 99%;
+    height: 95vh;
+    min-width: 480px;
+
+    background-color: white;
+    
+    margin: 0px;
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    border-right: solid 2px #7d84b2; 
+    border-bottom: solid 2px #7d84b2; 
+}
+
+#divBody > div:not(#presentazione):not(#posts)
 {
     width: 90%;
     margin: auto auto;
@@ -187,144 +223,28 @@ input:focus
 {
     background-color: inherit;
     width: 100%;
+    min-width: 800px;
     position: fixed;
     top: 0px;
 }
 
 header, nav
 {
-    float:left;
+    float: left;
     border-bottom: solid 2px #7d84b2; 
     border-top: solid 2px #7d84b2; 
-}
-
-header
-{
-    width: 16.5%;
-    height: 40px;
-    border-right: solid 2px #7d84b2; 
-}
-
-#title
-{
-    margin: 0px;
-    margin-left: auto;
-    margin-right: auto;
-    width: 100%;
-    text-align: center;
-    padding: 0px;
-    border: 0px;
-    min-width: 30px;
-    line-height: 40px;
-    display: inline-block;
-    font: 20px/40px "Times New Roman", Arial, sans-serif;
-    font-weight: bold;
-    color: #BBBBBB;
 }
 
 #logo
 {
     margin: 0px;
+    margin-right: 5px;
     padding: 0px;
     border: 0px;
-    background-image: url('../Assets/ICONS/NerdBook_logo.svg');
-    background-size: 100% 100%;
-    background-repeat: no-repeat;
     display: inline-block;
-    width: 30px; 
-    height: 30px;
+    width: 40px; 
+    height: 100%;
     vertical-align: middle;
-}
-
-nav
-{
-    width: 83%;
-    border-bottom: solid 2px #7d84b2;
-    border-top: solid 2px #7d84b2; 
-}
-
-nav ol, nav li
-{
-    display: inline-block;
-    list-style-type: none;
-    font-weight: bold;
-}
-
-nav ol
-{
-    border: 0px;
-    margin: 0px;
-    padding: 0px;
-    float: left;
-    width: 100%;
-    font-size: 0;
-}
-
-nav li
-{
-    font-size: 14px;
-    background-color: #445E93;
-    width: 130px;
-    height: 40px;
-    text-align: center;
-    border-right: solid 2px #7d84b2;
-}
-
-nav ol li a
-{
-    line-height: 40px;
-    display: inline-block;
-}
-
-nav ol li a:link, nav ol li a:visited
-{
-    text-decoration: none;
-    color: #BBBBBB;
-}
-
-nav ol li a:hover
-{
-    text-decoration: underline;
-    color: #BBBBBB;
-}
-
-nav li:last-child
-{
-    float:right;
-    border-left: solid 2px #7d84b2;
-}
-
-nav li:first-child
-{
-    margin-left: 1px;
-}
-
-nav #descrizioneLink::before
-{
-    content: url("../Assets/ICONS/descrizione_icona.png");
-    vertical-align: -12%;
-    margin-right: 6px;
-}
-
-nav #loginLink::before
-{
-    content: url("../Assets/ICONS/login_icona.png");
-    vertical-align: -12%;
-    margin-right: 6px;
-}
-
-nav #profiloLink::before
-{
-    content: url("../Assets/ICONS/profilo_icona.png");
-    vertical-align: -12%;
-    margin-right: 6px;
-}
-
-nav #bachecaLink::before
-{
-    content: url("../Assets/ICONS/bacheca_icona.png");
-    vertical-align: -12%;
-    margin-right: 6px;
 }
 
 #sommarioDiv 
@@ -340,7 +260,6 @@ nav #bachecaLink::before
 
 #loginForm
 {
-    width: 30%;
     margin-left: auto;
     margin-right: auto;
     border: solid 2px black;
@@ -357,7 +276,7 @@ nav #bachecaLink::before
 #loginForm label
 {
     font: 20px "Times New Roman", Arial, sans-serif;
-    width:80%;
+    width: 80%;
 }
 
 #loginForm label:after
@@ -373,10 +292,15 @@ nav #bachecaLink::before
     margin-bottom: 5px;
 }
 
-#loginFormDiv > div:first-child 
+#loginFormDiv
 {
-    width:30%;
-    margin: auto;
+    position: relative;
+    top: 20%;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 250px;
+    width: 50%;
+    max-width: 270px;
 }
 
 #loginFormDiv > div:first-child *
@@ -387,14 +311,56 @@ nav #bachecaLink::before
 
 #loginFormDiv > div:first-child h1
 {
-    margin-left: 30px;
+    margin-left: 10px;
 }
 
 #posts div#autorePost, #posts div#profilePic
 {
     display: inline-block;
     float: left;
-    width: auto;
+}
+
+#posts div#profilePic img
+{
+    height: auto; 
+    width: auto; 
+    max-width: 80px; 
+    max-height: 80px;    
+}
+
+#posts #allegatoPost img
+{
+    height: auto; 
+    width: auto; 
+    max-width: 80%; 
+    max-height: 80%;
+    margin: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#posts > div
+{
+    width: 90%;
+    border: solid 1px black;
+    margin: 0px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#presentazione
+{
+    margin-top: 50px;
+    margin-bottom: 20px;
+    width: 99.5%;
+    border: solid 1px black;
+}
+
+div#presentazione p
+{
+    margin-left: 10px;    
 }
 
 #divBody div#profilePic
@@ -402,23 +368,263 @@ nav #bachecaLink::before
     display: inline-block;
     width: 150px;
     margin: 0px;
+    margin-bottom: 15px;
+    margin-right: 20px;
     float: left;
+}
+    
+#title
+{
+    margin: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+    padding: 0px;
+    border: 0px;
+    line-height: 40px;
+    display: inline-block;
+    font: 20px/40px "Times New Roman", Arial, sans-serif;
+    font-weight: bold;
+    color: #BBBBBB;
 }
 
 @media only screen and (min-width: 1024px)
 {
+    header
+    {
+        width: 20.5%;
+        height: 40px;
+        border-right: solid 2px #7d84b2; 
+    }
+
+    #title
+    {
+        margin: 0px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        text-align: center;
+        padding: 0px;
+        border: 0px;
+        min-width: 30px;
+        line-height: 40px;
+        display: inline-block;
+        font: 20px/40px "Times New Roman", Arial, sans-serif;
+        font-weight: bold;
+        color: #BBBBBB;
+    }
+
     
-}
+    nav ol li a
+    {
+        line-height: 40px;
+        display: inline-block;
+    }
+
+    nav ol li a:link, nav ol li a:visited
+    {
+        text-decoration: none;
+        color: #BBBBBB;
+    }
+
+    nav ol li a:hover
+    {
+        text-decoration: underline;
+        color: #BBBBBB;
+    }
+    
+    nav ol li a img
+    {
+        display: none;
+    }
+    
+    nav li
+    {
+        font-size: 14px;
+        background-color: #445E93;
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        border-right: solid 2px #7d84b2;
+    }
+
+    nav li:last-child
+    {
+        float:right;
+        border-left: solid 2px #7d84b2;
+    }
+
+    nav li:first-child
+    {
+        margin-left: 1px;
+    }
+
+    nav li.active
+    {
+        background-color: #0a214f; 
+    }     
+    
+    header, #sidebar1
+    {
+        min-width: 150px;
+    }
+} /* FINE 1024min */
 
 @media only screen and (min-width: 480px) and (max-width: 1024px)
 {
+    header
+    {
+        width: 20.5%;
+        height: 40px;
+        border-right: solid 2px #7d84b2; 
+        min-width: 150px;
+    }
+        
+    #sidebar1
+    {
+        min-width: 165px;
+    }
     
-}
+    body
+    {
+        min-width: 805px;
+    }
+    
+    nav
+    {
+        min-width: 450px;
+    }
+    
+    nav ol li a
+    {
+        line-height: 40px;
+        display: inline-block;
+    }
 
-@media only screen and (max-width: 480px)
+    nav ol li a:link, nav ol li a:visited
+    {
+        text-decoration: none;
+        color: #BBBBBB;
+    }
+
+    nav ol li a:hover
+    {
+        text-decoration: underline;
+        color: #BBBBBB;
+    }
+    
+    nav ol li a img
+    {
+        display: none;
+    }
+    
+    nav li
+    {
+        font-size: 14px;
+        background-color: #445E93;
+        width: 80px;
+        height: 40px;
+        text-align: center;
+        border-right: solid 2px #7d84b2;
+    }
+
+    nav li:last-child
+    {
+        float:right;
+        border-left: solid 2px #7d84b2;
+    }
+
+    nav li:first-child
+    {
+        margin-left: 1px;
+    }
+
+    nav li.active
+    {
+        background-color: #0a214f; 
+    } 
+} /* FINE dim intermedie */
+
+@media only screen and (max-width: 481px)
 {
+    body
+    {
+        min-width: 480px;
+    }
+    
+    .headerBar
+    {
+        width: 470px;
+        min-width: 470px;
+    }
+    
+    header
+    {
+        width: 100%;
+        min-width: 250px;
+        height: 40px;
+        border-right: solid 2px #7d84b2; 
+        border-bottom: 0px;            
+    }
+
     #sidebar1
     {
         display: none;
+    }
+    
+    nav
+    {
+        width: 100%;
+    } 
+    
+    #divBody
+    {
+        width: 470px;
+        padding-top: 50px;
+    }
+    
+    #divForm
+    {
+        margin-left: 0px;
+        margin-top: 15px;
+    }
+       
+    nav ol li a img
+    {
+        display: block;
+        width: 35px;
+        height: 100%;
+        margin: 0px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    nav ol li a
+    {
+        height: 100%;
+        font-size: 0px;
+        vertical-align: middle;
+    }
+    
+    nav li
+    {
+        background-color: #445E93;
+        width: 50px;
+        height: 40px;
+        text-align: center;
+        border-right: solid 2px #7d84b2;
+    }
+    
+    nav li:last-child
+    {
+        float:right;
+        border-left: solid 2px #7d84b2;
+        border-right: none;
+    }
+
+    nav li:first-child
+    {
+        margin-left: 1px;
     }
 }
