@@ -20,9 +20,9 @@
 
             <nav> <!-- Menu di navigazione -->
                 <ol>   
-                    <li><a id="profiloLink" href="profilo.html">Profilo</a></li><!--
-                 --><li><a class="active" id="bachecaLink" href="bacheca.html">Bacheca</a></li><!---
-                 --><li><a id="descrizioneLink" href="descrizione.html">Descrizione</a></li>
+                    <li><a id="profiloLink" href="profilo.html">Profilo</a></li>
+                    <li><a class="active" id="bachecaLink" href="bacheca.html">Bacheca</a></li>
+                    <li><a id="descrizioneLink" href="descrizione.html">Descrizione</a></li>
                     <li><a id="loginLink" href="login.html">Login</a></li>
                 </ol>
             </nav>       
@@ -64,21 +64,23 @@
                     <!-- Post senza allegati -->
                     <div> <!-- Contenitore dati autore -->                 
                         <div>
-                            <div> <!-- Foto profilo -->                           
+                            <div id="profilePic"> <!-- Foto profilo -->                           
                                 <img src="../Assets/IMG/djanniprofilo.jpg" alt="Foto autore del post">
                             </div>
 
-                            <div> <!-- Nome autore del post -->                         
+                            <div id="autorePost"> <!-- Nome autore del post -->                         
                                 <p>nome autore del post</p>
                             </div>
-                        </div>                  
+                        </div> 
+                        
+                        <div class="clear"></div>
 
-                        <div> <!-- Contenuto del post -->
+                        <div id="contenutoPost"> <!-- Contenuto del post -->
                             <div> <!-- Testo del post -->                         
                                 <p>Questo è il testo del post</p>
                             </div>
 
-                            <div> <!-- Allegato del post -->
+                            <div id="allegatoPost"> <!-- Allegato del post -->
                                 <!-- Nessun allegato -->                            
                             </div>
                         </div>

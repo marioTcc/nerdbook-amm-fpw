@@ -7,28 +7,80 @@ body
 {
     background-color: #3a506b;
     font: 17px "Times New Roman", Arial, sans-serif;
+    margin: 0px;
 }
 
 h1
 {
     font-weight: bold;
+    font-style: italic;
 }
 
 h2
 {
     font-weight: bold;
     margin-top: 80px;
+    font-style: italic;
 }
 
 h3
 {
     margin-top: 30px;
     font-weight: bold;
+    font-style: italic;
 }
 
 h4
 {
-    margin:0px;
+    margin: 0px;
+}
+
+input
+{
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);    
+}
+
+input:focus
+{
+    box-shadow: 0 0 10px green;
+}
+
+#divForm
+{
+    float: left;
+    width: 50%;
+    min-width: 480px;
+    margin-left: 20px;
+}
+
+#formDatiProfilo
+{
+    width: 100%;
+}
+
+#formDatiProfilo > div
+{
+    margin-bottom: 10px;
+}
+
+#formDatiProfilo label
+{
+    display: inline-block;
+    width: 120px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+#formDatiProfilo textarea, #formDatiProfilo input
+{
+    width: 300px;
+    height: 20px;
+    vertical-align: middle;
+}
+
+#formDatiProfilo button
+{
+    width: 440px;
 }
 
 .clear
@@ -38,12 +90,14 @@ h4
 
 #sidebar1
 {
-    width: 16.75%;
+    width: 16.5%;
     float:left;
     margin: 0px;
     background-color: white;
     min-height: 300px;
     border-right: solid 2px #7d84b2;
+    border-bottom: solid 2px #7d84b2; 
+    padding-bottom: 20px;
 }
 
 #sidebar1 div:first-child
@@ -96,32 +150,33 @@ h4
 
 #divBody
 {
-    float: right;
+    float: left;
     width: 83%;
+    min-width: 480px;
     padding-bottom: 30px;
     background-color: white;
     margin: auto;
+    border-right: solid 2px #7d84b2; 
+    border-bottom: solid 2px #7d84b2; 
 }
 
 #divBody > div
 {
-    width: 100%;
+    width: 90%;
     margin: auto auto;
     padding: 0px;
-    padding-top: 50px;
+    padding-top: 60px;
     padding-bottom: 20px;        
-    border:0px;
+    border: 0px;
 }
 
-#divBody a:link
+#divBody a:link, #divBody a:visited
 {
-    color: blue;
-}
-#divBody a:visited
-{
+    color: black;
     text-decoration: none;
-    color: blue;
+    font-style: italic;
 }
+
 #divBody a:hover
 {
     font-weight: bold;
@@ -136,30 +191,31 @@ h4
     top: 0px;
 }
 
-
 header, nav
 {
     float:left;
+    border-bottom: solid 2px #7d84b2; 
+    border-top: solid 2px #7d84b2; 
 }
 
 header
 {
     width: 16.5%;
     height: 40px;
+    border-right: solid 2px #7d84b2; 
 }
 
 #title
 {
     margin: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
     text-align: center;
     padding: 0px;
     border: 0px;
     min-width: 30px;
-    width: 100%;
     line-height: 40px;
-    border-right: solid 2px #7d84b2; 
-    border-bottom: solid 2px #7d84b2; 
-    border-top: solid 2px #7d84b2; 
     display: inline-block;
     font: 20px/40px "Times New Roman", Arial, sans-serif;
     font-weight: bold;
@@ -182,7 +238,7 @@ header
 
 nav
 {
-    width: 81.5%;
+    width: 83%;
     border-bottom: solid 2px #7d84b2;
     border-top: solid 2px #7d84b2; 
 }
@@ -201,10 +257,12 @@ nav ol
     padding: 0px;
     float: left;
     width: 100%;
+    font-size: 0;
 }
 
 nav li
 {
+    font-size: 14px;
     background-color: #445E93;
     width: 130px;
     height: 40px;
@@ -218,13 +276,7 @@ nav ol li a
     display: inline-block;
 }
 
-nav ol li a:link
-{
-    text-decoration: none;
-    color: #BBBBBB;
-}
-
-nav ol li a:visited
+nav ol li a:link, nav ol li a:visited
 {
     text-decoration: none;
     color: #BBBBBB;
@@ -244,7 +296,7 @@ nav li:last-child
 
 nav li:first-child
 {
-    margin-left: 2px;
+    margin-left: 1px;
 }
 
 nav #descrizioneLink::before
@@ -278,6 +330,7 @@ nav #bachecaLink::before
 #sommarioDiv 
 {
     width: 30%;
+    min-width: 240px;
     margin: 0px;
     padding: 0px;
     border: 1.2px;
@@ -301,12 +354,14 @@ nav #bachecaLink::before
     margin: auto;
 }
 
-#loginForm label{
+#loginForm label
+{
     font: 20px "Times New Roman", Arial, sans-serif;
     width:80%;
 }
 
-#loginForm label:after{
+#loginForm label:after
+{
     content: '\A';
     white-space: pre;
 }
@@ -333,4 +388,37 @@ nav #bachecaLink::before
 #loginFormDiv > div:first-child h1
 {
     margin-left: 30px;
+}
+
+#posts div#autorePost, #posts div#profilePic
+{
+    display: inline-block;
+    float: left;
+    width: auto;
+}
+
+#divBody div#profilePic
+{
+    display: inline-block;
+    width: 150px;
+    margin: 0px;
+    float: left;
+}
+
+@media only screen and (min-width: 1024px)
+{
+    
+}
+
+@media only screen and (min-width: 480px) and (max-width: 1024px)
+{
+    
+}
+
+@media only screen and (max-width: 480px)
+{
+    #sidebar1
+    {
+        display: none;
+    }
 }

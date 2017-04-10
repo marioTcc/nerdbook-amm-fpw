@@ -53,50 +53,56 @@
         
         <div id="divBody">
             
-            <div id="divForm"> <!-- Form dati profilo -->
-                <form id="formDatiProfilo" action="#" method="post">
-                    
-                    <div> <!-- Nome utente -->
-                        <label for="userName">Nome:</label>
-                        <input type="text" name="userName" id="userName">
-                    </div>
-                    
-                    <div> <!-- Cognome utente -->
-                        <label for="userName">Cognome:</label>
-                        <input type="text" name="userSurname" id="userSurname">
-                    </div>
-                    
-                    <div> <!-- Immagine profilo -->
-                        <label for="profilePic">Url immagine profilo:</label>
-                        <input type="url" name="profilePic" id="profilePic">
-                    </div>
-                    
-                    <div> <!-- Presentazione -->
-                        <label for="presentazione">Presentazione:</label>
-                        <textarea name="presentazione" id="presentazione"></textarea>
-                    </div>
-                    
-                    <div> <!-- Data di nascita -->
-                        <label for="bDate">Data di nascita:</label>
-                        <input type="date" name="bDate" id="bDate">
-                    </div>
-                    
-                    <div> <!-- Password -->
-                        <label for="password">Password:</label>
-                        <input type="password" name="password" id="password">
-                    </div>
-                    
-                    <div> <!-- Conferma password -->
-                        <label for="passwordConfirm">Conferma password:</label>
-                        <input type="password" name="passwordConfirm" id="passwordConfirm">
-                    </div>
-                    
-                    <div>
-                        <input type="submit" form="formDatiProfilo" value="Modifica">
-                    </div>
-                </form> 
-            </div> <!-- Fine form login -->
-            
+            <div>
+
+                <div id="profilePic">
+                    <img src="../Assets/IMG/djanniprofilo.jpg" alt="Foto autore del post">
+                </div>
+
+                <div id="divForm"> <!-- Form dati profilo -->
+                    <form id="formDatiProfilo" action="#" method="post">
+
+                        <div> <!-- Nome utente -->
+                            <label for="userName">Nome:</label>
+                            <input type="text" name="userName" id="userName">
+                        </div>
+
+                        <div> <!-- Cognome utente -->
+                            <label for="userName">Cognome:</label>
+                            <input type="text" name="userSurname" id="userSurname">
+                        </div>
+
+                        <div> <!-- Immagine profilo -->
+                            <label for="profilePic">Url immagine profilo:</label>
+                            <input type="url" name="profilePic" id="profilePic">
+                        </div>
+
+                        <div> <!-- Presentazione -->
+                            <label for="presentazione">Presentazione:</label>
+                            <textarea name="presentazione" id="presentazione"></textarea>
+                        </div>
+
+                        <div> <!-- Data di nascita -->
+                            <label for="bDate">Data di nascita:</label>
+                            <input type="date" name="bDate" id="bDate">
+                        </div>
+
+                        <div> <!-- Password -->
+                            <label for="password">Password:</label>
+                            <input type="password" name="password" id="password">
+                        </div>
+
+                        <div> <!-- Conferma password -->
+                            <label for="passwordConfirm">Conferma password:</label>
+                            <input type="password" name="passwordConfirm" id="passwordConfirm">
+                        </div>
+
+                        <div>
+                            <button type="submit" form="formDatiProfilo">Aggiorna</button>
+                        </div>
+                    </form> 
+                </div> <!-- Fine form login -->
+            </div>
         </div>
 
     </body>
