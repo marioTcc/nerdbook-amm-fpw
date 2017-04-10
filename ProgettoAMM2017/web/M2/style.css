@@ -314,21 +314,28 @@ header, nav
     margin-left: 10px;
 }
 
-#posts div#autorePost, #posts div#profilePic
+#posts div.autorePost, #posts div.profilePic
 {
     display: inline-block;
     float: left;
+    margin-top: 10px;
 }
 
-#posts div#profilePic img
+#posts div.datiAutore, #posts div.contenutoPost
+{
+    margin-left: 10px;
+}
+
+#posts div.profilePic img
 {
     height: auto; 
     width: auto; 
     max-width: 80px; 
     max-height: 80px;    
+    margin-right: 20px;   
 }
 
-#posts #allegatoPost img
+#posts .allegatoPost img
 {
     height: auto; 
     width: auto; 
