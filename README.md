@@ -195,3 +195,75 @@ Create un layout responsive, da utilizzare per tutte le pagine. In particolare c
 ### Task 7 ###
 
 Eseguite il commit finale su Git Hub per la consegna, utilizzando come messaggio “consegna M2”
+
+
+-----------------------------------------------------------------------------------------------
+
+
+## Milestone 3: Consegna 5 Maggio 2017 ##
+
+#### Programmazione Server-Side ####
+
+Per il progetto si implementerà un piccolo sito di e-commerce, che lavorerà utilizzando moneta molto virtuale. Il venditore avrà la possibilità di controllare il saldo della moneta virtuale, di inserire e rimuovere oggetti in vendita. Il cliente invece potrà ricaricare il proprio saldo e procedere all'acquisto di uno o più oggetti. Quale tipologia di oggetto si possa mettere in vendita è a vostra scelta.
+ 
+
+### Task 1 ###
+
+Se il vostro progetto Netbeans non fosse un progetto Java-Web, createne uno nuovo nel repository che utilizzate per la consegna. 
+
+### Task 2 ###
+
+Create un package dedicato a contenere il modello della vostra applicazione. All'interno di questo package ci deve essere una classe per ogni oggetto del dominio applicativo manipolato dalla vostra applicazione. In particolare:
+
+* Utenti venditori
+* Utenti clienti
+* Oggetti messi in vendita
+* Saldo del conto di clienti e venditori
+
+Inserite all’interno di queste classi tutte le variabili necessarie per descriverli. Fatto questo, create per ognuna una Factory che restituisca istanze della classe popolata con dati fittizi, restituendole in base ad un determinato criterio. 
+
+Per esempio (vuol dire che non siete costretti ad implementare l’elenco di sotto ma qualcosa di simile), consideriamo la classe ObjectSale (il nome non è importante, chiamatela come volete) che rappresenta un oggetto in vendita. La corrispondente factory ObjectSaleFactory può avere i seguenti metodi:
+
+* ObjectSale getObjectSaleById(int id) che restiuisce l’oggetto avente l’identificatore passato per parametro
+* List<ObjectSale> getSellingObjectList() che restituisce tutti gli oggetti ObjectSale presenti nel sistema
+* List<ObjectSale> getSellingObjectByCategory(String category) che restituisce tutti gli oggetti di una determinata categoria 
+
+E tutti gli altri metodi necessari per fare la ricerca di dati nell'applicazione.
+
+### Task 3 ###
+
+Trasformate le pagine HTML delle milestones precedenti in JSP, effettuando le seguenti operazioni:
+* Individuate i pezzi ripetuti di HTML ed isolateli in altre JSP, importandoli all’interno delle altre con le include. 
+*Rendete dinamiche le parti HTML da generare in base ai dati dell’applicazione, come per esempio la tabella degli oggetti.  Per fare questo, assumete che nella request siano stati impostati tutti gli attributi necessari (p.e. la lista di oggetti) dalla servlet che richiama la JSP. 
+* Impostate la pagina di descrizione come welcome file della vostra applicazione web
+
+### Task 4 ###
+
+Create una servlet Login e mappatela sulla URL login.html. La servlet si deve comportare ne modo seguente:
+
+* Nel caso l’utente non sia autenticato, deve mostrare il form di login (login.jsp) e verificare username e password nel caso siano inviate tramite il form
+* Nel caso l’utente sia già stato autenticato (durante la gestione della richiesta corrente o ad una precedente), deve mostrare
+ * La pagina per l’aggiunta di un nuovo oggetto nel caso l’utente sia un venditore (venditore.jsp)
+ * La pagina per l’acquisto di un nuovo oggetto nel caso l’utente sia un cliente (cliente.jsp)
+* Nel caso l’utente abbia inviato username e password ma l’autenticazione sia fallita, deve mostrare un messaggio di errore e permettere di riprovare. 
+
+### Task 5 ###
+
+Create una servlet Venditore e mappatela sulla URL venditore.html. La servlet si deve comportare nel modo seguente:
+
+* Nel caso l’utente non sia autenticato o non sia un venditore, deve mostrare un messaggio di accesso negato
+* Nel caso l’utente sia un venditore, deve mostrare il form di inserimento dell’oggetto. 
+* Nel caso siano inviati i dati relativi all'inserimento di un oggetto, deve mostrare una conferma dell’avvenuto inserimento ed i dati dell’oggetto inserito.
+
+### Task 6 ###
+
+Create una servlet Cliente e mappatela sulla URL cliente.html. La servlet si deve comportare nel modo seguente:
+
+* Nel caso l’utente non sia autenticato o non sia un cliente, deve mostrare un messaggio di accesso negato
+* Nel caso l’utente sia un cliente, deve mostrare la lista degli oggetti.
+* Nel caso l’utente selezioni il link per comprare un oggetto, deve mostrare solo un riepilogo dei dati dell’oggetto ed un pulsante per la conferma di acquisto
+* In caso di conferma dell’acquisto, deve verificare che l’utente abbia abbastanza soldi. In caso positivo deve mostrare un messaggio di avvenuto acquisto, altrimenti un messaggio di errore. 
+
+### Task 7 ###
+
+Eseguite il commit finale su Git Hub per la consegna, utilizzando come messaggio “consegna M3”
