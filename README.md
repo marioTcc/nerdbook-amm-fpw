@@ -194,19 +194,22 @@ Create un layout responsive, da utilizzare per tutte le pagine. In particolare c
 
 ### Task 7 ###
 
-Eseguite il commit finale su Git Hub per la consegna, utilizzando come messaggio “consegna M2”
+Eseguite il commit finale su GitHub per la consegna, utilizzando come messaggio “consegna M2”
 
 
 -----------------------------------------------------------------------------------------------
 
 
-## Milestone 3: Consegna 5 Maggio 2017 ##
+## Milestone 3: Programmazione Server Side ##
 
-#### Programmazione Server-Side ####
+Per il progetto si implementerà un piccolo social network semplificato, che permetta agli utenti di stringere amicizie e di creare e gestire dei gruppi. Si avranno due tipologie di utenti:
 
-Per il progetto si implementerà un piccolo sito di e-commerce, che lavorerà utilizzando moneta molto virtuale. Il venditore avrà la possibilità di controllare il saldo della moneta virtuale, di inserire e rimuovere oggetti in vendita. Il cliente invece potrà ricaricare il proprio saldo e procedere all'acquisto di uno o più oggetti. Quale tipologia di oggetto si possa mettere in vendita è a vostra scelta.
+* Utenti registrati, che possono inserire informazioni personali, stringere amicizia con altri utenti, creare e gestire dei gruppi, inserire post nella sua bacheca o quella degli amici.
+* L’amministratore, che può cancellare i post da qualsiasi bacheca e cancellare qualsiasi gruppo.
+
+
+Per questa milestone dovete creare una parte della logica server side del per il vostro sito web. 
  
-
 ### Task 1 ###
 
 Se il vostro progetto Netbeans non fosse un progetto Java-Web, createne uno nuovo nel repository che utilizzate per la consegna. 
@@ -215,54 +218,59 @@ Se il vostro progetto Netbeans non fosse un progetto Java-Web, createne uno nuov
 
 Create un package dedicato a contenere il modello della vostra applicazione. All'interno di questo package ci deve essere una classe per ogni oggetto del dominio applicativo manipolato dalla vostra applicazione. In particolare:
 
-* Utenti venditori
-* Utenti clienti
-* Oggetti messi in vendita
-* Saldo del conto di clienti e venditori
+* Utenti registrati
+* Post
+* Gruppi
 
 Inserite all’interno di queste classi tutte le variabili necessarie per descriverli. Fatto questo, create per ognuna una Factory che restituisca istanze della classe popolata con dati fittizi, restituendole in base ad un determinato criterio. 
 
-Per esempio (vuol dire che non siete costretti ad implementare l’elenco di sotto ma qualcosa di simile), consideriamo la classe ObjectSale (il nome non è importante, chiamatela come volete) che rappresenta un oggetto in vendita. La corrispondente factory ObjectSaleFactory può avere i seguenti metodi:
+Per esempio (vuol dire che non siete costretti ad implementare l’elenco di sotto ma qualcosa di simile), consideriamo la classe Post (il nome non è importante, chiamatela come volete) che rappresenta un oggetto in vendita. La corrispondente factory PostFactory può avere i seguenti metodi:
 
-* ObjectSale getObjectSaleById(int id) che restiuisce l’oggetto avente l’identificatore passato per parametro
-* List<ObjectSale> getSellingObjectList() che restituisce tutti gli oggetti ObjectSale presenti nel sistema
-* List<ObjectSale> getSellingObjectByCategory(String category) che restituisce tutti gli oggetti di una determinata categoria 
+* Post getPostById(int id) che restituisce l’oggetto avente l’identificatore passato per parametro
+* List<Post> getPostList(User usr) che restituisce tutti gli oggetti Post per un determinato utente
+* List<Post> getPostList(Group gr) che restituisce tutti gli oggetti Post per un determinato gruppo
 
 E tutti gli altri metodi necessari per fare la ricerca di dati nell'applicazione.
 
 ### Task 3 ###
 
 Trasformate le pagine HTML delle milestones precedenti in JSP, effettuando le seguenti operazioni:
-* Individuate i pezzi ripetuti di HTML ed isolateli in altre JSP, importandoli all’interno delle altre con le include. 
-*Rendete dinamiche le parti HTML da generare in base ai dati dell’applicazione, come per esempio la tabella degli oggetti.  Per fare questo, assumete che nella request siano stati impostati tutti gli attributi necessari (p.e. la lista di oggetti) dalla servlet che richiama la JSP. 
+
+* Individuate i pezzi ripetuti di HTML ed isolateli in altre JSP, importandoli all’interno delle altre con le include (p.es. Header, footer, barre di navigazione ecc.)
+* Rendete dinamiche le parti HTML da generare in base ai dati dell’applicazione, come per esempio l’elenco dei post in bacheca.  Per fare questo, assumete che nella request siano stati impostati tutti gli attributi necessari (p.e. la lista dei post da scorrere) dalla servlet che richiama la JSP. 
 * Impostate la pagina di descrizione come welcome file della vostra applicazione web
 
 ### Task 4 ###
-
 Create una servlet Login e mappatela sulla URL login.html. La servlet si deve comportare ne modo seguente:
 
 * Nel caso l’utente non sia autenticato, deve mostrare il form di login (login.jsp) e verificare username e password nel caso siano inviate tramite il form
-* Nel caso l’utente sia già stato autenticato (durante la gestione della richiesta corrente o ad una precedente), deve mostrare
- * La pagina per l’aggiunta di un nuovo oggetto nel caso l’utente sia un venditore (venditore.jsp)
- * La pagina per l’acquisto di un nuovo oggetto nel caso l’utente sia un cliente (cliente.jsp)
+* Nel caso l’utente sia già stato autenticato (durante la gestione della richiesta corrente o ad una precedente), deve mostrare:
+* * La pagina di modifica dei dati del profilo nel caso l’utente non abbia registrato uno fra i seguenti dati: nome, cognome, immagine del profilo, frase di presentazione. 
+* * La bacheca con i post dell’utente nel caso tutti i dati precedenti siano stati registrati.
 * Nel caso l’utente abbia inviato username e password ma l’autenticazione sia fallita, deve mostrare un messaggio di errore e permettere di riprovare. 
+
+Suggerimento: nelle factory create, fra gli altri utenti, un utente incompleto, il cui campo nome, cognome, immagine del profilo o frase di presentazione sia a null. Per tutti gli altri, impostate invece tutti i campi. Nel caso incompleto effettui la login, deve vedere la pagina del profilo subito dopo l’autenticazione. Gli altri devono vedere la bacheca. 
 
 ### Task 5 ###
 
-Create una servlet Venditore e mappatela sulla URL venditore.html. La servlet si deve comportare nel modo seguente:
+Create una servlet Profilo e mappatela sulla URL profilo.html. La servlet si deve comportare nel modo seguente:
 
-* Nel caso l’utente non sia autenticato o non sia un venditore, deve mostrare un messaggio di accesso negato
-* Nel caso l’utente sia un venditore, deve mostrare il form di inserimento dell’oggetto. 
-* Nel caso siano inviati i dati relativi all'inserimento di un oggetto, deve mostrare una conferma dell’avvenuto inserimento ed i dati dell’oggetto inserito.
+* Nel caso l’utente non sia autenticato, deve mostrare un messaggio di accesso negato
+* Nel caso l’utente sia autenticato, deve mostrare il form di inserimento dei dati del profilo. 
+* Nel caso siano inviati i dati relativi al profilo, deve mostrare una conferma dell’avvenuto inserimento ed i dati inseriti.
+
+N.B. In realtà nel caso si faccia il reload della pagina, i dati torneranno ad essere quelli che erano prima dell’inserimento. Ciò che scrivete nel form sarà disponibile solo per la riposta immediatamente dopo il submit del form. È un problema che risolveremo nella prossima milestone.
 
 ### Task 6 ###
 
-Create una servlet Cliente e mappatela sulla URL cliente.html. La servlet si deve comportare nel modo seguente:
+Create una servlet Bacheca e mappatela sulla URL bacheca.html. È possibile per gli utenti autenticati visitare la bacheca di altri utenti. La servlet si deve comportare nel modo seguente:
 
-* Nel caso l’utente non sia autenticato o non sia un cliente, deve mostrare un messaggio di accesso negato
-* Nel caso l’utente sia un cliente, deve mostrare la lista degli oggetti.
-* Nel caso l’utente selezioni il link per comprare un oggetto, deve mostrare solo un riepilogo dei dati dell’oggetto ed un pulsante per la conferma di acquisto
-* In caso di conferma dell’acquisto, deve verificare che l’utente abbia abbastanza soldi. In caso positivo deve mostrare un messaggio di avvenuto acquisto, altrimenti un messaggio di errore. 
+* Nel caso l’utente non sia autenticato, deve mostrare un messaggio di accesso negato
+* Nel caso l’utente sia autenticato, deve mostrare l’elenco dei post di uno specifico utente. 
+* Sulla sinistra della pagina, ci deve essere un elenco di link alle bacheche degli  utenti presenti nel sistema. Cliccando su uno di questi link, si visita la bacheca dell’utente selezionato. 
+* In cima alla parte centrale della pagina, ci deve essere un form per l’inserimento di un nuovo post. È possibile per un utente scrivere nella bacheca di altri utenti. Una volta inserito il messaggio, la servlet mostrerà il riepilogo dei dati inseriti, mostrando esplicitamente chi sia l’autore del post e chi sia il proprietario della bacheca. Il riepilogo deve mostrare un pulsante di conferma che conclude l’inserimento. Premuto questo pulsante, deve comparire il messaggio “Hai scritto sulla bacheca di [Tizio]”. 
+
+Suggerimenti: Fate attenzione all'utilizzo della sessione. Deve essere possibile aprire la bacheca di più utenti su più tab. 
 
 ### Task 7 ###
 
