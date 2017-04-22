@@ -15,9 +15,7 @@
         
         <c:set var="page" value="profilo" scope="request"/>
         <jsp:include page="headerBar.jsp"/>
-        
-        <div class="clear"></div>
-        
+                
         <jsp:include page="sideBar.jsp"/>
                   
         <div id="divBody">

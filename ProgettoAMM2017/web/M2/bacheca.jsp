@@ -15,8 +15,6 @@
         
         <c:set var="page" value="bacheca" scope="request"/>
         <jsp:include page="headerBar.jsp"/>
-
-        <div class="clear"></div>
         
         <jsp:include page="sideBar.jsp"/>
         
@@ -43,7 +41,7 @@
 
                     <div class="contenutoPost"> <!-- Contenuto del post -->
                         <div> <!-- Testo del post -->                         
-                            <p>Questo Ã¨ il testo del post</p>
+                            <p>Questo è il testo del post</p>
                         </div>
 
                         <div class="allegatoPost"> <!-- Allegato del post -->
@@ -68,7 +66,7 @@
 
                     <div class="contenutoPost"> <!-- Contenuto del post -->
                         <div> <!-- Testo del post -->                         
-                            <p>Questo Ã¨ il testo del post</p>
+                            <p>Questo è il testo del post</p>
                         </div>
 
                         <div class="allegatoPost"> <!-- Allegato del post -->                        
@@ -94,7 +92,7 @@
                     <div class="contenutoPost"> <!-- Contenuto del post -->
                         <div>
                             <!-- Testo del post -->
-                            <p>Questo Ã¨ il testo del post</p>
+                            <p>Questo è il testo del post</p>
                         </div>
 
                         <div class="allegatoPost"> <!-- Allegato del post -->                            

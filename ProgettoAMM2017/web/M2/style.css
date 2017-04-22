@@ -292,6 +292,22 @@ header, nav
     margin-bottom: 5px;
 }
 
+.loginErrorDiv
+{
+    margin: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 250px;
+    width: 50%;
+}
+
+.loginErrorDiv > p
+{
+    text-align: center;
+    text-decoration: underline;
+    color: red;    
+}
+
 #loginFormDiv
 {
     position: relative;

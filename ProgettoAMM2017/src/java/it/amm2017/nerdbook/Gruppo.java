@@ -12,6 +12,7 @@ public class Gruppo {
     
     private int id;
     private String nome;
+    private String groupIconUrl;
     private ArrayList<Utente> iscritti;
     
     public Gruppo()
@@ -19,6 +20,7 @@ public class Gruppo {
         this.nome="";
         this.id=-1;
         this.iscritti=new ArrayList<Utente>();
+        this.groupIconUrl="";
     }
 
     /**
@@ -61,6 +63,20 @@ public class Gruppo {
      */
     public void setIscritti(ArrayList<Utente> iscritti) {
         this.iscritti = iscritti;
+    }
+
+    /**
+     * @return the groupIconUrl
+     */
+    public String getGroupIconUrl() {
+        return groupIconUrl;
+    }
+
+    /**
+     * @param groupIconUrl the groupIconUrl to set
+     */
+    public void setGroupIconUrl(String groupIconUrl) {
+        this.groupIconUrl = groupIconUrl;
     }
     
 }

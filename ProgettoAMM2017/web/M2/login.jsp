@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true" %>
 <!DOCTYPE html>
 
 <html>
@@ -13,13 +15,29 @@
     <body>
         
         <div id="divBodyLogin">
-
+            
+            <c:if test="${sessionScope.loginError =='none'}">
+                
+            </c:if>
+                
+            <c:if test="${sessionScope.loginError =='wrongPassword'}">
+                <div class="loginErrorDiv">
+                    <p>Nome utente e/o Password errati, riprovare.</p>
+                </div>
+            </c:if>
+            
+            <c:if test="${sessionScope.loginError =='emptyField'}">
+                <div class="loginErrorDiv">
+                    <p>Per favore, compilare tutti i campi</p>
+                </div>
+            </c:if>
+          
             <div id="loginFormDiv"> <!-- Contenitore form di login -->
                 <div>
                     <img src="Assets/ICONS/NerdBook_logo.svg" width="54" height="44" alt="Logo del social network" />
                     <h1> NerdBook </h1>
                 </div>
-                <form id="loginForm" method="post" action="#">
+                <form id="loginForm" method="post" action="login.html">
                     <div>
                         <label for="username">Nome utente:</label>
                         <input type="text" name="username" id="username">
