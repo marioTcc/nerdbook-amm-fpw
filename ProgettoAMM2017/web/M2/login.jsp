@@ -15,23 +15,7 @@
     <body>
         
         <div id="divBodyLogin">
-            
-            <c:if test="${sessionScope.loginError =='none'}">
-                
-            </c:if>
-                
-            <c:if test="${sessionScope.loginError =='wrongPassword'}">
-                <div class="loginErrorDiv">
-                    <p>Nome utente e/o Password errati, riprovare.</p>
-                </div>
-            </c:if>
-            
-            <c:if test="${sessionScope.loginError =='emptyField'}">
-                <div class="loginErrorDiv">
-                    <p>Per favore, compilare tutti i campi</p>
-                </div>
-            </c:if>
-          
+                          
             <div id="loginFormDiv"> <!-- Contenitore form di login -->
                 <div>
                     <img src="Assets/ICONS/NerdBook_logo.svg" width="54" height="44" alt="Logo del social network" />
@@ -50,8 +34,20 @@
                         <button type="submit">Accedi</button>
                     </div>
                 </form>
+                
+                <c:if test="${sessionScope.loginError =='wrongPassword'}">
+                    <div class="loginErrorDiv">
+                        <p>Nome utente e/o Password errati, riprovare.</p>
+                    </div>
+                </c:if>
+
+                <c:if test="${sessionScope.loginError =='emptyField'}">
+                    <div class="loginErrorDiv">
+                        <p>Per favore, compilare tutti i campi.</p>
+                    </div>
+                </c:if>
             </div> <!-- Fine form di login -->
-            
+                        
         </div>
     </body>
 </html>

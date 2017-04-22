@@ -19,6 +19,7 @@
         <jsp:include page="sideBar.jsp"/>
         
         <div id="divBody">
+            
             <div id="presentazione">
                 <p>Autore presentazione: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
             </div>
