@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html>
@@ -7,51 +9,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Mario Taccori">
         <meta name="keywords" content="NerdBook bacheca social network">
-        <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="M2/style.css" media="screen">
     </head>
     <body>
         
-        <div class="headerBar">
-            <header> <!-- Titolo -->
-                <div id="title">
-                    <img id="logo" src="../Assets/ICONS/NerdBook_logo.svg" alt="Logo del social network" />NerdBook
-                </div>
-            </header>
-
-            <nav> <!-- Menu di navigazione -->
-                <ol>   
-                    <li><a id="profiloLink" href="profilo.html"><img src="../Assets/ICONS/profilo_icona.svg" alt="immagine tasto profilo" />Profilo</a></li>
-                    <li class="active"><a id="bachecaLink" href="bacheca.html"><img src="../Assets/ICONS/bacheca_icona.svg" alt="immagine tasto bacheca" />Bacheca</a></li>
-                    <li><a id="descrizioneLink" href="descrizione.html"><img src="../Assets/ICONS/descrizione_icona.svg" alt="immagine tasto descrizione" />Descrizione</a></li>
-                    <li><a id="loginLink" href="login.html"><img src="../Assets/ICONS/login_icona.svg" alt="immagine tasto login" />Login</a></li>
-                </ol>
-            </nav>       
-        </div>
+        <c:set var="page" value="bacheca" scope="request"/>
+        <jsp:include page="headerBar.jsp"/>
 
         <div class="clear"></div>
         
-        <div id="sidebar1">
-            <div id="searchBar">
-                <input type="text" value="Cerca">
-            </div>
-            
-            <div id="elencoPersone">
-                <h4>Persone:</h4>
-                <ul>
-                    <li>Persona Uno</li>
-                    <li>Persona Due</li>
-                    <li>Persona Tre</li>
-                </ul>
-            </div>
-            
-            <div id="elencoGruppi">
-                <h4>Gruppi:</h4>
-                <ul>
-                    <li>Molgonfieristi</li>
-                    <li>Ritardatari</li>
-                </ul>
-            </div>
-        </div>
+        <jsp:include page="sideBar.jsp"/>
         
         <div id="divBody">
             <div id="presentazione">
@@ -64,7 +31,7 @@
                 <div>             
                     <div class="datiAutore"> <!-- Contenitore dati autore -->    
                         <div class="profilePic"> <!-- Foto profilo -->                           
-                            <img src="../Assets/IMG/djanniprofilo.jpg" alt="Foto autore del post">
+                            <img src="Assets/IMG/djanniprofilo.jpg" alt="Foto autore del post">
                         </div>
 
                         <div class="autorePost"> <!-- Nome autore del post -->                         
@@ -76,7 +43,7 @@
 
                     <div class="contenutoPost"> <!-- Contenuto del post -->
                         <div> <!-- Testo del post -->                         
-                            <p>Questo è il testo del post</p>
+                            <p>Questo Ã¨ il testo del post</p>
                         </div>
 
                         <div class="allegatoPost"> <!-- Allegato del post -->
@@ -89,7 +56,7 @@
                 <div>                    
                     <div class="datiAutore"> <!-- Contenitore dati autore -->
                         <div class="profilePic"> <!-- Foto profilo -->                          
-                            <img src="../Assets/IMG/djanniprofilo.jpg" alt="Foto autore del post">
+                            <img src="Assets/IMG/djanniprofilo.jpg" alt="Foto autore del post">
                         </div>
 
                         <div class="autorePost"> <!-- Nome autore del post -->                          
@@ -101,11 +68,11 @@
 
                     <div class="contenutoPost"> <!-- Contenuto del post -->
                         <div> <!-- Testo del post -->                         
-                            <p>Questo è il testo del post</p>
+                            <p>Questo Ã¨ il testo del post</p>
                         </div>
 
                         <div class="allegatoPost"> <!-- Allegato del post -->                        
-                            <img src="../Assets/IMG/siamese.jpg" alt="Immagine in allegato al post">
+                            <img src="Assets/IMG/siamese.jpg" alt="Immagine in allegato al post">
                         </div>
                     </div>
                 </div>
@@ -114,7 +81,7 @@
                 <div>       
                     <div class="datiAutore"> <!-- Contenitore dati autore -->
                         <div class="profilePic"> <!-- Foto profilo -->                           
-                            <img src="../Assets/IMG/djanniprofilo.jpg" alt="Foto autore del post">
+                            <img src="Assets/IMG/djanniprofilo.jpg" alt="Foto autore del post">
                         </div>
 
                         <div class="autorePost"> <!-- Nome autore del post -->                        
@@ -127,7 +94,7 @@
                     <div class="contenutoPost"> <!-- Contenuto del post -->
                         <div>
                             <!-- Testo del post -->
-                            <p>Questo è il testo del post</p>
+                            <p>Questo Ã¨ il testo del post</p>
                         </div>
 
                         <div class="allegatoPost"> <!-- Allegato del post -->                            

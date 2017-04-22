@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Mario Taccori">
         <meta name="keywords" content="NerdBook login social network">
-        <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="M2/style.css" media="screen">
     </head>
     
     <body>
@@ -16,7 +16,7 @@
 
             <div id="loginFormDiv"> <!-- Contenitore form di login -->
                 <div>
-                    <img src="../Assets/ICONS/NerdBook_logo.svg" width="54" height="44" alt="Logo del social network" />
+                    <img src="Assets/ICONS/NerdBook_logo.svg" width="54" height="44" alt="Logo del social network" />
                     <h1> NerdBook </h1>
                 </div>
                 <form id="loginForm" method="post" action="#">

@@ -7,6 +7,7 @@ import java.util.ArrayList;
  *
  * @author Mario Taccori
  */
+
 public class GruppoFactory {
     
     private static GruppoFactory singleton;

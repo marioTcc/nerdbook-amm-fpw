@@ -1,3 +1,5 @@
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html>
@@ -7,49 +9,16 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Mario Taccori">
         <meta name="keywords" content="NerdBook descrizione social network">
-        <link rel="stylesheet" type="text/css" href="style.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="M2/style.css" media="screen">
     </head>
     <body>
             
-        <div class="headerBar">
-            <header> <!-- Titolo -->
-                <div id="title">
-                    <img id="logo" src="../Assets/ICONS/NerdBook_logo.svg" alt="Logo del social network" />NerdBook
-                </div>
-            </header>
-
-            <nav> <!-- Menu di navigazione -->
-                <ol>   
-                    <li><a id="profiloLink" href="profilo.html"><img src="../Assets/ICONS/profilo_icona.svg" alt="immagine tasto profilo" />Profilo</a></li>
-                    <li><a id="bachecaLink" href="bacheca.html"><img src="../Assets/ICONS/bacheca_icona.svg" alt="immagine tasto bacheca" />Bacheca</a></li>
-                    <li class="active"><a id="descrizioneLink" href="descrizione.html"><img src="../Assets/ICONS/descrizione_icona.svg" alt="immagine tasto descrizione" />Descrizione</a></li>
-                    <li><a id="loginLink" href="login.html"><img src="../Assets/ICONS/login_icona.svg" alt="immagine tasto login" />Login</a></li>
-                </ol>
-            </nav>       
-        </div>
+        <c:set var="page" value="descrizione" scope="request"/>
+        <jsp:include page="headerBar.jsp"/>
         
-        <div id="sidebar1">
-            <div id="searchBar">
-                <input type="text" value="Cerca">
-            </div>
-            
-            <div id="elencoPersone">
-                <h4>Persone:</h4>
-                <ul>
-                    <li>Persona Uno</li>
-                    <li>Persona Due</li>
-                    <li>Persona Tre</li>
-                </ul>
-            </div>
-            
-            <div id="elencoGruppi">
-                <h4>Gruppi:</h4>
-                <ul>
-                    <li>Molgonfieristi</li>
-                    <li>Ritardatari</li>
-                </ul>
-            </div>
-        </div>
+        <div class="clear"></div>
+        
+        <jsp:include page="sideBar.jsp"/>
         
         <div id="divBody">
             <div>
@@ -92,7 +61,7 @@
                     </div>
 
                     <div id="obiettiviDiv">
-                        <h3 id="teamObiettivi">Perchè lo facciamo:</h3>
+                        <h3 id="teamObiettivi">PerchÃ¨ lo facciamo:</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue,
                            libero ut euismod rhoncus, risus lacus sodales mi, nec tempor lectus ante et elit.
                            Suspendisse sit amet lacus nulla. Cras et augue nec erat sollicitudin vulputate.
@@ -112,7 +81,7 @@
                     <h2 id="descrizioneSocialNetwork">Il social network:</h2>
 
                     <div id="proNerdBookDiv">
-                        <h3 id="proNerdBook">Perchè scegliere NerdBook:</h3>
+                        <h3 id="proNerdBook">PerchÃ¨ scegliere NerdBook:</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue,
                            libero ut euismod rhoncus, risus lacus sodales mi, nec tempor lectus ante et elit.
                            Suspendisse sit amet lacus nulla. Cras et augue nec erat sollicitudin vulputate.
