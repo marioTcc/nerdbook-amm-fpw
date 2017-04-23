@@ -35,7 +35,23 @@ public class UtenteSecure
         this.dataNascita=t.getDataNascita();
         this.urlFotoProfilo=t.getUrlFotoProfilo();
         this.frasePresentazione=t.getFrasePresentazione();                
-    } 
+    }
+    
+    public boolean equals(Object obj)
+    {
+        if(obj==null)
+            return false;
+	if(obj==this)
+            return true;
+
+	if(!(obj instanceof UtenteSecure))
+            return false;
+
+	if(this.id==((UtenteSecure) obj).getId())
+            return true;
+
+	return false;
+    }
 
     /**
      * @return the id

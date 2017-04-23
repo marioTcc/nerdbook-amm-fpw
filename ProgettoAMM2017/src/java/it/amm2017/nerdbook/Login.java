@@ -24,8 +24,8 @@ public class Login extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {     
         if(request.getParameter("action")==null || request.getParameter("action").equals("login"))
             this.login(request, response);
@@ -46,7 +46,7 @@ public class Login extends HttpServlet {
                 {
                     if(request.getParameter("username").toString().length()>0 && request.getParameter("password").toString().length()>0)
                     {
-                        Utente tmp=UtenteFactory.getInstance().getUtenteByUsername(request.getParameter("username").toString());
+                        Utente tmp = UtenteFactory.getInstance().getUtenteByUsername(request.getParameter("username").toString());
 
                         if(tmp!=null && tmp.getPassword().equals(request.getParameter("password")))
                         {
@@ -81,7 +81,7 @@ public class Login extends HttpServlet {
                 try
                 {
                     chooseDestination((UtenteSecure)session.getAttribute("user"), request, response);
-                }catch(Exception ex){System.out.println(ex.getMessage());}
+                }catch(Exception ex){}
             }
         }
         else
@@ -94,26 +94,19 @@ public class Login extends HttpServlet {
     
     public void chooseDestination(UtenteSecure tmp, HttpServletRequest request, HttpServletResponse response) throws IllegalAccessException, IOException, InvocationTargetException
     {
-        if(UtenteFactory.checkCompletion(tmp))
-        {
-            request.getSession(false).setAttribute("user", tmp);
+        request.getSession(false).setAttribute("user", tmp);
+        request.getSession(false).setAttribute("subscribedGroups", GruppoFactory.getInstance().getSubscribedGroups(tmp));
+        request.getSession(false).setAttribute("friends", UtenteFactory.getInstance().getFriends(tmp));
+        
+        if(UtenteFactory.checkCompletion(tmp))         
             response.sendRedirect("bacheca.html");
-            //request.getRequestDispatcher("M2/bacheca.jsp").forward(request, response);
-        }
         else
-        {
-            request.getSession(false).setAttribute("user", tmp);
-            response.sendRedirect("profilo.html");
-            //request.getRequestDispatcher("M2/profilo.jsp").forward(request, response);
-        }       
+            response.sendRedirect("profilo.html");       
     }
     
     public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
-        HttpSession session = request.getSession();
-        response.setContentType("text/html;charset=UTF-8");
-        session.invalidate(); 
-        //request.getRequestDispatcher("M2/login.jsp?").forward(request, response);  
+        request.getSession(false).invalidate(); 
         response.sendRedirect("login.html");
     }
 

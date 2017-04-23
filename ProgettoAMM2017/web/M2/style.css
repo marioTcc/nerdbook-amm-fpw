@@ -496,7 +496,7 @@ div#presentazione p
   
     nav #loggedInLi
     {
-        float:right;
+        float: right;
         border-left: solid 2px #7d84b2;
         width: 150px;
         background-color: #445E93;
@@ -507,7 +507,7 @@ div#presentazione p
         margin-left: 1px;
     }
 
-    nav li.active
+    nav li:not(#loggedInLi).active
     {
         background-color: #0a214f; 
     }  
@@ -536,7 +536,7 @@ div#presentazione p
         margin: 0px;
         padding: 0px;
         border: 0px;
-        font-size: 14px;
+        font-size: 12px;
     }
     
     nav li #loggedInDiv p
@@ -643,7 +643,7 @@ div#presentazione p
         margin-left: 1px;
     }
 
-    nav li.active
+    nav li:not(#loggedInLi).active
     {
         background-color: #0a214f; 
     }  
@@ -672,7 +672,7 @@ div#presentazione p
         margin: 0px;
         padding: 0px;
         border: 0px;
-        font-size: 14px;
+        font-size: 12px;
     }
     
     nav li #loggedInDiv p

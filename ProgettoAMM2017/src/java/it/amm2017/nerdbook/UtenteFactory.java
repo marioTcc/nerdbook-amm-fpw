@@ -84,8 +84,8 @@ public class UtenteFactory {
         Utente incompleto = new Utente();
         incompleto.setId(4);
         
-        incompleto.setNome("Djanni");
-        incompleto.setCognome("");
+        incompleto.setNome("Incompleto");
+        incompleto.setCognome("Orrù");
         
         incompleto.setEmail("");
         
@@ -139,12 +139,12 @@ public class UtenteFactory {
     }
     
     
-    public Utente getUtenteById(int id)
+    public UtenteSecure getUtenteById(int id)
     {
         for (Utente tmpUser : this.listaUtenti) 
         {
             if (tmpUser.getId() == id) 
-                return tmpUser;
+                return new UtenteSecure(tmpUser);
         }
         
         return null;
@@ -161,16 +161,28 @@ public class UtenteFactory {
         return null;
     }
     
-    public ArrayList<Utente> cercaUtente(String nome, String cognome)
+    public ArrayList<UtenteSecure> cercaUtente(String nome, String cognome)
     {
-        ArrayList<Utente> utentiTrovati= new ArrayList<Utente>();
+        ArrayList<UtenteSecure> utentiTrovati= new ArrayList<UtenteSecure>();
         
         for (Utente tmpUser : this.listaUtenti) 
         {
             if (tmpUser.getNome().equals(nome) && tmpUser.getCognome().equals(cognome)) 
-                utentiTrovati.add(tmpUser);
+                utentiTrovati.add(new UtenteSecure(tmpUser));
         }
         
         return utentiTrovati;        
+    }
+    
+    public ArrayList<UtenteSecure> getFriends(UtenteSecure t)
+    {
+        ArrayList<UtenteSecure> tmp = new ArrayList<UtenteSecure>();
+        for(Utente u : this.listaUtenti)
+        {
+            if(!((UtenteSecure)u).equals(t))
+                tmp.add(new UtenteSecure(u));
+        }
+        
+        return tmp;
     }
 }

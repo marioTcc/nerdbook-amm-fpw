@@ -24,6 +24,7 @@
                     <div>
 
                         <div id="profilePic">
+                            <c:set var="picSubject" value="self" scope="request" />
                             <jsp:include page="fotoProfilo.jsp" />
                         </div>
 

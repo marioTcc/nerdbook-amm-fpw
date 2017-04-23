@@ -29,7 +29,8 @@
                     
                 <c:when test="${sessionScope.loggedIn == true}">
                     <li id="loggedInLi">
-                        <div id="loggedInDiv">                                
+                        <div id="loggedInDiv">      
+                            <c:set var="picSubject" value="self" scope="request" />
                             <jsp:include page="fotoProfilo.jsp" />
                             <p>${sessionScope.user.nome} ${sessionScope.user.cognome}</p>
                             <a id="logoutLink" href="login.html?action=logout"><img src="Assets/ICONS/loggedIn_icona.svg" alt="immagine tasto login" />Logout</a>

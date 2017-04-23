@@ -15,17 +15,18 @@
     <div id="elencoPersone">
         <h4>Persone:</h4>
         <ul>
-            <li>Persona Uno</li>
-            <li>Persona Due</li>
-            <li>Persona Tre</li>
+            <c:forEach var="friendTmp" items="${friends}">
+                <li>${friendTmp.nome} ${friendTmp.cognome}</li>
+            </c:forEach>
         </ul>
     </div>
 
     <div id="elencoGruppi">
         <h4>Gruppi:</h4>
         <ul>
-            <li>Molgonfieristi</li>
-            <li>Ritardatari</li>
+            <c:forEach var="gruppoTmp" items="${subscribedGroups}">
+                <li>${gruppoTmp.nome}</li>
+            </c:forEach>
         </ul>
     </div>
 </div>

@@ -1,9 +1,8 @@
 
 package it.amm2017.nerdbook;
 
-import it.amm2017.nerdbook.UtenteFactory; // TMP?
 import java.util.ArrayList;
-import java.util.Arrays; // TMP?
+import java.util.Arrays;
 
 /**
  *
@@ -23,14 +22,14 @@ public class GruppoFactory {
         gruppo1.setId(0);
         gruppo1.setNome("Molgonfieristi");
         gruppo1.setGroupIconUrl("Assets/ICONS/molgonfieristiIcon.svg");
-        gruppo1.setIscritti(new ArrayList<Utente>(Arrays.asList(tmp.getUtenteById(0), tmp.getUtenteById(1))));
+        gruppo1.setIscritti(new ArrayList<UtenteSecure>(Arrays.asList(tmp.getUtenteById(0), tmp.getUtenteById(1))));
         
         // Gruppo 1
         Gruppo gruppo2=new Gruppo();
         gruppo2.setId(1);
         gruppo2.setNome("Ritardatari");
         gruppo2.setGroupIconUrl("Assets/ICONS/ritardatariIcon.svg");
-        gruppo2.setIscritti(new ArrayList<Utente>(Arrays.asList(tmp.getUtenteById(0), tmp.getUtenteById(2))));
+        gruppo2.setIscritti(new ArrayList<UtenteSecure>(Arrays.asList(tmp.getUtenteById(0), tmp.getUtenteById(2))));
         
         
         // Lista Gruppi
@@ -44,6 +43,19 @@ public class GruppoFactory {
             singleton = new GruppoFactory();
         
         return singleton;
+    }
+    
+    public ArrayList<Gruppo> getSubscribedGroups(UtenteSecure t)
+    {
+        ArrayList<Gruppo> subscribedGroups=new ArrayList<>();
+        
+        for(Gruppo tmp : this.listaGruppi)
+        {
+            if(tmp.getIscritti().contains(t))
+                subscribedGroups.add(tmp);
+        }
+        
+        return subscribedGroups;
     }
        
     public Gruppo getGruppoById(int id)

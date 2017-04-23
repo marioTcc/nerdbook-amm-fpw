@@ -12,12 +12,21 @@ public class Post {
         TESTO, IMMAGINE, LINK
     };
     
+    public enum DestinationType
+    {
+        INVALID, BACHECA, GRUPPO;
+    };
+         
+    
     private int id;
-    private Utente autorePost;
+    private UtenteSecure autorePost;
     private String contenuto;
     private PostType tipoPost;
     private String imgUrl;
     private String attachedLink;
+    
+    private DestinationType tipoDestinazione;
+    private int idDestinazione;    
     
     public Post()
     {
@@ -25,7 +34,25 @@ public class Post {
         this.autorePost=null;
         this.contenuto="";
         this.imgUrl="";
-        this.attachedLink="";
+        this.attachedLink="";     
+        this.tipoDestinazione=DestinationType.INVALID;
+        this.idDestinazione=-1;
+    }
+          
+    public boolean equals(Object obj)
+    {
+        if(obj==null)
+            return false;
+	if(obj==this)
+            return true;
+
+	if(!(obj instanceof Post))
+            return false;
+
+	if(this.id==((Post) obj).getId())
+            return true;
+
+	return false;
     }
 
     /**
@@ -45,14 +72,14 @@ public class Post {
     /**
      * @return the autorePost
      */
-    public Utente getAutorePost() {
+    public UtenteSecure getAutorePost() {
         return autorePost;
     }
 
     /**
      * @param autorePost the autorePost to set
      */
-    public void setAutorePost(Utente autorePost) {
+    public void setAutorePost(UtenteSecure autorePost) {
         this.autorePost = autorePost;
     }
 
@@ -110,6 +137,34 @@ public class Post {
      */
     public void setAttachedLink(String attachedLink) {
         this.attachedLink = attachedLink;
+    }
+
+    /**
+     * @return the tipoDestinazione
+     */
+    public DestinationType getTipoDestinazione() {
+        return tipoDestinazione;
+    }
+
+    /**
+     * @param tipoDestinazione the tipoDestinazione to set
+     */
+    public void setTipoDestinazione(DestinationType tipoDestinazione) {
+        this.tipoDestinazione = tipoDestinazione;
+    }
+
+    /**
+     * @return the idDestinazione
+     */
+    public int getIdDestinazione() {
+        return idDestinazione;
+    }
+
+    /**
+     * @param idDestinazione the idDestinazione to set
+     */
+    public void setIdDestinazione(int idDestinazione) {
+        this.idDestinazione = idDestinazione;
     }
     
 }

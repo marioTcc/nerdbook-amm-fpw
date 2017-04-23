@@ -10,6 +10,7 @@
 <div>             
     <div class="datiAutore"> <!-- Contenitore dati autore -->    
         <div class="profilePic">
+            <c:set var="picSubject" value="postAuthor" scope="request" />
             <jsp:include page="fotoProfilo.jsp" />
         </div>
 
