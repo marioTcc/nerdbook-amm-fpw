@@ -16,7 +16,7 @@
         <h4>Persone:</h4>
         <ul>
             <c:forEach var="friendTmp" items="${friends}">
-                <li>${friendTmp.nome} ${friendTmp.cognome}</li>
+                <li><a href="bacheca.html?owner=${friendTmp.id}">${friendTmp.nome} ${friendTmp.cognome}</a></li>
             </c:forEach>
         </ul>
     </div>

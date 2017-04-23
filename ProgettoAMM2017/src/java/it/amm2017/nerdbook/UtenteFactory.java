@@ -45,7 +45,7 @@ public class UtenteFactory {
         utente2.setPassword("123");
         
         utente2.setUrlFotoProfilo("");
-        utente2.setFrasePresentazione("ciao");
+        utente2.setFrasePresentazione("ciao, sono Heavy Breathing");
         utente2.setDataNascita("10/10/2010");
 
         // Utente3
@@ -61,7 +61,7 @@ public class UtenteFactory {
         utente3.setPassword("123");
         
         utente3.setUrlFotoProfilo("");
-        utente3.setFrasePresentazione("ciao");
+        utente3.setFrasePresentazione("ciao, sono GymWorkOut");
         utente3.setDataNascita("10/10/2010");
 
         // Utente4
@@ -77,7 +77,7 @@ public class UtenteFactory {
         utente4.setPassword("123");
         
         utente4.setUrlFotoProfilo("");
-        utente4.setFrasePresentazione("ciao");
+        utente4.setFrasePresentazione("ciao, sono Chao Povery");
         utente4.setDataNascita("10/10/2010");
         
         // Incompleto
@@ -93,7 +93,7 @@ public class UtenteFactory {
         incompleto.setPassword("sonoincompleto");
         
         incompleto.setUrlFotoProfilo("");
-        incompleto.setFrasePresentazione("ciao");
+        incompleto.setFrasePresentazione("ciao, sono incompleto; completami!");
         incompleto.setDataNascita("10/10/2010");
 
         

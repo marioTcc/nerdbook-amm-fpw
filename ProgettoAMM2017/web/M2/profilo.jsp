@@ -29,26 +29,26 @@
                         </div>
 
                         <div id="divForm"> <!-- Form dati profilo -->
-                            <form id="formDatiProfilo" action="#" method="post">
+                            <form id="formDatiProfilo" action="profilo.html?action=updateInfo" method="post">
 
                                 <div> <!-- Nome utente -->
                                     <label for="userName">Nome:</label>
-                                    <input type="text" name="userName" id="userName">
+                                    <input <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> type="text" name="userName" id="userName">
                                 </div>
 
                                 <div> <!-- Cognome utente -->
-                                    <label for="userName">Cognome:</label>
-                                    <input type="text" name="userSurname" id="userSurname">
+                                    <label for="userSurname">Cognome:</label>
+                                    <input <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> type="text" name="userSurname" id="userSurname">
                                 </div>
 
                                 <div> <!-- Immagine profilo -->
                                     <label for="profilePicURL">Url immagine profilo:</label>
-                                    <input type="url" name="profilePicURL" id="profilePicURL">
+                                    <input <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> type="url" name="profilePicURL" id="profilePicURL">
                                 </div>
 
                                 <div> <!-- Presentazione -->
                                     <label for="presentazione">Presentazione:</label>
-                                    <textarea name="presentazione" id="presentazione"></textarea>
+                                    <textarea <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> name="presentazione" id="presentazione"></textarea>
                                 </div>
 
                                 <div> <!-- Data di nascita -->
@@ -70,6 +70,12 @@
                                     <button type="submit" form="formDatiProfilo">Aggiorna</button>
                                 </div>
                             </form> 
+                                
+                            <c:if test="${isUserInfoComplete == false}"> 
+                                <c:set var="errorType" value="userInfoIncompleteError" scope="request" />
+                                <c:set var="errorValue" value="userInfoIncompleteError" scope="request" />
+                                <jsp:include page="errors.jsp" />
+                            </c:if>
                         </div> <!-- Fine form login -->
                     </div>
                         

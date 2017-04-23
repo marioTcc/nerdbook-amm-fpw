@@ -50,7 +50,7 @@ public class Login extends HttpServlet {
 
                         if(tmp!=null && tmp.getPassword().equals(request.getParameter("password")))
                         {
-                            session.setAttribute("loginError", "none");
+                            request.setAttribute("loginError", "none");
                             session.setAttribute("loggedIn", true);
                             
                             try
@@ -60,19 +60,19 @@ public class Login extends HttpServlet {
                         }
                         else
                         {
-                            session.setAttribute("loginError", "wrongCredentials");
+                            request.setAttribute("loginError", "wrongCredentials");
                             request.getRequestDispatcher("M2/login.jsp").forward(request, response);  
                         }                          
                     }
                     else
                     {
-                        session.setAttribute("loginError", "emptyField");
+                        request.setAttribute("loginError", "emptyField");
                         request.getRequestDispatcher("M2/login.jsp").forward(request, response);
                     }  
                 }
                 else
                 {
-                    session.setAttribute("loginError", "none");
+                    request.setAttribute("loginError", "none");
                     request.getRequestDispatcher("M2/login.jsp").forward(request, response);
                 }
             }
@@ -86,7 +86,7 @@ public class Login extends HttpServlet {
         }
         else
         {
-            session.setAttribute("loginError", "none");
+            request.setAttribute("loginError", "none");
             session.setAttribute("loggedIn", false);
             request.getRequestDispatcher("M2/login.jsp").forward(request, response);                
         }        
@@ -101,7 +101,7 @@ public class Login extends HttpServlet {
         if(UtenteFactory.checkCompletion(tmp))         
             response.sendRedirect("bacheca.html");
         else
-            response.sendRedirect("profilo.html");       
+            response.sendRedirect("profilo.html?isUserInfoComplete=false");
     }
     
     public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 

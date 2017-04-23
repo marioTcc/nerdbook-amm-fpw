@@ -20,7 +20,7 @@
         </div>
     </c:when>
     
-    <c:when test="${errorType == 'loginError' && errorValue=='loggedOut'}">
+    <c:when test="${errorType == 'loginError' && errorValue=='sessionExpired'}">
         <div class="errorDiv">
             <p>Sei stato disconnesso.</p>
         </div>
@@ -29,6 +29,12 @@
     <c:when test="${errorType == 'accessDenied' && errorValue=='accessDenied'}">
         <div class="errorDiv">
             <p>Accesso negato. Per favore, effettuare il login.</p>
+        </div>
+    </c:when>
+    
+    <c:when test="${errorType == 'userInfoIncompleteError' && errorValue=='userInfoIncompleteError'}">
+        <div class="errorDiv">
+            <p>I campi in rosso sono obbligatori</p>
         </div>
     </c:when>
     

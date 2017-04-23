@@ -4,7 +4,7 @@
 
 <html>
     <head>
-        <title>NerdBook - Bacheca</title>
+        <title>Bacheca di ${owner.nome} ${owner.cognome}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Mario Taccori">
@@ -23,7 +23,7 @@
             <c:choose>
                 <c:when test="${sessionScope.loggedIn==true}">
                     <div id="presentazione">
-                        <p>${sessionScope.user.frasePresentazione}</p>
+                        <p>${owner.frasePresentazione}</p>
                     </div>
    
 

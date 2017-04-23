@@ -35,14 +35,34 @@ h4
     margin: 0px;
 }
 
-input
+input:not(.necessaryField)
 {
     box-shadow: 0 0 10px rgba(0,0,0,0.2);    
 }
 
-input:focus
+input:focus:not(.necessaryField)
 {
     box-shadow: 0 0 10px green;
+}
+
+input.necessaryField
+{
+    box-shadow: 0 0 8px red;    
+}
+
+textarea:focus:not(.necessaryField)
+{
+    box-shadow: 0 0 10px green;
+}
+
+textarea.necessaryField
+{
+    box-shadow: 0 0 8px red;    
+}
+
+input.necessaryField:focus
+{
+    box-shadow: 0 0 8px red;    
 }
 
 nav
@@ -146,6 +166,25 @@ nav ol
     content: url("../Assets/ICONS/noProfilePic_icona.png");
     vertical-align: -25%;
     margin-right: 2px;
+}
+
+#sidebar1 ul li a
+{
+    text-decoration: none;
+    color: black;
+}
+
+#sidebar1 ul li a:hover
+{
+    font-weight: bold;
+    text-decoration: underline;
+    color: black;
+}
+
+#sidebar1 ul li a:visited
+{
+    text-decoration: none;
+    color: black;
 }
 
 #sidebar1 #searchBar

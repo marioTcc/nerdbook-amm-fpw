@@ -2,11 +2,11 @@
 package it.amm2017.nerdbook;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Mario Taccori
@@ -23,11 +23,17 @@ public class Profilo extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+        HttpSession session = request.getSession(false);
         response.setContentType("text/html;charset=UTF-8");
-        request.getRequestDispatcher("M2/profilo.jsp").forward(request, response);
+        
+        if(session!=null)
+        {
+            request.setAttribute("isUserInfoComplete", false);      
+            request.getRequestDispatcher("M2/profilo.jsp").forward(request, response);
+        }
+        else response.sendRedirect("login.html");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

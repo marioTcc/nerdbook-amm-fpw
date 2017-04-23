@@ -36,7 +36,7 @@
                 </form>
                 
                 <c:set var="errorType" value="loginError" scope="request" />
-                <c:set var="errorValue" value="${sessionScope.loginError}" scope="request" />
+                <c:set var="errorValue" value="${loginError}" scope="request" />
                 <jsp:include page="errors.jsp" />
                 
             </div> <!-- Fine form di login -->

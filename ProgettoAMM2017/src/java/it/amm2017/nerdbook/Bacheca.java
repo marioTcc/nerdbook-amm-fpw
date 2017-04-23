@@ -25,20 +25,32 @@ public class Bacheca extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException
+    
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         HttpSession session = request.getSession(false);
         response.setContentType("text/html;charset=UTF-8");
         
-        if(session.getAttribute("loggedIn")!=null && session.getAttribute("loggedIn").equals(true))
-        {
-            ArrayList<Post> listaPost = PostFactory.getInstance().getPostList((UtenteSecure)session.getAttribute("user"));
-            
-            request.setAttribute("listaPost", listaPost);          
-        }
+        UtenteSecure us;
         
-        request.getRequestDispatcher("M2/bacheca.jsp").forward(request, response);
+        if(session!=null)
+        {
+            if(session.getAttribute("loggedIn")!=null && session.getAttribute("loggedIn").equals(true))
+            {
+                if(request.getParameter("owner")!=null)
+                    us = UtenteFactory.getInstance().getUtenteById(Integer.parseInt(request.getParameter("owner")));
+                else 
+                    us =(UtenteSecure)session.getAttribute("user");
+
+                ArrayList<Post> listaPost = PostFactory.getInstance().getPostList(us);
+
+                request.setAttribute("owner", us);
+                request.setAttribute("listaPost", listaPost);          
+            }
+
+            request.getRequestDispatcher("M2/bacheca.jsp").forward(request, response);
+        }
+        else response.sendRedirect("login.html");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
