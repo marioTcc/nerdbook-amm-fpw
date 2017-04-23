@@ -118,7 +118,7 @@ public class UtenteFactory {
                      InvocationTargetException
     {
         String tmp="";
-        String dummyEmpty="";
+        String dummy="";
         Method [] methods=t.getClass().getDeclaredMethods();
         
         for(Method m : methods)
@@ -129,7 +129,7 @@ public class UtenteFactory {
                         || m.getName().endsWith("FrasePresentazione") || m.getName().endsWith("UrlFotoProfilo") )
                 {
                     tmp=(String)m.invoke(t);
-                    if(tmp.equals(dummyEmpty))
+                    if(tmp.equals(dummy))
                         return false;
                 }
             }

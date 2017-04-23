@@ -1,11 +1,7 @@
 
 package it.amm2017.nerdbook;
 
-import it.amm2017.nerdbook.UtenteFactory; //TMP?
-
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.lang.reflect.InvocationTargetException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -60,13 +56,13 @@ public class Login extends HttpServlet {
                             {
                                 if(UtenteFactory.checkCompletion(tmp))
                                 {
-                                    session.setAttribute("user", tmp);
+                                    session.setAttribute("user", new UtenteSecure(tmp));
                                     response.sendRedirect("bacheca.html");
                                     //request.getRequestDispatcher("M2/bacheca.jsp").forward(request, response);
                                 }
                                 else
                                 {
-                                    session.setAttribute("user", tmp);
+                                    session.setAttribute("user", new UtenteSecure(tmp));
                                     response.sendRedirect("profilo.html");
                                     //request.getRequestDispatcher("M2/profilo.jsp").forward(request, response);
                                 }         

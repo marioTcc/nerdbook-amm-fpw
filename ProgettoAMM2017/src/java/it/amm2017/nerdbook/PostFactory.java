@@ -81,7 +81,7 @@ public class PostFactory {
         return null;
     }
     
-    ArrayList<Post> getPostList(Utente utente)
+    ArrayList<Post> getPostList(UtenteSecure utente)
     {
         ArrayList<Post> tmp = new ArrayList<Post>();
         
