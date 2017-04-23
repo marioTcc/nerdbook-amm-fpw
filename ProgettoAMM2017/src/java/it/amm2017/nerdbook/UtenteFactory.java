@@ -113,7 +113,7 @@ public class UtenteFactory {
         return singleton;
     }
        
-    public static boolean checkCompletion(Utente t) throws IllegalAccessException,
+    public static boolean checkCompletion(UtenteSecure t) throws IllegalAccessException,
                      IllegalArgumentException,
                      InvocationTargetException
     {

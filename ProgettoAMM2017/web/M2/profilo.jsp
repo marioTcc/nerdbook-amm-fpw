@@ -19,57 +19,71 @@
                   
         <div id="divBody">
             
-            <div>
+            <c:choose>
+                <c:when test="${sessionScope.loggedIn==true}">
+                    <div>
 
-                <div id="profilePic">
-                    <jsp:include page="fotoProfilo.jsp" />
-                </div>
-
-                <div id="divForm"> <!-- Form dati profilo -->
-                    <form id="formDatiProfilo" action="#" method="post">
-
-                        <div> <!-- Nome utente -->
-                            <label for="userName">Nome:</label>
-                            <input type="text" name="userName" id="userName">
+                        <div id="profilePic">
+                            <jsp:include page="fotoProfilo.jsp" />
                         </div>
 
-                        <div> <!-- Cognome utente -->
-                            <label for="userName">Cognome:</label>
-                            <input type="text" name="userSurname" id="userSurname">
-                        </div>
+                        <div id="divForm"> <!-- Form dati profilo -->
+                            <form id="formDatiProfilo" action="#" method="post">
 
-                        <div> <!-- Immagine profilo -->
-                            <label for="profilePicURL">Url immagine profilo:</label>
-                            <input type="url" name="profilePicURL" id="profilePicURL">
-                        </div>
+                                <div> <!-- Nome utente -->
+                                    <label for="userName">Nome:</label>
+                                    <input type="text" name="userName" id="userName">
+                                </div>
 
-                        <div> <!-- Presentazione -->
-                            <label for="presentazione">Presentazione:</label>
-                            <textarea name="presentazione" id="presentazione"></textarea>
-                        </div>
+                                <div> <!-- Cognome utente -->
+                                    <label for="userName">Cognome:</label>
+                                    <input type="text" name="userSurname" id="userSurname">
+                                </div>
 
-                        <div> <!-- Data di nascita -->
-                            <label for="bDate">Data di nascita:</label>
-                            <input type="date" name="bDate" id="bDate">
-                        </div>
+                                <div> <!-- Immagine profilo -->
+                                    <label for="profilePicURL">Url immagine profilo:</label>
+                                    <input type="url" name="profilePicURL" id="profilePicURL">
+                                </div>
 
-                        <div> <!-- Password -->
-                            <label for="password">Password:</label>
-                            <input type="password" name="password" id="password">
-                        </div>
+                                <div> <!-- Presentazione -->
+                                    <label for="presentazione">Presentazione:</label>
+                                    <textarea name="presentazione" id="presentazione"></textarea>
+                                </div>
 
-                        <div> <!-- Conferma password -->
-                            <label for="passwordConfirm">Conferma password:</label>
-                            <input type="password" name="passwordConfirm" id="passwordConfirm">
-                        </div>
+                                <div> <!-- Data di nascita -->
+                                    <label for="bDate">Data di nascita:</label>
+                                    <input type="date" name="bDate" id="bDate">
+                                </div>
 
-                        <div>
-                            <button type="submit" form="formDatiProfilo">Aggiorna</button>
-                        </div>
-                    </form> 
-                </div> <!-- Fine form login -->
-            </div>
-        </div>
+                                <div> <!-- Password -->
+                                    <label for="password">Password:</label>
+                                    <input type="password" name="password" id="password">
+                                </div>
 
+                                <div> <!-- Conferma password -->
+                                    <label for="passwordConfirm">Conferma password:</label>
+                                    <input type="password" name="passwordConfirm" id="passwordConfirm">
+                                </div>
+
+                                <div>
+                                    <button type="submit" form="formDatiProfilo">Aggiorna</button>
+                                </div>
+                            </form> 
+                        </div> <!-- Fine form login -->
+                    </div>
+                        
+                        
+                </c:when>
+                    
+                <c:otherwise>
+                    <c:set var="errorType" value="accessDenied" scope="request" />
+                    <c:set var="errorValue" value="accessDenied" scope="request" />
+                    <jsp:include page="errors.jsp" />
+                </c:otherwise>
+                    
+            </c:choose>
+        </div><!-- Fine divBody -->
+        
+        <div class="clear"></div>
     </body>
 </html>

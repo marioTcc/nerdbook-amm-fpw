@@ -20,16 +20,28 @@
         
         <div id="divBody">
             
-            <div id="presentazione">
-                <p>${sessionScope.user.frasePresentazione}</p>
-            </div>
-                     
-            <div id="posts"> <!-- Sezione dei post -->
-                <c:forEach var="postTmp" items="${listaPost}">
-                    <c:set var="post" value="${postTmp}" scope="request" />
-                    <jsp:include page="post.jsp" />                      
-                </c:forEach>
-            </div> <!-- Chiusura sezione dei post -->
+            <c:choose>
+                <c:when test="${sessionScope.loggedIn==true}">
+                    <div id="presentazione">
+                        <p>${sessionScope.user.frasePresentazione}</p>
+                    </div>
+   
+
+                    <div id="posts"> <!-- Sezione dei post -->
+                        <c:forEach var="postTmp" items="${listaPost}">
+                            <c:set var="post" value="${postTmp}" scope="request" />
+                            <jsp:include page="post.jsp" />                      
+                        </c:forEach>
+                    </div> <!-- Chiusura sezione dei post -->
+               </c:when>
+                    
+                <c:otherwise>
+                    <c:set var="errorType" value="accessDenied" scope="request" />
+                    <c:set var="errorValue" value="accessDenied" scope="request" />
+                    <jsp:include page="errors.jsp" />
+                </c:otherwise>
+                    
+            </c:choose>
         </div><!-- Fine divBody -->
         
         <div class="clear"></div>

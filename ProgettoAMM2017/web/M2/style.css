@@ -292,20 +292,27 @@ header, nav
     margin-bottom: 5px;
 }
 
-.loginErrorDiv
+.errorDiv
 {
     margin: 0px;
     margin-left: auto;
     margin-right: auto;
     min-width: 250px;
-    width: 50%;
+    width: 60%;
 }
 
-.loginErrorDiv > p
+.errorDiv > p
 {
     text-align: center;
     text-decoration: underline;
     color: red;    
+}
+
+.errorDiv > p:before
+{
+    content: url("../Assets/ICONS/error_icona.png");
+    vertical-align: -25%;
+    margin-right: 2px;    
 }
 
 #loginFormDiv

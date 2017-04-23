@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author Mario Taccori
@@ -54,18 +55,7 @@ public class Login extends HttpServlet {
                             
                             try
                             {
-                                if(UtenteFactory.checkCompletion(tmp))
-                                {
-                                    session.setAttribute("user", new UtenteSecure(tmp));
-                                    response.sendRedirect("bacheca.html");
-                                    //request.getRequestDispatcher("M2/bacheca.jsp").forward(request, response);
-                                }
-                                else
-                                {
-                                    session.setAttribute("user", new UtenteSecure(tmp));
-                                    response.sendRedirect("profilo.html");
-                                    //request.getRequestDispatcher("M2/profilo.jsp").forward(request, response);
-                                }         
+                                chooseDestination(new UtenteSecure(tmp), request, response);
                             }catch(Exception ex){}
                         }
                         else
@@ -86,6 +76,13 @@ public class Login extends HttpServlet {
                     request.getRequestDispatcher("M2/login.jsp").forward(request, response);
                 }
             }
+            else
+            {
+                try
+                {
+                    chooseDestination((UtenteSecure)session.getAttribute("user"), request, response);
+                }catch(Exception ex){System.out.println(ex.getMessage());}
+            }
         }
         else
         {
@@ -93,6 +90,22 @@ public class Login extends HttpServlet {
             session.setAttribute("loggedIn", false);
             request.getRequestDispatcher("M2/login.jsp").forward(request, response);                
         }        
+    }
+    
+    public void chooseDestination(UtenteSecure tmp, HttpServletRequest request, HttpServletResponse response) throws IllegalAccessException, IOException, InvocationTargetException
+    {
+        if(UtenteFactory.checkCompletion(tmp))
+        {
+            request.getSession(false).setAttribute("user", tmp);
+            response.sendRedirect("bacheca.html");
+            //request.getRequestDispatcher("M2/bacheca.jsp").forward(request, response);
+        }
+        else
+        {
+            request.getSession(false).setAttribute("user", tmp);
+            response.sendRedirect("profilo.html");
+            //request.getRequestDispatcher("M2/profilo.jsp").forward(request, response);
+        }       
     }
     
     public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 

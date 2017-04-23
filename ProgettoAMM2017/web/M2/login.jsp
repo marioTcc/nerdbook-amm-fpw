@@ -35,24 +35,10 @@
                     </div>
                 </form>
                 
-                <c:if test="${sessionScope.loginError =='wrongCredentials'}">
-                    <div class="loginErrorDiv">
-                        <p>Nome utente e/o Password errati, riprovare.</p>
-                    </div>
-                </c:if>
-
-                <c:if test="${sessionScope.loginError =='emptyField'}">
-                    <div class="loginErrorDiv">
-                        <p>Per favore, compilare tutti i campi.</p>
-                    </div>
-                </c:if>
+                <c:set var="errorType" value="loginError" scope="request" />
+                <c:set var="errorValue" value="${sessionScope.loginError}" scope="request" />
+                <jsp:include page="errors.jsp" />
                 
-                
-                <c:if test="${sessionScope.loginError =='loggedOut'}">
-                    <div class="loginErrorDiv">
-                        <p>Sei stato disconnesso.</p>
-                    </div>
-                </c:if>
             </div> <!-- Fine form di login -->
                         
         </div>

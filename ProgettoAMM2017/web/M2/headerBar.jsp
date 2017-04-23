@@ -1,5 +1,5 @@
 <%-- 
-    Document   : navbar
+    Document   : headerBar
     Created on : 22-apr-2017, 10.04.29
     Author     : Mario Taccori
 --%>
