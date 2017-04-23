@@ -462,7 +462,7 @@ div#presentazione p
         display: none;
     }
     
-    nav li
+    nav li:not(#loggedInLi)
     {
         font-size: 14px;
         background-color: #445E93;
@@ -472,10 +472,18 @@ div#presentazione p
         border-right: solid 2px #7d84b2;
     }  
 
-    nav li:last-child
+    nav li:last-child:not(loggedInLi)
     {
         float:right;
         border-left: solid 2px #7d84b2;
+    }
+  
+    nav #loggedInLi
+    {
+        float:right;
+        border-left: solid 2px #7d84b2;
+        width: 150px;
+        background-color: #445E93;
     }
 
     nav li:first-child
@@ -486,7 +494,55 @@ div#presentazione p
     nav li.active
     {
         background-color: #0a214f; 
-    }     
+    }  
+    
+    nav li #loggedInDiv
+    {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+    
+    nav li #loggedInDiv > img
+    {
+        float: left;
+        height: 40px;
+        width: 45px;
+        margin: 0px;
+        padding: 0px;
+    }
+      
+    nav li #loggedInDiv *:not(img)
+    {
+        float: right;
+        display: block;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        font-size: 14px;
+    }
+    
+    nav li #loggedInDiv p
+    {
+        display: block;
+        text-align: center;
+        color: darkgrey;
+        line-height: 20px;
+        height: 20px;      
+        width: 100px;
+    }
+    
+    nav li #loggedInDiv #logoutLink
+    {
+        display: block; 
+        text-decoration: underline;
+        text-align: center;
+        line-height: 15px;
+        height: 20px;
+        width: 100px;
+    }
+    
     
     header, #sidebar1
     {
@@ -494,7 +550,7 @@ div#presentazione p
     }
 } /* FINE 1024min */
 
-@media only screen and (min-width: 480px) and (max-width: 1024px)
+@media only screen and (min-width: 481px) and (max-width: 1023px)
 {
     header
     {
@@ -542,7 +598,7 @@ div#presentazione p
         display: none;
     }
     
-    nav li
+    nav li:not(#loggedInLi)
     {
         font-size: 14px;
         background-color: #445E93;
@@ -550,12 +606,20 @@ div#presentazione p
         height: 40px;
         text-align: center;
         border-right: solid 2px #7d84b2;
-    }
+    }  
 
-    nav li:last-child
+    nav li:last-child:not(loggedInLi)
     {
         float:right;
         border-left: solid 2px #7d84b2;
+    }
+  
+    nav #loggedInLi
+    {
+        float:right;
+        border-left: solid 2px #7d84b2;
+        width: 150px;
+        background-color: #445E93;
     }
 
     nav li:first-child
@@ -566,10 +630,57 @@ div#presentazione p
     nav li.active
     {
         background-color: #0a214f; 
-    } 
+    }  
+    
+    nav li #loggedInDiv
+    {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+    
+    nav li #loggedInDiv > img
+    {
+        float: left;
+        height: 40px;
+        width: 45px;
+        margin: 0px;
+        padding: 0px;
+    }
+    
+    nav li #loggedInDiv *:not(img)
+    {
+        float: right;
+        display: block;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        font-size: 14px;
+    }
+    
+    nav li #loggedInDiv p
+    {
+        display: block;
+        text-align: center;
+        color: darkgrey;
+        line-height: 20px;
+        height: 20px;      
+        width: 100px;
+    }
+    
+    nav li #loggedInDiv #logoutLink
+    {
+        display: block; 
+        text-decoration: underline;
+        text-align: center;
+        line-height: 15px;
+        height: 20px;
+        width: 100px;
+    }
 } /* FINE dim intermedie */
 
-@media only screen and (max-width: 481px)
+@media only screen and (max-width: 480px)
 {
     body
     {
@@ -599,6 +710,7 @@ div#presentazione p
     nav
     {
         width: 100%;
+        height: 40px;
     } 
     
     #divBody
@@ -632,13 +744,14 @@ div#presentazione p
     
     nav li
     {
+        font-size: 14px;
         background-color: #445E93;
         width: 50px;
         height: 40px;
         text-align: center;
         border-right: solid 2px #7d84b2;
-    }
-    
+    }  
+
     nav li:last-child
     {
         float:right;
@@ -649,5 +762,48 @@ div#presentazione p
     nav li:first-child
     {
         margin-left: 1px;
+    }
+
+    nav li.active
+    {
+        background-color: #0a214f; 
+    }  
+    
+    nav li #loggedInDiv
+    {
+        width: 100%;
+        height: 100%;
+        margin: 0px;
+        padding: 0px;
+    }
+    
+    nav li #loggedInDiv a img
+    {
+        display: block;
+        width: 35px;
+        height: 100%;
+        margin: 0px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    nav li #loggedInDiv > img
+    {
+        display: none;
+    }
+    
+    nav li #loggedInDiv *:not(img):not(#logoutLink)
+    {
+        float: right;
+        display: block;
+        margin: 0px;
+        padding: 0px;
+        border: 0px;
+        font-size: 14px;
+    }
+    
+    nav li #loggedInDiv p
+    {
+        display: none;
     }
 }

@@ -5,6 +5,7 @@ import it.amm2017.nerdbook.UtenteFactory; //TMP?
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,8 +28,16 @@ public class Login extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException 
+            throws ServletException, IOException
     {     
+        if(request.getParameter("action")==null || request.getParameter("action").equals("login"))
+            this.login(request, response);
+        else if(request.getParameter("action").equals("logout"))
+            this.logout(request, response); 
+    }
+    
+    public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+    {
         HttpSession session = request.getSession();
         response.setContentType("text/html;charset=UTF-8");
         
@@ -42,22 +51,30 @@ public class Login extends HttpServlet {
                     {
                         Utente tmp=UtenteFactory.getInstance().getUtenteByUsername(request.getParameter("username").toString());
 
-                        if(tmp!=null)
+                        if(tmp!=null && tmp.getPassword().equals(request.getParameter("password")))
                         {
-                            if(tmp.getPassword().equals(request.getParameter("password")))
+                            session.setAttribute("loginError", "none");
+                            session.setAttribute("loggedIn", true);
+                            
+                            try
                             {
-                                session.setAttribute("loginError", "none");
-                                session.setAttribute("loggedIn", true);
-                            }
-                            else
-                            {
-                                session.setAttribute("loginError", "wrongPassword");
-                                request.getRequestDispatcher("M2/login.jsp").forward(request, response);  
-                            }
+                                if(UtenteFactory.checkCompletion(tmp))
+                                {
+                                    session.setAttribute("user", tmp);
+                                    response.sendRedirect("bacheca.html");
+                                    //request.getRequestDispatcher("M2/bacheca.jsp").forward(request, response);
+                                }
+                                else
+                                {
+                                    session.setAttribute("user", tmp);
+                                    response.sendRedirect("profilo.html");
+                                    //request.getRequestDispatcher("M2/profilo.jsp").forward(request, response);
+                                }         
+                            }catch(Exception ex){}
                         }
                         else
                         {
-                            session.setAttribute("loginError", "wrongPassword");
+                            session.setAttribute("loginError", "wrongCredentials");
                             request.getRequestDispatcher("M2/login.jsp").forward(request, response);  
                         }                          
                     }
@@ -73,15 +90,22 @@ public class Login extends HttpServlet {
                     request.getRequestDispatcher("M2/login.jsp").forward(request, response);
                 }
             }
-            
-            // CONTROLLO PER DESTINAZIONE LOGIN QUI
         }
         else
         {
             session.setAttribute("loginError", "none");
             session.setAttribute("loggedIn", false);
             request.getRequestDispatcher("M2/login.jsp").forward(request, response);                
-        }
+        }        
+    }
+    
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+    {
+        HttpSession session = request.getSession();
+        response.setContentType("text/html;charset=UTF-8");
+        session.invalidate(); 
+        //request.getRequestDispatcher("M2/login.jsp?").forward(request, response);  
+        response.sendRedirect("login.html");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

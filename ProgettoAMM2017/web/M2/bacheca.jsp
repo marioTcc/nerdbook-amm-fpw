@@ -1,5 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true" %>
 <!DOCTYPE html>
 
 <html>
@@ -21,7 +21,7 @@
         <div id="divBody">
             
             <div id="presentazione">
-                <p>Autore presentazione: Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>${sessionScope.user.frasePresentazione}</p>
             </div>
                      
             <div id="posts"> <!-- Sezione dei post -->

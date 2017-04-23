@@ -2,7 +2,6 @@
 package it.amm2017.nerdbook;
 
 /**
- *
  * @author Mario Taccori
  */
 
@@ -29,8 +28,7 @@ public class Utente {
         this.password="";
         this.urlFotoProfilo="";
         this.frasePresentazione="";                
-    }
-    
+    }   
     
     /**
      * @return the id

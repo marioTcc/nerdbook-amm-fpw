@@ -15,13 +15,13 @@
     <body>
         
         <div id="divBodyLogin">
-                          
+                     
             <div id="loginFormDiv"> <!-- Contenitore form di login -->
                 <div>
                     <img src="Assets/ICONS/NerdBook_logo.svg" width="54" height="44" alt="Logo del social network" />
                     <h1> NerdBook </h1>
                 </div>
-                <form id="loginForm" method="post" action="login.html">
+                <form id="loginForm" method="post" action="login.html?action=login">
                     <div>
                         <label for="username">Nome utente:</label>
                         <input type="text" name="username" id="username">
@@ -35,7 +35,7 @@
                     </div>
                 </form>
                 
-                <c:if test="${sessionScope.loginError =='wrongPassword'}">
+                <c:if test="${sessionScope.loginError =='wrongCredentials'}">
                     <div class="loginErrorDiv">
                         <p>Nome utente e/o Password errati, riprovare.</p>
                     </div>
@@ -44,6 +44,13 @@
                 <c:if test="${sessionScope.loginError =='emptyField'}">
                     <div class="loginErrorDiv">
                         <p>Per favore, compilare tutti i campi.</p>
+                    </div>
+                </c:if>
+                
+                
+                <c:if test="${sessionScope.loginError =='loggedOut'}">
+                    <div class="loginErrorDiv">
+                        <p>Sei stato disconnesso.</p>
                     </div>
                 </c:if>
             </div> <!-- Fine form di login -->
