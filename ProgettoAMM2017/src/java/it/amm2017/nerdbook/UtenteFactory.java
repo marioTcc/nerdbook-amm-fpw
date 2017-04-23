@@ -36,14 +36,15 @@ public class UtenteFactory {
         Utente utente2 = new Utente();
         utente2.setId(1);
         
-        utente2.setNome("HeavyBreathing");
-        utente2.setCognome("Utente");
+        utente2.setNome("Heavy");
+        utente2.setCognome("Breathing");
         
         utente2.setEmail("cholansia@gmail.com");
    
+        utente2.setUsername("HeavyBreathing");
         utente2.setPassword("123");
         
-        utente2.setUrlFotoProfilo("img/user1.gif");
+        utente2.setUrlFotoProfilo("");
         utente2.setFrasePresentazione("ciao");
         utente2.setDataNascita("10/10/2010");
 
@@ -51,14 +52,15 @@ public class UtenteFactory {
         Utente utente3 = new Utente();
         utente3.setId(2);
         
-        utente3.setNome("GymWorkOut");
-        utente3.setCognome("Utente");  
+        utente3.setNome("Gym");
+        utente3.setCognome("WorkOut");
         
+        utente3.setUsername("GymWorkOut");        
         utente3.setEmail("doIt@gmail.com");
         
         utente3.setPassword("123");
         
-        utente3.setUrlFotoProfilo("img/user2.jpg");
+        utente3.setUrlFotoProfilo("");
         utente3.setFrasePresentazione("ciao");
         utente3.setDataNascita("10/10/2010");
 
@@ -66,14 +68,15 @@ public class UtenteFactory {
         Utente utente4 = new Utente();
         utente4.setId(3);
         
-        utente4.setNome("ChaoPovery");
-        utente4.setCognome("Utente");
+        utente4.setNome("Chao");
+        utente4.setCognome("Povery");
         
         utente4.setEmail("r1tchb1tch@gmail.com");
         
+        utente4.setUsername("ChaoPovery"); 
         utente4.setPassword("123");
         
-        utente4.setUrlFotoProfilo("img/user3.jpg");
+        utente4.setUrlFotoProfilo("");
         utente4.setFrasePresentazione("ciao");
         utente4.setDataNascita("10/10/2010");
         
@@ -122,9 +125,13 @@ public class UtenteFactory {
         {
             if(m.getName().startsWith("get") && m.getReturnType()==String.class)
             {
-                tmp=(String)m.invoke(t);
-                if(tmp.equals(dummyEmpty))
-                    return false;
+                if(m.getName().endsWith("Nome") || m.getName().endsWith("Cognome") 
+                        || m.getName().endsWith("FrasePresentazione") || m.getName().endsWith("UrlFotoProfilo") )
+                {
+                    tmp=(String)m.invoke(t);
+                    if(tmp.equals(dummyEmpty))
+                        return false;
+                }
             }
         }
         

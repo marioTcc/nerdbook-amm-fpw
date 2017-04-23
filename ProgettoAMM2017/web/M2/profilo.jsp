@@ -14,8 +14,7 @@
     <body>
         
         <c:set var="page" value="profilo" scope="request"/>
-        <jsp:include page="headerBar.jsp"/>
-                
+        <jsp:include page="headerBar.jsp"/>                
         <jsp:include page="sideBar.jsp"/>
                   
         <div id="divBody">
@@ -23,7 +22,7 @@
             <div>
 
                 <div id="profilePic">
-                    <img src="Assets/IMG/djanniprofilo.jpg" alt="Foto autore del post">
+                    <jsp:include page="fotoProfilo.jsp" />
                 </div>
 
                 <div id="divForm"> <!-- Form dati profilo -->

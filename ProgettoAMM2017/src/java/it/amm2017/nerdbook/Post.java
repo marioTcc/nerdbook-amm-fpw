@@ -2,7 +2,6 @@
 package it.amm2017.nerdbook;
 
 /**
- *
  * @author Mario Taccori
  */
 
@@ -17,12 +16,16 @@ public class Post {
     private Utente autorePost;
     private String contenuto;
     private PostType tipoPost;
+    private String imgUrl;
+    private String attachedLink;
     
     public Post()
     {
         this.id=-1;
         this.autorePost=null;
         this.contenuto="";
+        this.imgUrl="";
+        this.attachedLink="";
     }
 
     /**
@@ -79,6 +82,34 @@ public class Post {
      */
     public void setTipoPost(PostType tipoPost) {
         this.tipoPost = tipoPost;
+    }
+
+    /**
+     * @return the imgUrl
+     */
+    public String getImgUrl() {
+        return imgUrl;
+    }
+
+    /**
+     * @param imgUrl the imgUrl to set
+     */
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    /**
+     * @return the attachedLink
+     */
+    public String getAttachedLink() {
+        return attachedLink;
+    }
+
+    /**
+     * @param attachedLink the attachedLink to set
+     */
+    public void setAttachedLink(String attachedLink) {
+        this.attachedLink = attachedLink;
     }
     
 }

@@ -6,7 +6,7 @@
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" session="true" %>
 
 <div class="headerBar">
 
@@ -29,10 +29,10 @@
                     
                 <c:when test="${sessionScope.loggedIn == true}">
                     <li id="loggedInLi">
-                        <div id="loggedInDiv">      
-                            <img id="fotoLoggedIn" alt="foto profilo" src="${sessionScope.user.urlFotoProfilo}" />
+                        <div id="loggedInDiv">                                
+                            <jsp:include page="fotoProfilo.jsp" />
                             <p>${sessionScope.user.nome} ${sessionScope.user.cognome}</p>
-                            <a id="logoutLink" href="login.html?action=logout"><img src="Assets/ICONS/login_icona.svg" alt="immagine tasto login" />Logout</a>
+                            <a id="logoutLink" href="login.html?action=logout"><img src="Assets/ICONS/loggedIn_icona.svg" alt="immagine tasto login" />Logout</a>
                         </div>
                     </li>
                 </c:when>            

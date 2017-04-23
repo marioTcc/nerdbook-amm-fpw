@@ -342,12 +342,21 @@ header, nav
     margin-left: 10px;
 }
 
-#posts div.profilePic img
+#posts div.profilePic img:not(.defaultPic)
 {
+    
     height: auto; 
     width: auto; 
     max-width: 80px; 
     max-height: 80px;    
+    margin-right: 20px;   
+}
+
+#posts div.profilePic img.defaultPic
+{
+    
+    height: 80px; 
+    width: 80px;
     margin-right: 20px;   
 }
 
@@ -790,16 +799,6 @@ div#presentazione p
     nav li #loggedInDiv > img
     {
         display: none;
-    }
-    
-    nav li #loggedInDiv *:not(img):not(#logoutLink)
-    {
-        float: right;
-        display: block;
-        margin: 0px;
-        padding: 0px;
-        border: 0px;
-        font-size: 14px;
     }
     
     nav li #loggedInDiv p

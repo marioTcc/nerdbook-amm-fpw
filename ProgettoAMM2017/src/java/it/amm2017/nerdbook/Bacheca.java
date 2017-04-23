@@ -1,12 +1,15 @@
 
 package it.amm2017.nerdbook;
 
+import java.util.ArrayList;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Mario Taccori
@@ -26,7 +29,16 @@ public class Bacheca extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        HttpSession session = request.getSession(false);
         response.setContentType("text/html;charset=UTF-8");
+        
+        if(session.getAttribute("loggedIn")!=null && session.getAttribute("loggedIn").equals(true))
+        {
+            ArrayList<Post> listaPost = PostFactory.getInstance().getPostList((Utente)session.getAttribute("user"));
+            
+            request.setAttribute("listaPost", listaPost);          
+        }
+        
         request.getRequestDispatcher("M2/bacheca.jsp").forward(request, response);
     }
 

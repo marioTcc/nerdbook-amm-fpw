@@ -59,7 +59,7 @@
                     </div>
 
                     <div id="obiettiviDiv">
-                        <h3 id="teamObiettivi">PerchÃ¨ lo facciamo:</h3>
+                        <h3 id="teamObiettivi">Perchè lo facciamo:</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue,
                            libero ut euismod rhoncus, risus lacus sodales mi, nec tempor lectus ante et elit.
                            Suspendisse sit amet lacus nulla. Cras et augue nec erat sollicitudin vulputate.
@@ -79,7 +79,7 @@
                     <h2 id="descrizioneSocialNetwork">Il social network:</h2>
 
                     <div id="proNerdBookDiv">
-                        <h3 id="proNerdBook">PerchÃ¨ scegliere NerdBook:</h3>
+                        <h3 id="proNerdBook">Perchè scegliere NerdBook:</h3>
                         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi congue,
                            libero ut euismod rhoncus, risus lacus sodales mi, nec tempor lectus ante et elit.
                            Suspendisse sit amet lacus nulla. Cras et augue nec erat sollicitudin vulputate.
