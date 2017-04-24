@@ -35,9 +35,9 @@
                     </div>
                 </form>
                 
-                <c:set var="errorType" value="loginError" scope="request" />
-                <c:set var="errorValue" value="${loginError}" scope="request" />
-                <jsp:include page="errors.jsp" />
+                <c:set var="notificationType" value="loginError" scope="request" />
+                <c:set var="notificationValue" value="${loginError}" scope="request" />
+                <jsp:include page="notifications.jsp" />
                 
             </div> <!-- Fine form di login -->
                         

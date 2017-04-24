@@ -331,7 +331,7 @@ header, nav
     margin-bottom: 5px;
 }
 
-.errorDiv
+.notificationDiv
 {
     margin: 0px;
     margin-left: auto;
@@ -340,18 +340,24 @@ header, nav
     width: 60%;
 }
 
-.errorDiv > p
+.notificationDiv > p
 {
     text-align: center;
     text-decoration: underline;
     color: red;    
 }
 
-.errorDiv > p:before
+.notificationDiv > p:before
 {
     content: url("../Assets/ICONS/error_icona.png");
     vertical-align: -25%;
     margin-right: 2px;    
+}
+
+.notificationDiv ul.notificationList
+{
+    list-style-type: square;
+    color: red;
 }
 
 #loginFormDiv

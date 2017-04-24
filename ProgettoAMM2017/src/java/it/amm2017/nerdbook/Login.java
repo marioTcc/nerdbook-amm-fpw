@@ -53,10 +53,8 @@ public class Login extends HttpServlet {
                             request.setAttribute("loginError", "none");
                             session.setAttribute("loggedIn", true);
                             
-                            try
-                            {
-                                chooseDestination(new UtenteSecure(tmp), request, response);
-                            }catch(Exception ex){}
+                            try { chooseDestination(new UtenteSecure(tmp), request, response); }
+                            catch(Exception ex){}
                         }
                         else
                         {
@@ -78,10 +76,8 @@ public class Login extends HttpServlet {
             }
             else
             {
-                try
-                {
-                    chooseDestination((UtenteSecure)session.getAttribute("user"), request, response);
-                }catch(Exception ex){}
+                try { chooseDestination((UtenteSecure)session.getAttribute("user"), request, response); }
+                catch(Exception ex){}
             }
         }
         else

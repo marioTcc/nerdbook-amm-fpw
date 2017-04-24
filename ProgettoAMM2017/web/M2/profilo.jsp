@@ -33,27 +33,27 @@
 
                                 <div> <!-- Nome utente -->
                                     <label for="userName">Nome:</label>
-                                    <input <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> type="text" name="userName" id="userName">
+                                    <input <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> type="text" name="userName" id="userName" <c:if test="${nome != null}">value="${nome}"</c:if>>
                                 </div>
 
                                 <div> <!-- Cognome utente -->
                                     <label for="userSurname">Cognome:</label>
-                                    <input <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> type="text" name="userSurname" id="userSurname">
+                                    <input <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> type="text" name="userSurname" id="userSurname" <c:if test="${cognome != null}">value="${cognome}"</c:if>>
                                 </div>
 
                                 <div> <!-- Immagine profilo -->
                                     <label for="profilePicURL">Url immagine profilo:</label>
-                                    <input <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> type="url" name="profilePicURL" id="profilePicURL">
+                                    <input <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> type="url" name="profilePicURL" id="profilePicURL" <c:if test="${urlFotoProfilo != null}">value="${urlFotoProfilo}"</c:if>>
                                 </div>
 
                                 <div> <!-- Presentazione -->
                                     <label for="presentazione">Presentazione:</label>
-                                    <textarea <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> name="presentazione" id="presentazione"></textarea>
+                                    <textarea <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> name="presentazione" id="presentazione"><c:if test="${frasePresentazione != null}">${frasePresentazione}</c:if></textarea>
                                 </div>
 
                                 <div> <!-- Data di nascita -->
                                     <label for="bDate">Data di nascita:</label>
-                                    <input type="date" name="bDate" id="bDate">
+                                    <input type="date" name="bDate" id="bDate" <c:if test="${dataNascita != null}">value="${dataNascita}"</c:if>>
                                 </div>
 
                                 <div> <!-- Password -->
@@ -71,21 +71,26 @@
                                 </div>
                             </form> 
                                 
-                            <c:if test="${isUserInfoComplete == false}"> 
-                                <c:set var="errorType" value="userInfoIncompleteError" scope="request" />
-                                <c:set var="errorValue" value="userInfoIncompleteError" scope="request" />
-                                <jsp:include page="errors.jsp" />
+                            <c:if test="${isUserInfoComplete!=null && isUserInfoComplete == false}"> 
+                                <c:set var="notificationType" value="userInfoIncompleteError" scope="request" />
+                                <c:set var="notificationValue" value="userInfoIncompleteError" scope="request" />
+                                <jsp:include page="notifications.jsp" />
+                            </c:if>
+                                
+                            <c:if test="${campiModificati != null}">
+                                <c:set var="notificationType" value="profileInfo" scope="request" />
+                                <c:set var="notificationValue" value="updatedProfileInfo" scope="request" />
+                                <c:set var="extraParameters" value="${campiModificati}" scope="request" />
+                                <jsp:include page="notifications.jsp" />
                             </c:if>
                         </div> <!-- Fine form login -->
-                    </div>
-                        
-                        
+                    </div>          
                 </c:when>
                     
                 <c:otherwise>
-                    <c:set var="errorType" value="accessDenied" scope="request" />
-                    <c:set var="errorValue" value="accessDenied" scope="request" />
-                    <jsp:include page="errors.jsp" />
+                    <c:set var="notificationType" value="accessDenied" scope="request" />
+                    <c:set var="notificationValue" value="accessDenied" scope="request" />
+                    <jsp:include page="notifications.jsp" />
                 </c:otherwise>
                     
             </c:choose>

@@ -37,6 +37,17 @@ public class UtenteSecure
         this.frasePresentazione=t.getFrasePresentazione();                
     }
     
+    public UtenteSecure(int id, String nome, String cognome, String email, String dataNascita, String urlFotoProfilo, String frasePresentazione)
+    {
+        this.id = id;
+        this.nome = nome;
+        this.cognome = cognome;
+        this.email = email;
+        this.dataNascita = dataNascita;
+        this.urlFotoProfilo = urlFotoProfilo;
+        this.frasePresentazione = frasePresentazione;
+    }
+    
     public boolean equals(Object obj)
     {
         if(obj==null)

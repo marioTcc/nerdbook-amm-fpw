@@ -36,9 +36,9 @@
                </c:when>
                     
                 <c:otherwise>
-                    <c:set var="errorType" value="accessDenied" scope="request" />
-                    <c:set var="errorValue" value="accessDenied" scope="request" />
-                    <jsp:include page="errors.jsp" />
+                    <c:set var="notificationType" value="accessDenied" scope="request" />
+                    <c:set var="notificationValue" value="accessDenied" scope="request" />
+                    <jsp:include page="notifications.jsp" />
                 </c:otherwise>
                     
             </c:choose>

@@ -30,7 +30,7 @@ public class UtenteFactory {
         
         utente1.setUrlFotoProfilo("Assets/IMG/djanniprofilo.jpg");
         utente1.setFrasePresentazione("ciao a tutti, sono io, Djanni");
-        utente1.setDataNascita("10/10/2010");
+        utente1.setDataNascita("2010-10-10");
 
         // Utente2
         Utente utente2 = new Utente();
@@ -46,7 +46,7 @@ public class UtenteFactory {
         
         utente2.setUrlFotoProfilo("");
         utente2.setFrasePresentazione("ciao, sono Heavy Breathing");
-        utente2.setDataNascita("10/10/2010");
+        utente2.setDataNascita("2010-10-11");
 
         // Utente3
         Utente utente3 = new Utente();
@@ -62,7 +62,7 @@ public class UtenteFactory {
         
         utente3.setUrlFotoProfilo("");
         utente3.setFrasePresentazione("ciao, sono GymWorkOut");
-        utente3.setDataNascita("10/10/2010");
+        utente3.setDataNascita("2010-10-12");
 
         // Utente4
         Utente utente4 = new Utente();
@@ -78,7 +78,7 @@ public class UtenteFactory {
         
         utente4.setUrlFotoProfilo("");
         utente4.setFrasePresentazione("ciao, sono Chao Povery");
-        utente4.setDataNascita("10/10/2010");
+        utente4.setDataNascita("2010-10-13");
         
         // Incompleto
         Utente incompleto = new Utente();
@@ -94,7 +94,7 @@ public class UtenteFactory {
         
         incompleto.setUrlFotoProfilo("");
         incompleto.setFrasePresentazione("ciao, sono incompleto; completami!");
-        incompleto.setDataNascita("10/10/2010");
+        incompleto.setDataNascita("2010-10-14");
 
         
         // Lista utenti
