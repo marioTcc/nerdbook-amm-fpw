@@ -52,7 +52,11 @@ public class Profilo extends HttpServlet {
                 try
                 {
                     ArrayList<String> campiModificati = updateUserInfo(request, _old, _new);
-                    request.setAttribute("campiModificati", campiModificati);
+                    
+                    if(campiModificati.isEmpty())
+                        request.setAttribute("campiModificati", "none");
+                    else
+                        request.setAttribute("campiModificati", campiModificati);
                     loadData(request);
                 }
                 catch(Exception ex){}         
@@ -84,7 +88,7 @@ public class Profilo extends HttpServlet {
                 tmpGetter = UtenteSecure.class.getMethod("get"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1));
                 request.setAttribute(tmp.getName(), tmpGetter.invoke(utente).toString());
             }        
-        }       
+        }   
     }
     
     public ArrayList<String> updateUserInfo(HttpServletRequest request, UtenteSecure _old, UtenteSecure _new) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException

@@ -58,10 +58,11 @@ public class DataMigrator
         
         //Creazione Post4
         Post post4 = new Post();
-        post4.setContenuto("I need ansioliticy");
+        post4.setContenuto("Và tutti che bella questa pic");
         post4.setId(3);
-        post4.setAutorePost(utenteFactory.getUtenteById(0));
-        
+        post4.setAutorePost(utenteFactory.getUtenteById(2));
+        post4.setAttachedUrl("http://68.media.tumblr.com/11e0fa516c5c382765ef28af19a341d3/tumblr_mynfdmKYPa1rq3dyyo1_1280.jpg");
+        post4.setTipoPost(Post.PostType.IMMAGINE);
         post4.setTipoDestinazione(Post.DestinationType.GRUPPO);
         post4.setIdDestinazione(0);
 
@@ -89,6 +90,42 @@ public class DataMigrator
         post6.setTipoDestinazione(Post.DestinationType.BACHECA);
         post6.setIdDestinazione(1);
         
+        //Creazione Post7
+        Post post7 = new Post();
+        post7.setContenuto("Forse anche a trenitalia interessa iscriversi a questo gruppo? Invitateli!");
+        post7.setId(5);
+        post7.setAutorePost(utenteFactory.getUtenteById(2));
+        post7.setAttachedUrl("Assets/IMG/trenitalia_ritardo_post.jpg");
+        post7.setTipoPost(Post.PostType.IMMAGINE);
+        post7.setTipoDestinazione(Post.DestinationType.GRUPPO);
+        post7.setIdDestinazione(1);
+        
+        //Creazione Post8
+        Post post8 = new Post();
+        post8.setContenuto("Hahaha dedicato al mio amico Gym");
+        post8.setId(6);
+        post8.setAutorePost(utenteFactory.getUtenteById(0));
+        post8.setAttachedUrl("Assets/IMG/ritardo_post.jpg");
+        post8.setTipoPost(Post.PostType.IMMAGINE);
+        post8.setTipoDestinazione(Post.DestinationType.GRUPPO);
+        post8.setIdDestinazione(1);
+        
+        //Creazione Post9
+        Post post9 = new Post();
+        post9.setContenuto("Iscrivetevi!");
+        post9.setId(6);
+        post9.setAutorePost(utenteFactory.getUtenteById(0));
+        post9.setAttachedUrl("google.it");
+        post9.setTipoPost(Post.PostType.LINK);
+        post9.setTipoDestinazione(Post.DestinationType.GRUPPO);
+        post9.setIdDestinazione(1);
+        
+        
+        
+        
+        
+        
+        
         
         //Lista post
         listaPost.add(post1);
@@ -97,6 +134,9 @@ public class DataMigrator
         listaPost.add(post4);
         listaPost.add(post5);   
         listaPost.add(post6);
+        listaPost.add(post7);
+        listaPost.add(post8);
+        listaPost.add(post9);
         
         return listaPost;
     }
@@ -109,21 +149,21 @@ public class DataMigrator
         Gruppo gruppo1=new Gruppo();
         gruppo1.setId(0);
         gruppo1.setNome("Molgonfieristi");
-        gruppo1.setGroupIconUrl("Assets/ICONS/molgonfieristiIcon.svg");
+        gruppo1.setGroupIconUrl("Assets/ICONS/molgonfieristi_icona.svg");
         gruppo1.setIscritti(new ArrayList<UtenteSecure>(Arrays.asList(tmp.getUtenteById(0), tmp.getUtenteById(1))));
         
         // Gruppo 2
         Gruppo gruppo2=new Gruppo();
         gruppo2.setId(1);
         gruppo2.setNome("Ritardatari");
-        gruppo2.setGroupIconUrl("Assets/ICONS/ritardatariIcon.svg");
+        gruppo2.setGroupIconUrl("Assets/ICONS/ritardatari_icona.svg");
         gruppo2.setIscritti(new ArrayList<UtenteSecure>(Arrays.asList(tmp.getUtenteById(0), tmp.getUtenteById(2))));
         
         // Gruppo 3
         Gruppo gruppo3=new Gruppo();
-        gruppo3.setId(1);
+        gruppo3.setId(2);
         gruppo3.setNome("Fittizio1");
-        gruppo3.setGroupIconUrl("Assets/ICONS/ritardatariIcon.svg");
+        gruppo3.setGroupIconUrl("Assets/ICONS/error_icona.svg");
         gruppo3.setIscritti(new ArrayList<UtenteSecure>(Arrays.asList(tmp.getUtenteById(0), tmp.getUtenteById(1), tmp.getUtenteById(2))));
         
         
@@ -183,7 +223,7 @@ public class DataMigrator
         
         utente3.setPassword("123");
         
-        utente3.setUrlFotoProfilo("");
+        utente3.setUrlFotoProfilo("Assets/IMG/siamese.jpg");
         utente3.setFrasePresentazione("ciao, sono GymWorkOut");
         utente3.setDataNascita("2010-10-12");
 

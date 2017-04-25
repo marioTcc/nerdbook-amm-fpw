@@ -2,7 +2,7 @@
 package it.amm2017.nerdbook;
 
 /**
- * @author User1
+ * @author Mario Taccori
  */
 
 public class UtenteSecure

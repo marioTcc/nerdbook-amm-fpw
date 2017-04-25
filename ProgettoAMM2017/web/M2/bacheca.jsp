@@ -4,7 +4,7 @@
 
 <html>
     <head>
-        <title>Bacheca di ${owner.nome} ${owner.cognome}</title>
+        <title>Bacheca di ${owner.nome}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="author" content="Mario Taccori">
@@ -22,7 +22,7 @@
             
             <c:choose>
                 <c:when test="${sessionScope.loggedIn==true}">
-                    <c:if test="${owner.frasePresentazione!=null}">
+                    <c:if test="${ownerType!='group' && owner.frasePresentazione!=null}">
                         <div id="presentazione">
                             <p>${owner.frasePresentazione}</p>
                         </div>
@@ -30,7 +30,7 @@
                     
                     <c:if test="${postState!=null && postState=='created'}">
                         <div id="notificaNuovoPost">
-                            <p>Hai scritto sulla bacheca di ${owner.nome} ${owner.cognome}!</p>
+                            <p>Hai scritto sulla bacheca di ${owner.nome} <c:if test="${ownerType!='group'}">${owner.cognome}!</c:if></p>
                         </div>                            
                     </c:if>
                    
@@ -45,7 +45,7 @@
                                         </div>
                                         <div>
                                             <label for="allegato"></label>
-                                            <input type="text" name="allegato" id="allegato" value="URL allegato (opzionale)">
+                                            <input type="url" name="allegato" id="allegato" value="URL allegato (opzionale, cancella se non necessario)">
                                         </div>
                                     </div>
 
@@ -62,6 +62,7 @@
                                     </div>
 
                                     <input type="hidden" name="owner" value="${owner.id}">
+                                    <input type="hidden" name="ownerType" value="${ownerType}">
                                     <input type="hidden" name="action" value="newPost">
                                     <input type="hidden" name="confirmRequired" value="true">
 
@@ -79,7 +80,19 @@
                                     <p>Riepilogo dati inseriti:</p>
                                     <ul>
                                         <li>Autore: "${sessionScope.user.nome} ${sessionScope.user.cognome}"</li>
-                                        <li>Proprietario della bacheca: "${owner.nome} ${owner.cognome}"</li>
+                                        <li>
+                                            Proprietario della bacheca:
+                                            <c:choose>
+                                                <c:when test="${previewPost.tipoDestinazione == 'BACHECA'}">
+                                                    "${owner.nome} ${owner.cognome}"
+                                                </c:when>
+                                                    
+                                                <c:when test="${previewPost.tipoDestinazione == 'GRUPPO'}">
+                                                    Gruppo "$owner.nome"
+                                                </c:when>
+                                                    
+                                            </c:choose>                                        
+                                        </li>
                                         <li>Testo: "${previewPost.contenuto}"</li>
                                         <li>URL: "${previewPost.attachedUrl}"</li>
                                         <li>Tipo: "${previewPost.tipoPost}"</li>                    
@@ -95,7 +108,9 @@
                                 <div id="choiceDiv">
                                     <div>
                                         <form id="confirmForm" action="bacheca.html" method="post">
-                                            // AGGIUNGERE I FORM HIDDEN PER RIMANDARE I DATI DELLA NUOVO POST PER SALVARLO IN DB
+                                            <!-- AGGIUNGERE I FORM HIDDEN PER RIMANDARE I DATI DELLA NUOVO POST PER SALVARLO IN DB -->
+                                            <input type="hidden" name="owner" value="${owner.id}">
+                                            <input type="hidden" name="ownerType" value="${ownerType}">
                                             <input type="hidden" name="action" value="confirmNewPost">
                                             <div>
                                                 <button type="submit" form="confirmForm">Conferma</button>
@@ -103,6 +118,7 @@
                                         </form>
                                         <form id="cancelForm" action="bacheca.html" method="post"> 
                                             <input type="hidden" name="owner" value="${owner.id}">
+                                            <input type="hidden" name="ownerType" value="${ownerType}">
                                             <input type="hidden" name="action" value="cancelNewPost">
                                             <div>
                                                 <button type="submit" form="cancelForm">Annulla</button>

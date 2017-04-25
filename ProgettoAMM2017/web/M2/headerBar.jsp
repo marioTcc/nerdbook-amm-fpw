@@ -19,7 +19,7 @@
     <nav> <!-- Menu di navigazione -->
         <ol>   
             <li <c:if test="${page=='profilo'}">class="active"</c:if>><a id="profiloLink" href="profilo.html"><img src="Assets/ICONS/profilo_icona.svg" alt="immagine tasto profilo" />Profilo</a></li>
-            <li <c:if test="${page=='bacheca'}">class="active"</c:if>><a id="bachecaLink" href="bacheca.html"><img src="Assets/ICONS/bacheca_icona.svg" alt="immagine tasto bacheca" />Bacheca</a></li>
+            <li <c:if test="${page=='bacheca'}">class="active"</c:if>><a id="bachecaLink" href="bacheca.html?ownerType=user"><img src="Assets/ICONS/bacheca_icona.svg" alt="immagine tasto bacheca" />Bacheca</a></li>
             <li <c:if test="${page=='descrizione'}">class="active"</c:if>><a id="descrizioneLink" href="descrizione.html"><img src="Assets/ICONS/descrizione_icona.svg" alt="immagine tasto descrizione" />Descrizione</a></li>
             
             <c:choose>

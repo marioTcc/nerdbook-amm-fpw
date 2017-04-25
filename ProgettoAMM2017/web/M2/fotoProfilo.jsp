@@ -18,7 +18,8 @@
                             <c:otherwise>
                                "Assets/ICONS/noProfilePic_icona.svg" class="defaultPic"
                             </c:otherwise>
-                       </c:choose>/>
+                       </c:choose>
+        />
     </c:when>
     
     <c:when test="${picSubject=='postAuthor'}">
@@ -31,7 +32,36 @@
                     <c:otherwise>
                        "Assets/ICONS/noProfilePic_icona.svg" class="defaultPic"
                     </c:otherwise>
-               </c:choose>/>
+               </c:choose>
+        />
+    </c:when>
+               
+    <c:when test="${picSubject=='friend'}">
+        <img class="friendPic" alt="foto profilo amico" src=
+                <c:choose>
+                    <c:when test="${friendPicUrl != ''}">
+                       "${friendPicUrl}"
+                    </c:when>
+
+                    <c:otherwise>
+                       "Assets/ICONS/noProfilePic_icona.svg"
+                    </c:otherwise>
+               </c:choose>
+        />
+    </c:when>
+               
+    <c:when test="${picSubject=='groupIcon'}">
+        <img class="groupIcon" alt="icona gruppo" src=
+                <c:choose>
+                    <c:when test="${groupPicUrl != ''}">
+                       "${groupPicUrl}"
+                    </c:when>
+
+                    <c:otherwise>
+                       "Assets/ICONS/noProfilePic_icona.svg"
+                    </c:otherwise>
+               </c:choose>
+        />
     </c:when>
                        
 </c:choose>

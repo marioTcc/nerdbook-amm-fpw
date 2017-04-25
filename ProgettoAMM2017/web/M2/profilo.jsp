@@ -29,8 +29,8 @@
                         </div>
 
                         <div id="divForm"> <!-- Form dati profilo -->
-                            <form id="formDatiProfilo" action="profilo.html?action=updateInfo" method="post">
-
+                            <form id="formDatiProfilo" action="profilo.html" method="post">
+                                <input type="hidden" name="action" value="updateInfo">
                                 <div> <!-- Nome utente -->
                                     <label for="userName">Nome:</label>
                                     <input <c:if test="${isUserInfoComplete == false}">class='necessaryField'</c:if> type="text" name="userName" id="userName" <c:if test="${nome != null}">value="${nome}"</c:if>>

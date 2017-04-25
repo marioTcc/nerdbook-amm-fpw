@@ -95,7 +95,7 @@ public class Login extends HttpServlet {
         request.getSession(false).setAttribute("friends", UtenteFactory.getInstance().getFriends(tmp));
         
         if(UtenteFactory.checkCompletion(tmp))         
-            response.sendRedirect("bacheca.html");
+            response.sendRedirect("bacheca.html?ownerType=user");
         else
             response.sendRedirect("profilo.html?isUserInfoComplete=false");
     }

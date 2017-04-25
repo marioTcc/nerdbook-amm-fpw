@@ -36,7 +36,9 @@ public class Bacheca extends HttpServlet {
             if(session.getAttribute("loggedIn")!=null && session.getAttribute("loggedIn").equals(true))
             {
                 if(request.getParameter("action") == null)
+                {
                     this.loadView(request);
+                }
                 else
                 {
                     switch (request.getParameter("action")) 
@@ -53,8 +55,6 @@ public class Bacheca extends HttpServlet {
                         case "cancelNewPost":
                             this.loadView(request);
                             break;
-                        default:
-                            break;
                     }
                 }
             }
@@ -66,18 +66,34 @@ public class Bacheca extends HttpServlet {
     
     public void loadView(HttpServletRequest request) 
     {
-        UtenteSecure us;
         
-        if(request.getParameter("owner")!=null)
-            us = UtenteFactory.getInstance().getUtenteById(Integer.parseInt(request.getParameter("owner")));
-        else 
-            us =(UtenteSecure)request.getSession().getAttribute("user");
+        if(request.getParameter("ownerType").equals("user"))
+        {
+            UtenteSecure us;
 
-        ArrayList<Post> listaPost = PostFactory.getInstance().getPostList(us);
+            if(request.getParameter("owner")!=null)
+                us = UtenteFactory.getInstance().getUtenteById(Integer.parseInt(request.getParameter("owner")));
+            else 
+                us =(UtenteSecure)request.getSession().getAttribute("user");
 
-        request.setAttribute("owner", us);
-        request.setAttribute("listaPost", listaPost); 
+            ArrayList<Post> listaPost = PostFactory.getInstance().getPostList(us);
+
+            request.setAttribute("owner", us);
+            request.setAttribute("ownerType", "user");
+            request.setAttribute("listaPost", listaPost); 
+        }
+        else
+        {
+            Gruppo gruppo;
         
+            gruppo = GruppoFactory.getInstance().getGruppoById(Integer.parseInt(request.getParameter("owner")));
+
+            ArrayList<Post> listaPost = PostFactory.getInstance().getPostList(gruppo);
+
+            request.setAttribute("owner", gruppo);
+            request.setAttribute("ownerType", "group");
+            request.setAttribute("listaPost", listaPost);            
+        }     
     }
     
     public void loadNewPost(HttpServletRequest request)
@@ -85,7 +101,15 @@ public class Bacheca extends HttpServlet {
         this.loadView(request);
         request.setAttribute("confirmRequired", true);
         
+        Post.DestinationType tmpDestType = Post.DestinationType.INVALID;
         Post.PostType tmpType = Post.PostType.TESTO;
+        
+        
+        if(request.getParameter("ownerType").equals("user"))          
+            tmpDestType = Post.DestinationType.BACHECA;
+        else
+            tmpDestType = Post.DestinationType.GRUPPO;
+        
         
         if(request.getParameter("postType")!=null)
         {
@@ -105,19 +129,20 @@ public class Bacheca extends HttpServlet {
             }
         }
         else tmpType = Post.PostType.TESTO;
-                    
+             
+        
         Post previewPost = PostFactory.getInstance().getFakePost((UtenteSecure) request.getSession(false).getAttribute("user"),
-                request.getParameter("contenuto"), tmpType, request.getParameter("allegato"), Post.DestinationType.BACHECA);
-        
-        request.setAttribute("previewPost", previewPost);
-        
-              
+                request.getParameter("contenuto"), tmpType, request.getParameter("allegato"), tmpDestType);
+       
+        request.setAttribute("ownerType", request.getParameter("ownerType"));
+        request.setAttribute("previewPost", previewPost);              
     }
     
     public void confirmNewPost(HttpServletRequest request)
     {  
         this.loadView(request);
         //CHIAMA DATAMIGRATOR PER SALVARE IL NUOVO POST NEL DB
+        request.setAttribute("ownerType", request.getParameter("ownerType"));
         request.setAttribute("postState", "created");
     }
     

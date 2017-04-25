@@ -33,7 +33,7 @@
                 </c:when>
                     
                 <c:when test="${post.tipoPost == 'LINK'}">
-                    <a href="${post.attachedUrl}">Link in Allegato</a>                        
+                    <a href="http://${post.attachedUrl}">${post.attachedUrl}</a>                        
                 </c:when>
             </c:choose>
         </div>

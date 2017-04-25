@@ -38,7 +38,7 @@
         </div>
     </c:when>
     
-    <c:when test="${notificationType == 'profileInfo' && notificationValue=='updatedProfileInfo'}">
+    <c:when test="${notificationType == 'profileInfo' && notificationValue=='updatedProfileInfo' && campiModificati!='none'}">
         <div class="notificationDiv">
             <p>I seguenti campi sono stati aggiornati:</p>
             <ul class="notificationList">

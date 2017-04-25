@@ -47,20 +47,7 @@ public class PostFactory {
         
         return tmp;
     }
-    
-    ArrayList<Post> getPostListAsAuthor(UtenteSecure utente)
-    {
-        ArrayList<Post> tmp = new ArrayList<Post>();
         
-        for (Post tmpPost : this.listaPost) 
-        {
-            if (tmpPost.getAutorePost().getId() == utente.getId()) 
-                tmp.add(tmpPost);
-        }
-
-        return tmp;
-    }
-    
     ArrayList<Post> getPostList(UtenteSecure utente)
     {
         ArrayList<Post> tmp = new ArrayList<Post>();
