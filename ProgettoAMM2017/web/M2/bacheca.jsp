@@ -88,7 +88,7 @@
                                                 </c:when>
                                                     
                                                 <c:when test="${previewPost.tipoDestinazione == 'GRUPPO'}">
-                                                    Gruppo "$owner.nome"
+                                                    Gruppo "${owner.nome}"
                                                 </c:when>
                                                     
                                             </c:choose>                                        
