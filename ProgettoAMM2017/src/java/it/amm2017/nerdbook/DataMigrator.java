@@ -150,7 +150,7 @@ public class DataMigrator
         gruppo1.setId(0);
         gruppo1.setNome("Molgonfieristi");
         gruppo1.setGroupIconUrl("Assets/ICONS/molgonfieristi_icona.svg");
-        gruppo1.setIscritti(new ArrayList<UtenteSecure>(Arrays.asList(tmp.getUtenteById(0), tmp.getUtenteById(1))));
+        gruppo1.setIscritti(new ArrayList<UtenteSecure>(Arrays.asList(tmp.getUtenteById(0), tmp.getUtenteById(1), tmp.getUtenteById(2))));
         
         // Gruppo 2
         Gruppo gruppo2=new Gruppo();
