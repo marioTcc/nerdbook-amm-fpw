@@ -29,11 +29,11 @@
         <div class="allegatoPost"> <!-- Allegato del post -->
             <c:choose>
                 <c:when test="${post.tipoPost == 'IMMAGINE'}">
-                    <img alt="Immagine in allegato al post" src="${post.imgUrl}">
+                    <img alt="Immagine in allegato al post" src="${post.attachedUrl}">
                 </c:when>
                     
                 <c:when test="${post.tipoPost == 'LINK'}">
-                    <a href="${post.attachedLink}">Link in Allegato</a>                        
+                    <a href="${post.attachedUrl}">Link in Allegato</a>                        
                 </c:when>
             </c:choose>
         </div>

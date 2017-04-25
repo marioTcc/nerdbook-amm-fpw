@@ -21,7 +21,7 @@
                     <img src="Assets/ICONS/NerdBook_logo.svg" width="54" height="44" alt="Logo del social network" />
                     <h1> NerdBook </h1>
                 </div>
-                <form id="loginForm" method="post" action="login.html?action=login">
+                <form id="loginForm" method="post" action="login.html">
                     <div>
                         <label for="username">Nome utente:</label>
                         <input type="text" name="username" id="username">
@@ -30,6 +30,9 @@
                         <label for="password">Password:</label>
                         <input type="password" name="password" id="password">
                     </div>
+                    
+                    <input type="hidden" name="action" value="login">
+                    
                     <div>
                         <button type="submit">Accedi</button>
                     </div>

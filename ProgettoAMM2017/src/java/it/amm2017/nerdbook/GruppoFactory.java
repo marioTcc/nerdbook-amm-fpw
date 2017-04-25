@@ -2,10 +2,8 @@
 package it.amm2017.nerdbook;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
- *
  * @author Mario Taccori
  */
 
@@ -16,25 +14,7 @@ public class GruppoFactory {
     
     private GruppoFactory()
     {
-        UtenteFactory tmp = UtenteFactory.getInstance();
-        // Gruppo 1
-        Gruppo gruppo1=new Gruppo();
-        gruppo1.setId(0);
-        gruppo1.setNome("Molgonfieristi");
-        gruppo1.setGroupIconUrl("Assets/ICONS/molgonfieristiIcon.svg");
-        gruppo1.setIscritti(new ArrayList<UtenteSecure>(Arrays.asList(tmp.getUtenteById(0), tmp.getUtenteById(1))));
-        
-        // Gruppo 1
-        Gruppo gruppo2=new Gruppo();
-        gruppo2.setId(1);
-        gruppo2.setNome("Ritardatari");
-        gruppo2.setGroupIconUrl("Assets/ICONS/ritardatariIcon.svg");
-        gruppo2.setIscritti(new ArrayList<UtenteSecure>(Arrays.asList(tmp.getUtenteById(0), tmp.getUtenteById(2))));
-        
-        
-        // Lista Gruppi
-        this.listaGruppi.add(gruppo1);
-        this.listaGruppi.add(gruppo2);
+        this.listaGruppi=DataMigrator.getInstance().getAllGroups();
     }
 
     public static GruppoFactory getInstance()

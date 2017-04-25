@@ -22,9 +22,7 @@ public class Post {
     private UtenteSecure autorePost;
     private String contenuto;
     private PostType tipoPost;
-    private String imgUrl;
-    private String attachedLink;
-    
+    private String attachedUrl;   
     private DestinationType tipoDestinazione;
     private int idDestinazione;    
     
@@ -33,8 +31,7 @@ public class Post {
         this.id=-1;
         this.autorePost=null;
         this.contenuto="";
-        this.imgUrl="";
-        this.attachedLink="";     
+        this.attachedUrl="";     
         this.tipoDestinazione=DestinationType.INVALID;
         this.idDestinazione=-1;
     }
@@ -112,31 +109,17 @@ public class Post {
     }
 
     /**
-     * @return the imgUrl
-     */
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    /**
-     * @param imgUrl the imgUrl to set
-     */
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    /**
      * @return the attachedLink
      */
-    public String getAttachedLink() {
-        return attachedLink;
+    public String getAttachedUrl() {
+        return attachedUrl;
     }
 
     /**
      * @param attachedLink the attachedLink to set
      */
-    public void setAttachedLink(String attachedLink) {
-        this.attachedLink = attachedLink;
+    public void setAttachedUrl(String attachedUrl) {
+        this.attachedUrl = attachedUrl;
     }
 
     /**

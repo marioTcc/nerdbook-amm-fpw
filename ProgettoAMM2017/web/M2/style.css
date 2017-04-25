@@ -87,6 +87,128 @@ nav ol
     font-size: 0;
 }
 
+div#nuovoPostDiv
+{
+    width: 90%; 
+    margin-left: auto;
+    margin-right: auto;
+    border: solid 3px #3a506b;
+    margin-bottom: 20px;
+}
+
+div#nuovoPostDiv form#formNuovoPost
+{
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+div#nuovoPostDiv #confirmForm, div#nuovoPostDiv #cancelForm
+{
+    display: inline-block;
+}
+
+div#nuovoPostDiv #confirmForm button, div#nuovoPostDiv #cancelForm button
+{
+    margin: 0px;
+    padding: 0px;
+    height: 30px;
+    width: 100px;
+    font-weight: bold;
+    color: #BBBBBB;
+    background-color: #3a506b;
+}
+
+div#nuovoPostDiv #riepilogoDiv, div#nuovoPostDiv #previewPostDiv
+{
+    margin-left: 10px;
+    margin-bottom: 10px;
+}
+
+div#nuovoPostDiv #choiceDiv 
+{
+    text-align: center;
+}
+
+div#nuovoPostDiv #choiceDiv > div
+{
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#nuovoPostDiv form#formNuovoPost *
+{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div#nuovoPostDiv form#formNuovoPost #inputsDiv div:first-child label::before
+{
+    content: url("../Assets/ICONS/noProfilePic_icona.png");
+    vertical-align: -25%;
+    margin-right: 2px;
+}
+
+div#nuovoPostDiv form#formNuovoPost #inputsDiv div:nth-child(2) label::before
+{
+    content: url("../Assets/ICONS/attach_icona.png");
+    vertical-align: -25%;
+    margin-right: 2px;    
+}
+
+div#nuovoPostDiv #previewPostDiv div.autorePost, div#nuovoPostDiv #previewPostDiv div.profilePic
+{
+    display: inline-block;
+    float: left;
+    margin-top: 10px;
+}
+
+div#nuovoPostDiv #previewPostDiv div.datiAutore, div#nuovoPostDiv #previewPostDiv div.contenutoPost
+{
+    margin-left: 10px;
+}
+
+div#nuovoPostDiv #previewPostDiv div.profilePic img:not(.defaultPic)
+{
+    height: auto; 
+    width: auto; 
+    max-width: 80px; 
+    max-height: 80px;    
+    margin-right: 20px;   
+}
+
+div#nuovoPostDiv #previewPostDiv div.profilePic img.defaultPic
+{
+    height: 80px; 
+    width: 80px;
+    margin-right: 20px;   
+}
+
+div#nuovoPostDiv #previewPostDiv .allegatoPost img
+{
+    height: auto; 
+    width: auto; 
+    max-width: 80%; 
+    max-height: 80%;
+    margin: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+div#nuovoPostDiv #previewPostDiv > div
+{
+    width: 90%;
+    border: solid 1px black;
+    margin: 0px;
+    margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 10px;
+}
+
 #divForm
 {
     float: left;
@@ -235,7 +357,7 @@ nav ol
     border-bottom: solid 2px #7d84b2; 
 }
 
-#divBody > div:not(#presentazione):not(#posts)
+#divBody > div:not(#presentazione):not(#posts):not(#nuovoPostDiv):not(#notificaNuovoPost)
 {
     width: 90%;
     margin: auto auto;
@@ -360,6 +482,19 @@ header, nav
     color: red;
 }
 
+div#notificaNuovoPost
+{
+    margin: 0px;
+    padding: 0px;
+    border: solid 1px black;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 60%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
 #loginFormDiv
 {
     position: relative;
@@ -432,6 +567,7 @@ header, nav
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
+    padding-bottom: 10px;
 }
 
 div#presentazione
@@ -603,12 +739,54 @@ div#presentazione p
         height: 20px;
         width: 100px;
     }
-    
-    
+        
     header, #sidebar1
     {
         min-width: 150px;
     }
+    
+    div#nuovoPostDiv form#formNuovoPost #inputsDiv, div#nuovoPostDiv form#formNuovoPost #radiosDiv, div#nuovoPostDiv form#formNuovoPost #buttonDiv
+    {
+        width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    div#nuovoPostDiv form#formNuovoPost div.filler
+    {
+        display: inline-block;
+        width: 22px;
+        height: 10px;
+    }
+
+    div#nuovoPostDiv form#formNuovoPost #inputsDiv input
+    {
+        display: inline-block;
+        width: 400px;    
+        margin-top: 5px;
+    }
+
+    div#nuovoPostDiv form#formNuovoPost button
+    {
+        padding: 0px;
+        display: inline-block;
+        width: 406px;    
+        margin-top: 5px;    
+    }
+
+    div#nuovoPostDiv form#formNuovoPost #radiosDiv > div:not(.filler)
+    {
+        display: inline-block;
+        width: 372.75px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    div#nuovoPostDiv form#formNuovoPost #radiosDiv label
+    {
+        margin-right: 5%;
+    }
+    
 } /* FINE 1024min */
 
 @media only screen and (min-width: 481px) and (max-width: 1023px)
@@ -739,6 +917,50 @@ div#presentazione p
         height: 20px;
         width: 100px;
     }
+
+    div#nuovoPostDiv form#formNuovoPost #inputsDiv, div#nuovoPostDiv form#formNuovoPost #radiosDiv, div#nuovoPostDiv form#formNuovoPost #buttonDiv
+    {
+        width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    div#nuovoPostDiv form#formNuovoPost div.filler
+    {
+        display: inline-block;
+        width: 22px;
+        height: 10px;
+    }
+
+    div#nuovoPostDiv form#formNuovoPost #inputsDiv input
+    {
+        display: inline-block;
+        width: 400px;    
+        margin-top: 5px;
+    }
+
+    div#nuovoPostDiv form#formNuovoPost button
+    {
+        padding: 0px;
+        display: inline-block;
+        width: 406px;    
+        margin-top: 5px;    
+    }
+
+    div#nuovoPostDiv form#formNuovoPost #radiosDiv > div:not(.filler)
+    {
+        display: inline-block;
+        width: 372.75px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    div#nuovoPostDiv form#formNuovoPost #radiosDiv label
+    {
+        margin-right: 5%;
+    }
+    
+    
 } /* FINE dim intermedie */
 
 @media only screen and (max-width: 480px)
@@ -854,6 +1076,44 @@ div#presentazione p
     }
     
     nav li #loggedInDiv p
+    {
+        display: none;
+    }
+
+    div#nuovoPostDiv form#formNuovoPost #inputsDiv
+    {
+        width: 92.5%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    div#nuovoPostDiv form#formNuovoPost #inputsDiv input
+    {
+        display: inline-block;
+        width: 85%;    
+        margin-top: 5px;
+    }
+
+    div#nuovoPostDiv form#formNuovoPost button
+    {
+        display: block;
+        width: 81%;    
+        margin-top: 5px;    
+    }
+
+    div#nuovoPostDiv form#formNuovoPost #radiosDiv > div
+    {
+        width: 81%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    div#nuovoPostDiv form#formNuovoPost #radiosDiv label
+    {
+        margin-right: 5%;
+    }
+    
+    div#nuovoPostDiv form#formNuovoPost div.filler
     {
         display: none;
     }
