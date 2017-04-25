@@ -109,14 +109,14 @@ public class Post {
     }
 
     /**
-     * @return the attachedLink
+     * @return the attachedUrl
      */
     public String getAttachedUrl() {
         return attachedUrl;
     }
 
     /**
-     * @param attachedLink the attachedLink to set
+     * @param attachedUrl the attachedUrl to set
      */
     public void setAttachedUrl(String attachedUrl) {
         this.attachedUrl = attachedUrl;
