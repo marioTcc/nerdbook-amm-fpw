@@ -51,7 +51,7 @@ L’amministratore è un utente speciale che può cancellare i contenuti ritenut
 
 
 
-## Milestone 1: HTML ##
+## Milestone 1: HTML ## ### (Voto 1/1) ###
 
 Per questa milestone dovete creare solo il contenuto HTML statico. Non preoccupatevi della grafica. 
 
