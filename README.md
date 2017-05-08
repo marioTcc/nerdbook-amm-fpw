@@ -276,3 +276,111 @@ Suggerimenti: Fate attenzione all'utilizzo della sessione. Deve essere possibile
 ### Task 7 ###
 
 Eseguite il commit finale su Git Hub per la consegna, utilizzando come messaggio “consegna M3”
+
+
+-------------------------------------------------------------------------------------------
+
+
+## Milestone 4: Persistenza dei dati ##
+
+Per questa milestone dovrete implementare la persistenza dei dati, con piccole modifiche alla parte web.
+
+
+### Task 1 ###
+
+Individuate entità e relazioni nel dominio della vostra applicazione, insieme con i loro attributi. Una volta che li avete individuati, descriveteli in modo schematico in un file testuale da inserire in una cartella db-definition all’interno di WEB-INF. Per schematico intendo un elenco di entità con relativi attributi e di relazioni con relazione di partenza, di arrivo, cardinalità ed eventuali attributi.
+
+
+### Task 2 ###
+
+Traducete lo schema del task precedente in tabelle.
+Create le query per la loro creazione, salvandole in file crea-db.sql da inserire nella cartella WEB-INF/db-definition.
+Create delle query di inserimento per i dati iniziali dell’applicazione (quelli che avevate nelle factory: utenti, gruppi, post ecc.)
+
+
+### Task 3 ###
+
+Questo task non è concettuale, ma organizzativo. Permetterà al docente di correggere la milestone senza modificare il path del db.
+
+Create un database Derby di nome ammdb all’interno di una cartella db a sua volta all’interno della cartella WEB-INF. Per farlo, seguite la guida che abbiamo visto ad esercitazione.
+Aggiungete JavaDB alle librerie del progetto (seguite sempre la guida).
+All’interno di ogni classe factory, aggiungete una variabile di istanza connectionString di tipo Stringa e due metodi pubblici:
+
+
+```
+#!java
+
+public void setConnectionString(String s){
+	this.connectionString = s;
+}
+public String getConnectionString(){
+	return this.connectionString;
+}
+```
+
+
+All'interno della servlet Login:
+
+* aggiungete un parametro loadOnStartup = 0 alla annotazione @WebServlet.
+* Aggiungete tre costanti:
+* * private static final String JDBC_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
+* * private static final String DB_CLEAN_PATH = "../../web/WEB-INF/db/ammdb";
+* * private static final String DB_BUILD_PATH = "WEB-INF/db/ammdb";
+* Fate l’override del metodo init della servlet con il seguente codice:
+
+```
+#!java
+
+
+@Override
+   public void init(){
+       String dbConnection = "jdbc:derby:" + this.getServletContext().getRealPath("/") + DB_BUILD_PATH;
+       try {
+           Class.forName(JDBC_DRIVER);
+       } catch (ClassNotFoundException ex) {
+           Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+       }
+       ObjectFactory.getInstance().setConnectionString(dbConnection);
+   }
+```
+
+
+NB: assumo che la vostra factory si chiami ObjectFactory. Nel caso molto probabile di nome diverso cambiatelo. Se avete più factory, invocate setConnectionString su ognuna (ovviamente create anche le variabili di istanza ed i metodi).
+
+Se avete fatto tutto nel modo corretto, all’avvio del servlet container avete sia caricato il driver di derby che impostato la stringa di connessione in modo dinamico (indipendente dalla posizione sul filesystem della macchina).
+
+
+
+Vorrei attirare la vostra attenzione su due punti che potrebbero essere causa di confusione:
+
+* Il Servlet Container non legge il contenuto della cartella WEB-INF che vedete nel vostro progetto NetBeans ma una copia all’interno di una cartella build, che viene creata in fase di compilazione del progetto. Per questo motivo avete due copie dello stesso database: una nella cartella web/WEB-INF del progetto ed una nella cartella build/WEB-INF del progetto. Queste copie non sono sincronizzate, perciò ho messo due costanti che vi permettono di accedere ad entrambe: DB_CLEAN_PATH è quella del progetto Netbeans, DB_BUILD_PATH quella nella build. Per cambiare il db dovete solo modificare l’ultima parte dell’assegnamento della variabile dbConnection. Tenete in DB_CLEAN_PATH la configurazione iniziale del db, cioè quella che volete mandare a me per provarlo. Se fate una compilazione del progetto, perdete i dati nella build che vengono sovrascritti con la versione clean.
+* Utilizziamo il driver embedded di Derby, quindi avete a disposizione una sola connessione al db. Se utilizzate DB_BUILD_PATH, non avete questo problema, perché il db che aprite in Netbeans per lanciare query command line e quello dell’applicazione sono diversi. Se utilizzate  DB_CLEAN_PATH dovete avere cura di chiudere la connessione in netbeans prima di lanciare l’applicazione web.
+
+
+### Task 4 ###
+
+Eseguite le query contenute in crea-db.sql connettendovi al db creato al task 3
+Modificate i metodi della factory creata per la milestone precedente in modo che legga i dati eseguendo delle query sullo stesso db. Gli oggetti saranno dunque istanziati non può con un hard-coding dei valori delle variabili di istanza, ma tramite la lettura degli stessi dal db.
+
+
+### Task 5 ###
+
+Aggiungere alle factory i metodi necessari per salvare in modo persistente i post sulla bacheca di un utente. Il programma si dovrà comportare nello stesso modo descritto nel Task 6 della milestone 3, ma il post dovrà essere visibile anche fra due visite consecutive della pagina delle bacheca.
+
+
+### Task 6 ###
+
+Gestire la cancellazione di un utente e della sua bacheca con una transazione. Il pulsante per la cancellazione deve essere disponibile nella pagina di modifica dei dati del profilo e deve essere accessibile al solo proprietario del profilo stesso. La cancellazione deve procedere nel modo seguente:
+* Devono essere cancellati prima tutti i post presenti sulla bacheca,
+* Dopo di che devono essere cancellati i dati del profilo. 
+La cancellazione deve andare a buon fine solo nel caso entrambi i passi siano completati in modo corretto. Altrimenti la situazione nel db deve rimanere invariata. 
+
+Nel caso di cancellazione, deve essere mostrata semplicemente la pagina di login.
+
+ 
+### Task 7 ###
+
+Eseguite il commit finale su GitHub per la consegna, utilizzando come messaggio “consegna M4”
+
+
+-------------------------------------------------------------------------------------------
