@@ -28,12 +28,12 @@ public class Post {
     
     public Post()
     {
-        this.id=-1;
-        this.autorePost=null;
-        this.contenuto="";
-        this.attachedUrl="";     
-        this.tipoDestinazione=DestinationType.INVALID;
-        this.idDestinazione=-1;
+        this.id = -1;
+        this.autorePost = null;
+        this.contenuto = "";
+        this.attachedUrl = "";     
+        this.tipoDestinazione = DestinationType.INVALID;
+        this.idDestinazione = -1;
     }
           
     public boolean equals(Object obj)

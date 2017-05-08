@@ -26,15 +26,15 @@ public class UtenteSecure
         this.frasePresentazione="";                
     }   
     
-    public UtenteSecure(Utente t)
+    public UtenteSecure(Utente utente)
     {
-        this.id=t.getId();
-        this.nome= t.getNome();
-        this.cognome=t.getCognome();
-        this.email=t.getEmail();
-        this.dataNascita=t.getDataNascita();
-        this.urlFotoProfilo=t.getUrlFotoProfilo();
-        this.frasePresentazione=t.getFrasePresentazione();                
+        this.id = utente.getId();
+        this.nome = utente.getNome();
+        this.cognome = utente.getCognome();
+        this.email = utente.getEmail();
+        this.dataNascita = utente.getDataNascita();
+        this.urlFotoProfilo = utente.getUrlFotoProfilo();
+        this.frasePresentazione = utente.getFrasePresentazione();                
     }
     
     public UtenteSecure(int id, String nome, String cognome, String email, String dataNascita, String urlFotoProfilo, String frasePresentazione)

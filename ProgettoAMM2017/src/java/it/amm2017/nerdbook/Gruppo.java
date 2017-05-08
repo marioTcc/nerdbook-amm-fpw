@@ -16,10 +16,10 @@ public class Gruppo {
     
     public Gruppo()
     {
-        this.nome="";
-        this.id=-1;
-        this.iscritti=new ArrayList<UtenteSecure>();
-        this.groupIconUrl="";
+        this.nome = "";
+        this.id = -1;
+        this.iscritti = new ArrayList<UtenteSecure>(); //SERVE?
+        this.groupIconUrl = "";
     }
            
     public boolean equals(Object obj)

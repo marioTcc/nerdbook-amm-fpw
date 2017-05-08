@@ -13,8 +13,8 @@ public class Utente extends UtenteSecure
     public Utente()
     {
         super();
-        this.username="";
-        this.password="";              
+        this.username = "";
+        this.password = "";              
     }   
     
     /**

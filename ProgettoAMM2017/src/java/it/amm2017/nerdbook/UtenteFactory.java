@@ -27,11 +27,11 @@ public class UtenteFactory {
         return singleton;
     }
        
-    public static boolean checkCompletion(UtenteSecure t) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
+    public static boolean checkCompletion(UtenteSecure utente) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
         String tmp="";
-        String dummy="";
-        Method [] methods=t.getClass().getDeclaredMethods();
+
+        Method [] methods=utente.getClass().getDeclaredMethods();
         
         for(Method m : methods)
         {
@@ -40,8 +40,8 @@ public class UtenteFactory {
                 if(m.getName().endsWith("Nome") || m.getName().endsWith("Cognome") 
                         || m.getName().endsWith("FrasePresentazione") || m.getName().endsWith("UrlFotoProfilo") )
                 {
-                    tmp=(String)m.invoke(t);
-                    if(tmp.equals(dummy))
+                    tmp=(String)m.invoke(utente);
+                    if(tmp.equals(""))
                         return false;
                 }
             }
@@ -82,13 +82,14 @@ public class UtenteFactory {
         return utentiTrovati;        
     }
     
-    public ArrayList<UtenteSecure> getFriends(UtenteSecure t)
+    public ArrayList<UtenteSecure> getFriends(UtenteSecure utente)
     {
+        //AL MOMENTO RESTITUISCE TUTTI TRANNE SE STESSO
         ArrayList<UtenteSecure> tmp = new ArrayList<UtenteSecure>();
-        for(Utente u : this.listaUtenti)
+        for(Utente utenteTmp : this.listaUtenti)
         {
-            if(!((UtenteSecure)u).equals(t))
-                tmp.add(new UtenteSecure(u));
+            if(!((UtenteSecure)utenteTmp).equals(utente))
+                tmp.add(new UtenteSecure(utenteTmp));
         }
         
         return tmp;

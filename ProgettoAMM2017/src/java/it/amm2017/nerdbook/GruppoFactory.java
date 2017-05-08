@@ -14,7 +14,7 @@ public class GruppoFactory {
     
     private GruppoFactory()
     {
-        this.listaGruppi=DataMigrator.getInstance().getAllGroups();
+        this.listaGruppi = DataMigrator.getInstance().getAllGroups();
     }
 
     public static GruppoFactory getInstance()
@@ -25,13 +25,13 @@ public class GruppoFactory {
         return singleton;
     }
     
-    public ArrayList<Gruppo> getSubscribedGroups(UtenteSecure t)
+    public ArrayList<Gruppo> getSubscribedGroups(UtenteSecure utente)
     {
         ArrayList<Gruppo> subscribedGroups=new ArrayList<>();
         
         for(Gruppo tmp : this.listaGruppi)
         {
-            if(tmp.getIscritti().contains(t))
+            if(tmp.getIscritti().contains(utente))
                 subscribedGroups.add(tmp);
         }
         

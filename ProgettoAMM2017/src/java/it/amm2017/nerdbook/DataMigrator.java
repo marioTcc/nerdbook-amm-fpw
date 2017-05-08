@@ -121,12 +121,6 @@ public class DataMigrator
         post9.setIdDestinazione(1);
         
         
-        
-        
-        
-        
-        
-        
         //Lista post
         listaPost.add(post1);
         listaPost.add(post2);
@@ -145,6 +139,7 @@ public class DataMigrator
     {
         UtenteFactory tmp = UtenteFactory.getInstance();
         ArrayList<Gruppo> listaGruppi= new ArrayList<>();
+        
         // Gruppo 1
         Gruppo gruppo1=new Gruppo();
         gruppo1.setId(0);

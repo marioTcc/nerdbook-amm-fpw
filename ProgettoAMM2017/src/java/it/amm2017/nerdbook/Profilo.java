@@ -98,6 +98,8 @@ public class Profilo extends HttpServlet {
         Method [] classMethods = _old.getClass().getDeclaredMethods();
         Method tmpGetter, tmpSetter;
         
+        
+        // PER ORA NON CONTROLLA LA PASSWORD
         for(Field tmp : classFields)
         {
             if(tmp.getType() == String.class)
@@ -116,6 +118,7 @@ public class Profilo extends HttpServlet {
         }
         
         request.getSession(false).setAttribute("user", _old);
+        //SCRIVERE NEL DB QUI
         return campiModificati;                
     }
     
