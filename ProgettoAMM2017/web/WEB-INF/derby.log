@@ -1,0 +1,37 @@
+Tue May 09 20:53:30 CEST 2017 : Server di rete Apache Derby: 10.11.1.2 - (1629631) avviato e pronto ad accettare connessioni sulla porta 1527
+----------------------------------------------------------------
+Tue May 09 20:53:31 CEST 2017:
+Avvio della versione di Derby The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): istanza a816c00e-015b-ee8f-263c-00001d1beac1
+sulla directory di database C:\Users\User1\Documents\NetBeansProjects\progettoamm2017\ProgettoAMM2017\web\WEB-INF\ammdb con caricatore classi sun.misc.Launcher$AppClassLoader@1d44bcfa 
+Caricato da file:/C:/Program%20Files/Java/jdk1.8.0_101/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_101-b13
+user.dir=C:\Program Files\Java\jdk1.8.0_101\db
+os.name=Windows 8.1
+os.arch=amd64
+os.version=6.3
+derby.system.home=C:\Users\User1\Documents\NetBeansProjects\progettoamm2017\ProgettoAMM2017\web\WEB-INF
+Programma di caricamento classe database avviato - derby.database.classpath=''
+----------------------------------------------------------------
+Tue May 09 20:53:32 CEST 2017:
+Arresto dell'istanza a816c00e-015b-ee8f-263c-00001d1beac1 nella directory del database C:\Users\User1\Documents\NetBeansProjects\progettoamm2017\ProgettoAMM2017\web\WEB-INF\ammdb con il caricatore di classi sun.misc.Launcher$AppClassLoader@1d44bcfa 
+Tue May 09 20:53:32 CEST 2017 Thread[DRDAConnThread_3,5,main] (DATABASE = ammdb), (DRDAID = {2}), Chiusura del database 'ammdb'.
+----------------------------------------------------------------
+Tue May 09 20:53:38 CEST 2017:
+Avvio della versione di Derby The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): istanza a65c80ac-015b-ee8f-263c-00001d1beac1
+sulla directory di database C:\Users\User1\Documents\NetBeansProjects\progettoamm2017\ProgettoAMM2017\web\WEB-INF\ammdb con caricatore classi sun.misc.Launcher$AppClassLoader@1d44bcfa 
+Caricato da file:/C:/Program%20Files/Java/jdk1.8.0_101/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_101-b13
+user.dir=C:\Program Files\Java\jdk1.8.0_101\db
+os.name=Windows 8.1
+os.arch=amd64
+os.version=6.3
+derby.system.home=C:\Users\User1\Documents\NetBeansProjects\progettoamm2017\ProgettoAMM2017\web\WEB-INF
+Programma di caricamento classe database avviato - derby.database.classpath=''
+----------------------------------------------------------------
+Tue May 09 21:02:27 CEST 2017: arresto in corso del motore di Derby
+----------------------------------------------------------------
+Tue May 09 21:02:27 CEST 2017:
+Arresto dell'istanza a65c80ac-015b-ee8f-263c-00001d1beac1 nella directory del database C:\Users\User1\Documents\NetBeansProjects\progettoamm2017\ProgettoAMM2017\web\WEB-INF\ammdb con il caricatore di classi sun.misc.Launcher$AppClassLoader@1d44bcfa 
+----------------------------------------------------------------
