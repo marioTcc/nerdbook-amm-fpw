@@ -33,7 +33,7 @@
   +-------------------+                +----------------------+
 
 
-  Utente è in relazione uno a molti con posts
-  Posts è in relazione uno a uno con tipi post e tipo destinazione
-  Utente è in relazione uno a molti con amici e iscrizioni
-  Posts è in relazione uno a uno con gruppi
+  Utente Ã¨ in relazione uno a molti con posts
+  Posts Ã¨ in relazione uno a uno con tipi post e tipo destinazione
+  Utente Ã¨ in relazione uno a molti con amici e iscrizioni
+  Posts Ã¨ in relazione uno a uno con gruppi
