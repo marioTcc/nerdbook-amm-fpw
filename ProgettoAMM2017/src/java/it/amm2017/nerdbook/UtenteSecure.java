@@ -1,6 +1,8 @@
 
 package it.amm2017.nerdbook;
 
+import java.util.ArrayList;
+
 /**
  * @author Mario Taccori
  */
@@ -14,6 +16,7 @@ public class UtenteSecure
     private String dataNascita;
     private String urlFotoProfilo;
     private String frasePresentazione;
+    private ArrayList<UtenteSecure> listaAmici = new ArrayList<>();
     
     public UtenteSecure()
     {
@@ -23,7 +26,7 @@ public class UtenteSecure
         this.email="";
         this.dataNascita="";
         this.urlFotoProfilo="";
-        this.frasePresentazione="";                
+        this.frasePresentazione="";
     }   
     
     public UtenteSecure(Utente utente)
