@@ -15,13 +15,13 @@
     <div id="elencoPersone">
         <h4>Persone:</h4>
         <ul>
-            <c:forEach var="friendTmp" items="${friends}">
+            <c:forEach var="userTmp" items="${users}">
                 <li>
-                    <a href="bacheca.html?action=view&owner=${friendTmp.id}&ownerType=user">
-                        <c:set var="friendPicUrl" value="${friendTmp.urlFotoProfilo}" scope="request" />
+                    <a href="bacheca.html?action=view&owner=${userTmp.id}&ownerType=user">
+                        <c:set var="friendPicUrl" value="${userTmp.urlFotoProfilo}" scope="request" />
                         <c:set var="picSubject" value="friend" scope="request" />
                         <jsp:include page="fotoProfilo.jsp" />
-                        ${friendTmp.nome} ${friendTmp.cognome}
+                        ${userTmp.nome} ${userTmp.cognome}
                     </a>
                 </li>
             </c:forEach>
@@ -31,7 +31,7 @@
     <div id="elencoGruppi">
         <h4>Gruppi:</h4>
         <ul>
-            <c:forEach var="gruppoTmp" items="${subscribedGroups}">
+            <c:forEach var="gruppoTmp" items="${groups}">
                 <li>
                     <a href="bacheca.html?action=view&owner=${gruppoTmp.id}&ownerType=group">
                         <c:set var="groupPicUrl" value="${gruppoTmp.groupIconUrl}" scope="request" />

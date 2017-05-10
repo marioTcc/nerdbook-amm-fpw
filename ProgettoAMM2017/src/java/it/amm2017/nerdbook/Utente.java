@@ -15,7 +15,15 @@ public class Utente extends UtenteSecure
         super();
         this.username = "";
         this.password = "";              
-    }   
+    }  
+    
+    public Utente(int id, String nome, String cognome, String email, String dataNascita, String urlFotoProfilo, String frasePresentazione, String username, String password)
+    {
+        super(id, nome, cognome, email, dataNascita, urlFotoProfilo, frasePresentazione);
+        this.username = username;
+        this.password = password;
+    }
+    
     
     /**
      * @return the username

@@ -1,46 +1,46 @@
-+-------------------+                +----------------------+        +----------------------+
-|    Utenti         |                |      Posts           |        |       Tipi post      |
-+-------------------+                +----------------------+        +----------------------+
-|   id             +----+-----+      |    id                |   +-----+    id               |
-|   nome            |   |     +-------+   autore            |   |    |     nome tipo        |
-|   cognome         |   |     |      |    contenuto         |   |    |                      |
-|   username        |   |     |      |    tipo            +-----+    +----------------------+
-|   password        |   |     |      |    attached url      |
-|   email           |   |     |      |    tipo destinazione+-----+   +----------------------+
-|   data nascita    |   |     |      |                      |    |   |   Tipi destinazione  |
-|   urlfotoprofilo  |   |     +-------+   id utente dest    |    |   +----------------------+
-|   frasepresentaz  |   |       +-----+   id gruppo dest    |    +-----+   id               |
-|   tipo utente   +---+ |       |    |                      |        |     nome tipo        |
-+-------------------+ | |       |    +----------------------+        |                      |
-                      | |       |                                    +----------------------+
-+-------------------+ | |       |
-|     Tipi utente   | | |       |
-|-------------------| | |       |
-|    id        +------+ |       |
-|    nome tipo      |   |       |
-|                   |   |       |
-+-------------------+   |       |
-                        |       |
-+-------------------+   |       |
-|     Amici         |   |       |
-+-------------------+   |       |
-|    id utente1  |------+       |    +----------------------+
-|    id utente2  +------+       |    |      Gruppi          |
-|                   |   |       |    +----------------------+
-|                   |   |       ++------+   id              |
-+-------------------+   |        |   |      nome            |
-                        |        |   |      url icona       |
-                        |        |   |                      |
-+-------------------+   |        |   |                      |
-| Iscrizioni Gruppi |   |        |   |                      |
-+-------------------+   |        |   |                      |
-|     id utente    |----+        |   |                      |
-|     id gruppo    +-------------+   |                      |
-|                   |                |                      |
-+-------------------+                +----------------------+
+                +-------------------+                +----------------------+        +----------------------+
+                |    Utenti         |                |      Posts           |        |       Tipi post      |
+                +-------------------+                +----------------------+        +----------------------+
+                |   id             +----+-----+      |    id                |   +-----+    id               |
+                |   nome            |   |     +-------+   autore            |   |    |     nome tipo post   |
+                |   cognome         |   |     |      |    contenuto         |   |    |                      |
+                |   username        |   |     |      |    tipo post       +-----+    +----------------------+
+                |   password        |   |     |      |    attached url      |
+                |   email           |   |     |      |    tipo destinazione+-----+   +----------------------+
+                |   data nascita    |   |     |      |    data post         |    |   |   Tipi destinazione  |
+                |   urlfotoprofilo  |   |     +-------+   id utente dest    |    |   +----------------------+
+                |   frasepresentaz  |   |       +-----+   id gruppo dest    |    +-----+   id               |
+                |   tipo utente   +---+ |       |    |                      |        |     nome tipo dest   |
+                +-------------------+ | |       |    +----------------------+        |                      |
+                                      | |       |                                    +----------------------+
+                +-------------------+ | |       |
+                |     Tipi utente   | | |       |
+                |-------------------| | |       |
+                |    id        +------+ |       |
+                | nome tipo utente  |   |       |
+                |                   |   |       |
+                +-------------------+   |       |
+                                        |       |
+                +-------------------+   |       |
+                |     Amici         |   |       |
+                +-------------------+   |       |
+                |    id utente1  +------+       |    +----------------------+
+                |    id utente2  +------+       |    |      Gruppi          |
+                |                   |   |       |    +----------------------+
+                |                   |   |       ++------+   id              |
+                +-------------------+   |        |   |      nome            |
+                                        |        |   |      url icona       |
+                                        |        |   |                      |
+                +-------------------+   |        |   |                      |
+                | Iscrizioni Gruppi |   |        |   |                      |
+                +-------------------+   |        |   |                      |
+                |     id utente    |----+        |   |                      |
+                |     id gruppo    +-------------+   |                      |
+                |                   |                |                      |
+                +-------------------+                +----------------------+
 
 
-Utente è in relazione uno a molti con posts
-Posts è in relazione uno a uno con tipi post e tipo destinazione
-Utente è in relazione uno a molti con amici e iscrizioniGruppi
-Posts è in relazione uno a uno con gruppi
+                Utente è in relazione uno a molti con posts
+                Posts è in relazione uno a uno con tipi post e tipo destinazione
+                Utente è in relazione uno a molti con amici e iscrizioniGruppi
+                Posts è in relazione uno a uno con gruppi

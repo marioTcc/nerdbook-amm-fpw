@@ -25,6 +25,7 @@ public class Post {
     private String attachedUrl;   
     private DestinationType tipoDestinazione;
     private int idDestinazione;    
+    private String dataPost;
     
     public Post()
     {
@@ -34,6 +35,43 @@ public class Post {
         this.attachedUrl = "";     
         this.tipoDestinazione = DestinationType.INVALID;
         this.idDestinazione = -1;
+        this.dataPost = "1999-01-01";
+    }
+    
+    public Post(int id, UtenteSecure autorePost, String contenuto, String tipoPost, String attachedUrl, String tipoDestinazione, int idDestinazione, String dataPost)
+    {
+        this.id = id;
+        this.autorePost = autorePost;
+        this.contenuto = contenuto;
+        this.attachedUrl = attachedUrl;
+        this.idDestinazione = idDestinazione;
+        this.dataPost = dataPost;
+        
+        switch(tipoPost)
+        {
+            case "IMMAGINE":
+                this.tipoPost = PostType.IMMAGINE;
+                break;
+            case "LINK":
+                this.tipoPost = PostType.LINK;
+                break;
+            default:
+                this.tipoPost = PostType.TESTO;
+                break;
+        }
+        
+        switch(tipoDestinazione)
+        {
+            case "BACHECA":
+                this.tipoDestinazione = DestinationType.BACHECA;
+                break;
+            case "GRUPPO":
+                this.tipoDestinazione = DestinationType.GRUPPO;
+                break;
+            default:
+                this.tipoDestinazione = DestinationType.INVALID;
+                break;
+        }
     }
           
     public boolean equals(Object obj)
@@ -148,6 +186,20 @@ public class Post {
      */
     public void setIdDestinazione(int idDestinazione) {
         this.idDestinazione = idDestinazione;
+    }
+
+    /**
+     * @return the dataPost
+     */
+    public String getDataPost() {
+        return dataPost;
+    }
+
+    /**
+     * @param dataPost the dataPost to set
+     */
+    public void setDataPost(String dataPost) {
+        this.dataPost = dataPost;
     }
     
 }

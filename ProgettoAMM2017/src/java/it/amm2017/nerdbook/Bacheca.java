@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpSession;
 /**
  * @author Mario Taccori
  */
-
+@WebServlet( name = "Bacheca", urlPatterns = {"/bacheca.html"})
 public class Bacheca extends HttpServlet {
 
     /**
@@ -35,6 +36,12 @@ public class Bacheca extends HttpServlet {
         {
             if(session.getAttribute("loggedIn")!=null && session.getAttribute("loggedIn").equals(true))
             {
+                UtenteSecure tmp = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
+                request.setAttribute("user", tmp);
+                request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
+                request.setAttribute("users", UtenteFactory.getInstance().getAllUsers());
+                
+                
                 if(request.getParameter("action") == null)
                 {
                     this.loadView(request);
@@ -65,8 +72,7 @@ public class Bacheca extends HttpServlet {
     }
     
     public void loadView(HttpServletRequest request) 
-    {
-        
+    {     
         if(request.getParameter("ownerType").equals("user"))
         {
             UtenteSecure us;
@@ -74,7 +80,7 @@ public class Bacheca extends HttpServlet {
             if(request.getParameter("owner")!=null)
                 us = UtenteFactory.getInstance().getUtenteById(Integer.parseInt(request.getParameter("owner")));
             else 
-                us =(UtenteSecure)request.getSession().getAttribute("user");
+                us = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
 
             ArrayList<Post> listaPost = PostFactory.getInstance().getPostList(us);
 

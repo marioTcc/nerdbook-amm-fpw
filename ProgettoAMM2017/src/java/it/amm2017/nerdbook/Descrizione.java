@@ -3,14 +3,16 @@ package it.amm2017.nerdbook;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * @author Mario Taccori
  */
-
+@WebServlet( name = "Descrizione", urlPatterns = {"/descrizione.html"})
 public class Descrizione extends HttpServlet {
 
     /**
@@ -25,7 +27,19 @@ public class Descrizione extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException
     {
+        
+        HttpSession session = request.getSession(false);        
         response.setContentType("text/html;charset=UTF-8");
+        
+        if(session!=null && session.getAttribute("loggedIn")!=null && session.getAttribute("loggedIn").equals(true))
+        {
+            UtenteSecure tmp = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
+            request.setAttribute("user", tmp);
+            request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
+            request.setAttribute("users", UtenteFactory.getInstance().getAllUsers());
+        }
+        
+        
         request.getRequestDispatcher("M2/descrizione.jsp").forward(request, response);
     }
 

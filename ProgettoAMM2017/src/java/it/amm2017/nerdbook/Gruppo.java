@@ -18,8 +18,16 @@ public class Gruppo {
     {
         this.nome = "";
         this.id = -1;
-        this.iscritti = new ArrayList<UtenteSecure>(); //SERVE?
+        this.iscritti = new ArrayList<UtenteSecure>(); 
         this.groupIconUrl = "";
+    }
+    
+    public Gruppo(int id, String nome, String iconUrl)
+    {
+        this.id = id;
+        this.nome = nome;
+        this.groupIconUrl = iconUrl;
+        this.iscritti = new ArrayList<UtenteSecure>();
     }
            
     public boolean equals(Object obj)

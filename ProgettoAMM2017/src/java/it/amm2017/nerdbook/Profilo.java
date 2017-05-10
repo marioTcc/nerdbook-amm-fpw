@@ -12,11 +12,12 @@ import javax.servlet.http.HttpSession;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import javax.servlet.annotation.WebServlet;
 
 /**
  * @author Mario Taccori
  */
-
+@WebServlet( name = "Profilo", urlPatterns = {"/profilo.html"})
 public class Profilo extends HttpServlet {
 
     /**
@@ -33,8 +34,13 @@ public class Profilo extends HttpServlet {
         HttpSession session = request.getSession(false);
         response.setContentType("text/html;charset=UTF-8");
         
-        if(session!=null)
+        if(session!=null && session.getAttribute("loggedIn").equals(true))
         {            
+            UtenteSecure _old = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
+            request.setAttribute("user", _old);
+            request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
+            request.setAttribute("users", UtenteFactory.getInstance().getAllUsers());
+                
             if(request.getParameter("action")==null)
             {                
                 try{ loadData(request); }
@@ -42,8 +48,6 @@ public class Profilo extends HttpServlet {
             }
             else if(request.getParameter("action").equals("updateInfo"))
             {
-                // AGGIORNAMENTO FITTIZIO DEI DATI (SOLO IN SESSIONE PER ORA)
-                UtenteSecure _old = (UtenteSecure)session.getAttribute("user");
                 UtenteSecure _new = new UtenteSecure(_old.getId(), request.getParameter("userName"),
                                                     request.getParameter("userSurname"), _old.getEmail(),
                                                     request.getParameter("bDate"), request.getParameter("profilePicURL"),
@@ -57,6 +61,7 @@ public class Profilo extends HttpServlet {
                         request.setAttribute("campiModificati", "none");
                     else
                         request.setAttribute("campiModificati", campiModificati);
+                    
                     loadData(request);
                 }
                 catch(Exception ex){}         
@@ -64,7 +69,7 @@ public class Profilo extends HttpServlet {
             
             try
             {
-                if(UtenteFactory.checkCompletion((UtenteSecure)session.getAttribute("user")))
+                if(UtenteFactory.checkCompletion(UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"))))
                     request.setAttribute("isUserInfoComplete", true);
                 else 
                     request.setAttribute("isUserInfoComplete", false);
@@ -77,7 +82,7 @@ public class Profilo extends HttpServlet {
     
     public void loadData(HttpServletRequest request) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
     {
-        UtenteSecure utente = (UtenteSecure) request.getSession(false).getAttribute("user");
+        UtenteSecure utente = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
         Field [] classFields = utente.getClass().getDeclaredFields();
         Method tmpGetter;
         

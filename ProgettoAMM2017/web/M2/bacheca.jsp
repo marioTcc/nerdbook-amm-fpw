@@ -79,7 +79,7 @@
                                 <div id="riepilogoDiv">
                                     <p>Riepilogo dati inseriti:</p>
                                     <ul>
-                                        <li>Autore: "${sessionScope.user.nome} ${sessionScope.user.cognome}"</li>
+                                        <li>Autore: "${requestScope.user.nome} ${requestScope.user.cognome}"</li>
                                         <li>
                                             Proprietario della bacheca:
                                             <c:choose>
