@@ -63,6 +63,7 @@ CREATE TABLE posts (
     FOREIGN KEY (tipoPost) REFERENCES tipiPost(id),
 
     dataPost DATE,
+    oraPost TIME,
     attachedUrl VARCHAR(500),
     
     tipoDestinazione INTEGER,
@@ -150,45 +151,45 @@ VALUES ( 1, 2);
 
 
 
-INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost)
-VALUES ( default, 1, 'Ciao, miei schiavi. Datemi cibo! Adesso! Miaomiaomiaomiaomiao!', 1, null, 1, 1, null, '2012-03-15'); 
+INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost, oraPost)
+VALUES ( default, 1, 'Ciao, miei schiavi. Datemi cibo! Adesso! Miaomiaomiaomiaomiao!', 1, null, 1, 1, null, '2012-03-15', '13:46:02'); 
         
-INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost)
+INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost, oraPost)
 VALUES ( default, 1, 'Ti mando una foto, ciao', 2,
          'https://68.media.tumblr.com/51942e1f788f7209ee0f6db7cfc5e0fb/tumblr_n37ycpbMZf1rkxod7o1_500.jpg',
-        1, 2, null, '2012-03-16');
+        1, 2, null, '2012-03-16', '12:42:12');
 
-INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost)
+INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost, oraPost)
 VALUES ( default, 2, 'Siete invitati all evento in molgonfiera di giovedì, ci vediamo lì, ciao', 2,
          'http://68.media.tumblr.com/fe7cd8c3cd98e15f1812430959c36b56/tumblr_myftmaNObo1sh9bnuo1_500.jpg',
-        2, null, 1, '2012-03-17');
+        2, null, 1, '2012-03-17', '18:21:10');
 
-INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost)
+INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost, oraPost)
 VALUES ( default, 3, 'Và tutti che bella questa pic', 2,
          'http://68.media.tumblr.com/11e0fa516c5c382765ef28af19a341d3/tumblr_mynfdmKYPa1rq3dyyo1_1280.jpg',
-        2, null, 1, '2012-03-18');
+        2, null, 1, '2012-03-18', '11:02:00');
 
-INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost)
+INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost, oraPost)
 VALUES ( default, 2, 'Ti mando una foto, ciao', 2,
          'https://68.media.tumblr.com/51942e1f788f7209ee0f6db7cfc5e0fb/tumblr_n37ycpbMZf1rkxod7o1_500.jpg',
-        1, 1, null, '2012-03-10');
+        1, 1, null, '2012-03-10', '17:17:16');
 
-INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost)
+INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost, oraPost)
 VALUES ( default, 1, 'Guardati questo link, ciao', 3,
          'https://68.media.tumblr.com/51942e1f788f7209ee0f6db7cfc5e0fb/tumblr_n37ycpbMZf1rkxod7o1_500.jpg',
-        1, 2, null, '2012-05-14');      
+        1, 2, null, '2012-05-14', '17:18:19');      
 
-INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost)
+INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost, oraPost)
 VALUES ( default, 3, 'Forse anche a trenitalia interessa iscriversi a questo gruppo? Invitateli!', 2,
          'Assets/IMG/trenitalia_ritardo_post.jpg',
-        2, null, 2, '2012-02-14'); 
+        2, null, 2, '2012-02-14', '20:21:22'); 
 
-INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost)
+INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost, oraPost)
 VALUES ( default, 1, 'Hahaha dedicato al mio amico Gym', 2,
          'Assets/IMG/ritardo_post.jpg',
-        2, null, 2, '2013-03-15');                   
+        2, null, 2, '2013-03-15', '03:03:00');                   
         
-INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost)
+INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost, oraPost)
 VALUES ( default, 1, 'Iscrivetevi!', 3,
          'codechef.com',
-        2, null, 2, '2011-05-25');  
+        2, null, 2, '2011-05-25', '15:05:15');  

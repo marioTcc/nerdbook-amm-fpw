@@ -10,7 +10,7 @@
            |    |   data nascita    |   |     |      |    data post         |    |   |   Tipi destinazione  |
            |    |   urlfotoprofilo  |   |     +-------+   id utente dest    |    |   +----------------------+
            |    |   frasepresentaz  |   |       +-----+   id gruppo dest    |    +-----+   id               |
-           |    |   tipo utente   +---+ |       |    |                      |        |     nome tipo dest   |
+           |    |   tipo utente   +---+ |       |    |    ora post          |        |     nome tipo dest   |
            |    +-------------------+ | |       |    +----------------------+        |                      |
            |                          | |       |                                    +----------------------+
            |    +-------------------+ | |       |

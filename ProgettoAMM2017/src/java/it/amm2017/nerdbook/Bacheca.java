@@ -4,6 +4,8 @@ package it.amm2017.nerdbook;
 import java.util.ArrayList;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -75,8 +77,7 @@ public class Bacheca extends HttpServlet {
             request.getRequestDispatcher("M2/bacheca.jsp").forward(request, response);
         }
         else response.sendRedirect("login.html");
-    }
-    
+    }   
     public void loadView(HttpServletRequest request) 
     {     
         if(request.getParameter("ownerType").equals("user"))
@@ -125,7 +126,7 @@ public class Bacheca extends HttpServlet {
                 request.setAttribute("ownerType", "group");                
             }
         }     
-    }
+    }  
     
     public void loadNewPost(HttpServletRequest request)
     {
@@ -160,19 +161,56 @@ public class Bacheca extends HttpServlet {
         else tmpType = Post.PostType.TESTO;
              
         
-        Post previewPost = PostFactory.getInstance().getFakePost((UtenteSecure) request.getSession(false).getAttribute("user"),
+        Post previewPost = PostFactory.getInstance().getFakePost(UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user")),
                 request.getParameter("contenuto"), tmpType, request.getParameter("allegato"), tmpDestType);
        
         request.setAttribute("ownerType", request.getParameter("ownerType"));
-        request.setAttribute("previewPost", previewPost);              
-    }
+        request.setAttribute("previewPost", previewPost);
+    }   
     
     public void confirmNewPost(HttpServletRequest request)
     {  
-        this.loadView(request);
-        //CHIAMA DATAMIGRATOR PER SALVARE IL NUOVO POST NEL DB
-        request.setAttribute("ownerType", request.getParameter("ownerType"));
+        Post.DestinationType tmpDestType = Post.DestinationType.INVALID;
+        Post.PostType tmpType = Post.PostType.TESTO;
+        
+        
+        if(request.getParameter("ownerType").equals("user")) tmpDestType = Post.DestinationType.BACHECA;
+        else tmpDestType = Post.DestinationType.GRUPPO;
+        
+        
+        if(request.getParameter("postType")!=null)
+        {
+            switch(request.getParameter("postType"))
+            {
+                case "":
+                    tmpType = Post.PostType.TESTO;
+                    break;
+                
+                case "IMMAGINE":
+                    tmpType = Post.PostType.IMMAGINE;
+                    break;
+                    
+                case "LINK":
+                    tmpType = Post.PostType.LINK;
+                    break;
+            }
+        }
+        else tmpType = Post.PostType.TESTO;
+             
+        
+        Post newPost = PostFactory.getInstance().getFakePost(UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user")),
+                request.getParameter("contenuto"), tmpType, request.getParameter("allegato"), tmpDestType);
+
+        newPost.setIdDestinazione(Integer.parseInt(request.getParameter("owner")));
+        newPost.setId(-1);
+        newPost.setDataPost(LocalDate.now());
+        newPost.setOraPost(LocalTime.now());
+        
+        PostFactory.getInstance().registerNewPost(newPost);
         request.setAttribute("postState", "created");
+        this.loadView(request);
+        //request.setAttribute("ownerType", request.getParameter("ownerType"));
+
     }
     
     

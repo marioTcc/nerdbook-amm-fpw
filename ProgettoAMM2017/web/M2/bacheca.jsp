@@ -110,6 +110,9 @@
                                             <div>
                                                 <form id="confirmForm" action="bacheca.html" method="post">
                                                     <!-- AGGIUNGERE I FORM HIDDEN PER RIMANDARE I DATI DEL NUOVO POST PER SALVARLO IN DB -->
+                                                    <input type="hidden" name="contenuto" value="${previewPost.contenuto}">
+                                                    <input type="hidden" name="allegato" value="${previewPost.attachedUrl}">
+                                                    <input type="hidden" name="postType" value="${previewPost.tipoPost}">
                                                     <input type="hidden" name="owner" value="${owner.id}">
                                                     <input type="hidden" name="ownerType" value="${ownerType}">
                                                     <input type="hidden" name="action" value="confirmNewPost">

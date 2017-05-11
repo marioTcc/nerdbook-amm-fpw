@@ -1,11 +1,14 @@
 
 package it.amm2017.nerdbook;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 /**
  * @author Mario Taccori
  */
 
-public class Post 
+public class Post implements Comparable<Post>
 {
     public enum PostType { TESTO, IMMAGINE, LINK };
     public enum DestinationType { INVALID, BACHECA, GRUPPO; };
@@ -17,7 +20,8 @@ public class Post
     private String attachedUrl;   
     private DestinationType tipoDestinazione;
     private int idDestinazione;    
-    private String dataPost;
+    private LocalDate dataPost;
+    private LocalTime oraPost;
     
     public Post()
     {
@@ -27,9 +31,10 @@ public class Post
         this.attachedUrl = "";     
         this.tipoDestinazione = DestinationType.INVALID;
         this.idDestinazione = -1;
-        this.dataPost = "1999-01-01";
+        this.dataPost = LocalDate.of(1999, 01, 01);
+        this.oraPost = LocalTime.of(0, 0, 0);
     }   
-    public Post(int id, UtenteSecure autorePost, String contenuto, String tipoPost, String attachedUrl, String tipoDestinazione, int idDestinazione, String dataPost)
+    public Post(int id, UtenteSecure autorePost, String contenuto, String tipoPost, String attachedUrl, String tipoDestinazione, int idDestinazione, LocalDate dataPost, LocalTime oraPost)
     {
         this.id = id;
         this.autorePost = autorePost;
@@ -37,6 +42,7 @@ public class Post
         this.attachedUrl = attachedUrl;
         this.idDestinazione = idDestinazione;
         this.dataPost = dataPost;
+        this.oraPost = oraPost;
         
         switch(tipoPost)
         {
@@ -94,7 +100,14 @@ public class Post
     public void setTipoDestinazione(DestinationType tipoDestinazione) { this.tipoDestinazione = tipoDestinazione; }
     public int getIdDestinazione() { return idDestinazione; }
     public void setIdDestinazione(int idDestinazione) { this.idDestinazione = idDestinazione; }
-    public String getDataPost() { return dataPost; }
-    public void setDataPost(String dataPost) { this.dataPost = dataPost; }
+    public LocalDate getDataPost() { return dataPost; }
+    public void setDataPost(LocalDate dataPost) { this.dataPost = dataPost; }
+    public LocalTime getOraPost() { return oraPost; }
+    public void setOraPost(LocalTime oraPost) { this.oraPost = oraPost; }
     
+    public int compareTo(Post b)
+    {
+        if(this.dataPost.compareTo(b.getDataPost())!=0) return -this.dataPost.compareTo(b.getDataPost());
+        else return -this.oraPost.compareTo(b.getOraPost());
+    }
 }
