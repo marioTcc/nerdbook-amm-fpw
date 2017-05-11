@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import javax.servlet.annotation.WebServlet;
 
 /**
@@ -39,7 +40,7 @@ public class Profilo extends HttpServlet {
             UtenteSecure _old = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
             request.setAttribute("user", _old);
             request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
-            request.setAttribute("users", UtenteFactory.getInstance().getAllUsers());
+            request.setAttribute("users", UtenteFactory.getInstance().getAllUsers(new ArrayList<Integer>(Arrays.asList(_old.getId()))));
                 
             if(request.getParameter("action")==null)
             {                

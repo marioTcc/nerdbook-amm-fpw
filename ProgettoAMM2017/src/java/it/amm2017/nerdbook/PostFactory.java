@@ -19,29 +19,14 @@ public class PostFactory {
     private static PostFactory singleton;
     private String connectionString;
     
-    private PostFactory()
-    {
-        
-    }
-
+    private PostFactory(){}
     public static PostFactory getInstance()
     {
-        if (singleton == null)
-            singleton = new PostFactory();
-        
+        if (singleton == null) singleton = new PostFactory();       
         return singleton;
     }
-    
-    public void setConnectionString(String s)
-    {
-	this.connectionString = s;
-    }
-    
-    public String getConnectionString()
-    {
-	return this.connectionString;
-    }
-       
+    public void setConnectionString(String s) { this.connectionString = s; }
+    public String getConnectionString() { return this.connectionString; }       
     public Post getPostById(int id) //DA RIVEDERE
     {
         Post tmp = null;
@@ -73,8 +58,7 @@ public class PostFactory {
 
 
         return tmp;
-    }
-        
+    }        
     public Post getFakePost(UtenteSecure autore, String contenuto, Post.PostType tipoPost, String attachedUrl, Post.DestinationType tipoDestinazione)
     {
         Post tmp = new Post();
@@ -86,8 +70,7 @@ public class PostFactory {
         tmp.setTipoDestinazione(tipoDestinazione);       
         
         return tmp;
-    }
-        
+    }      
     public ArrayList<Post> getPostList(UtenteSecure utente)
     {
         ArrayList<Post> tmp = new ArrayList<>();
@@ -133,8 +116,7 @@ public class PostFactory {
 
 
         return tmp;
-    }
-    
+    }  
     public ArrayList<Post> getPostList(Gruppo gruppo)
     {
         ArrayList<Post> tmp = new ArrayList<>();

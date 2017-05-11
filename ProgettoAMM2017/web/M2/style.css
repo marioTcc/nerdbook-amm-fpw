@@ -367,6 +367,23 @@ div#nuovoPostDiv #previewPostDiv .allegatoPost
     margin: auto;
     border-right: solid 2px #7d84b2; 
     border-bottom: solid 2px #7d84b2; 
+    min-height: 440px;
+}
+
+#newFriendshipForm, #newSubscriptionForm
+{
+    padding-top: 10%;
+    display: block;
+    width: 50%;
+    margin: auto;
+}
+
+#newFriendshipForm button, #newSubscriptionForm button
+{
+    font-size: 16px;
+    font-weight: bold;
+    display: block;
+    margin: auto; 
 }
 
 #divBodyLogin

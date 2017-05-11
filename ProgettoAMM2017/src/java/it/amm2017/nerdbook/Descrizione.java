@@ -2,6 +2,8 @@
 package it.amm2017.nerdbook;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -36,7 +38,7 @@ public class Descrizione extends HttpServlet {
             UtenteSecure tmp = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
             request.setAttribute("user", tmp);
             request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
-            request.setAttribute("users", UtenteFactory.getInstance().getAllUsers());
+            request.setAttribute("users", UtenteFactory.getInstance().getAllUsers(new ArrayList<Integer>(Arrays.asList(tmp.getId()))));
         }
         
         

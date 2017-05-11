@@ -99,7 +99,6 @@ public class Login extends HttpServlet {
     {
         request.getSession(false).setAttribute("user", tmp.getId());
 
-        
         if(UtenteFactory.checkCompletion(tmp))   
             response.sendRedirect("bacheca.html?ownerType=user");
         else

@@ -19,126 +19,151 @@
         <jsp:include page="sideBar.jsp"/>
         
         <div id="divBody">
-            
             <c:choose>
-                <c:when test="${sessionScope.loggedIn==true}">
-                    <c:if test="${ownerType!='group' && owner.frasePresentazione!=null}">
-                        <div id="presentazione">
-                            <p>${owner.frasePresentazione}</p>
-                        </div>
-                    </c:if>
-                    
-                    <c:if test="${postState!=null && postState=='created'}">
-                        <div id="notificaNuovoPost">
-                            <p>Hai scritto sulla bacheca di ${owner.nome} <c:if test="${ownerType!='group'}">${owner.cognome}!</c:if></p>
-                        </div>                            
-                    </c:if>
-                   
+                <c:when test="${sessionScope.loggedIn==true}">             
                     <c:choose>
-                        <c:when test="${confirmRequired==null || confirmRequired==false}">
-                            <div id="nuovoPostDiv">
-                                <form id="formNuovoPost" action="bacheca.html" method="post">
-                                    <div id="inputsDiv"> 
-                                        <div>
-                                            <label for="contenuto"></label>
-                                            <input type="text" name="contenuto" id="contenuto" value="Testo nuovo post">
-                                        </div>
-                                        <div>
-                                            <label for="allegato"></label>
-                                            <input type="url" name="allegato" id="allegato" value="URL allegato (opzionale, cancella se non necessario)">
-                                        </div>
-                                    </div>
+                        <c:when test="${(isFriend != null && isFriend == true) || (isSubscribed != null && isSubscribed == true) }">
+                            <c:if test="${ownerType!='group' && owner.frasePresentazione!=null}">
+                                <div id="presentazione">
+                                    <p>${owner.frasePresentazione}</p>
+                                </div>
+                            </c:if>
 
-                                    <div id="radiosDiv">
-                                        <div class="filler"></div>
-                                        <div>
-                                            <input type="radio" name="postType" id="postTypeTextRadio" value="testo" checked="checked">
-                                            <label for="postTypeTextRadio">Testo</label>
-                                            <input type="radio" name="postType" id="postTypeImmagineRadio" value="immagine">
-                                            <label for="postTypeImmagineRadio">Immagine</label>
-                                            <input type="radio" name="postType" id="postTypeLinkRadio" value="link">
-                                            <label for="postTypeLinkRadio">Link</label>
+                            <c:if test="${postState!=null && postState=='created'}">
+                                <div id="notificaNuovoPost">
+                                    <p>Hai scritto sulla bacheca di ${owner.nome} <c:if test="${ownerType!='group'}">${owner.cognome}!</c:if></p>
+                                </div>                            
+                            </c:if>
+
+                            <c:choose>
+                                <c:when test="${confirmRequired==null || confirmRequired==false}">
+                                    <div id="nuovoPostDiv">
+                                        <form id="formNuovoPost" action="bacheca.html" method="post">
+                                            <div id="inputsDiv"> 
+                                                <div>
+                                                    <label for="contenuto"></label>
+                                                    <input type="text" name="contenuto" id="contenuto" value="Testo nuovo post">
+                                                </div>
+                                                <div>
+                                                    <label for="allegato"></label>
+                                                    <input type="url" name="allegato" id="allegato" value="URL allegato (opzionale, cancella se non necessario)">
+                                                </div>
+                                            </div>
+
+                                            <div id="radiosDiv">
+                                                <div class="filler"></div>
+                                                <div>
+                                                    <input type="radio" name="postType" id="postTypeTextRadio" value="testo" checked="checked">
+                                                    <label for="postTypeTextRadio">Testo</label>
+                                                    <input type="radio" name="postType" id="postTypeImmagineRadio" value="immagine">
+                                                    <label for="postTypeImmagineRadio">Immagine</label>
+                                                    <input type="radio" name="postType" id="postTypeLinkRadio" value="link">
+                                                    <label for="postTypeLinkRadio">Link</label>
+                                                </div>
+                                            </div>
+
+                                            <input type="hidden" name="owner" value="${owner.id}">
+                                            <input type="hidden" name="ownerType" value="${ownerType}">
+                                            <input type="hidden" name="action" value="newPost">
+                                            <input type="hidden" name="confirmRequired" value="true">
+
+                                            <div id="buttonDiv">
+                                                <div class="filler"></div>
+                                                <button type="submit" form="formNuovoPost">Crea post</button>
+                                            </div>
+                                        </form> 
+                                    </div>
+                                </c:when>
+
+                                <c:when test="${confirmRequired!=null && confirmRequired==true}">
+                                    <div id="nuovoPostDiv">
+                                        <div id="riepilogoDiv">
+                                            <p>Riepilogo dati inseriti:</p>
+                                            <ul>
+                                                <li>Autore: "${requestScope.user.nome} ${requestScope.user.cognome}"</li>
+                                                <li>
+                                                    Proprietario della bacheca:
+                                                    <c:choose>
+                                                        <c:when test="${previewPost.tipoDestinazione == 'BACHECA'}">
+                                                            "${owner.nome} ${owner.cognome}"
+                                                        </c:when>
+
+                                                        <c:when test="${previewPost.tipoDestinazione == 'GRUPPO'}">
+                                                            Gruppo "${owner.nome}"
+                                                        </c:when>
+
+                                                    </c:choose>                                        
+                                                </li>
+                                                <li>Testo: "${previewPost.contenuto}"</li>
+                                                <li>URL: "${previewPost.attachedUrl}"</li>
+                                                <li>Tipo: "${previewPost.tipoPost}"</li>                    
+                                            </ul>
                                         </div>
-                                    </div>
 
-                                    <input type="hidden" name="owner" value="${owner.id}">
-                                    <input type="hidden" name="ownerType" value="${ownerType}">
-                                    <input type="hidden" name="action" value="newPost">
-                                    <input type="hidden" name="confirmRequired" value="true">
+                                        <div id="previewPostDiv">    
+                                            <p>Preview:</p>
+                                            <c:set var="post" value="${previewPost}" scope="request" />
+                                            <jsp:include page="post.jsp" />     
+                                        </div>
 
-                                    <div id="buttonDiv">
-                                        <div class="filler"></div>
-                                        <button type="submit" form="formNuovoPost">Crea post</button>
-                                    </div>
-                                </form> 
-                            </div>
+                                        <div id="choiceDiv">
+                                            <div>
+                                                <form id="confirmForm" action="bacheca.html" method="post">
+                                                    <!-- AGGIUNGERE I FORM HIDDEN PER RIMANDARE I DATI DEL NUOVO POST PER SALVARLO IN DB -->
+                                                    <input type="hidden" name="owner" value="${owner.id}">
+                                                    <input type="hidden" name="ownerType" value="${ownerType}">
+                                                    <input type="hidden" name="action" value="confirmNewPost">
+                                                    <div>
+                                                        <button type="submit" form="confirmForm">Conferma</button>
+                                                    </div>
+                                                </form>
+                                                <form id="cancelForm" action="bacheca.html" method="post"> 
+                                                    <input type="hidden" name="owner" value="${owner.id}">
+                                                    <input type="hidden" name="ownerType" value="${ownerType}">
+                                                    <input type="hidden" name="action" value="cancelNewPost">
+                                                    <div>
+                                                        <button type="submit" form="cancelForm">Annulla</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>        
+                                </c:when>                      
+                            </c:choose>  
+
+                            <div id="posts"> <!-- Sezione dei post -->
+                                <c:forEach var="postTmp" items="${listaPost}">
+                                    <c:set var="post" value="${postTmp}" scope="request" />
+                                    <jsp:include page="post.jsp" />                      
+                                </c:forEach>
+                            </div> <!-- Chiusura sezione dei post -->
+
                         </c:when>
-
-                        <c:when test="${confirmRequired!=null && confirmRequired==true}">
-                            <div id="nuovoPostDiv">
-                                <div id="riepilogoDiv">
-                                    <p>Riepilogo dati inseriti:</p>
-                                    <ul>
-                                        <li>Autore: "${requestScope.user.nome} ${requestScope.user.cognome}"</li>
-                                        <li>
-                                            Proprietario della bacheca:
-                                            <c:choose>
-                                                <c:when test="${previewPost.tipoDestinazione == 'BACHECA'}">
-                                                    "${owner.nome} ${owner.cognome}"
-                                                </c:when>
-                                                    
-                                                <c:when test="${previewPost.tipoDestinazione == 'GRUPPO'}">
-                                                    Gruppo "${owner.nome}"
-                                                </c:when>
-                                                    
-                                            </c:choose>                                        
-                                        </li>
-                                        <li>Testo: "${previewPost.contenuto}"</li>
-                                        <li>URL: "${previewPost.attachedUrl}"</li>
-                                        <li>Tipo: "${previewPost.tipoPost}"</li>                    
-                                    </ul>
-                                </div>
-                                    
-                                <div id="previewPostDiv">    
-                                    <p>Preview:</p>
-                                    <c:set var="post" value="${previewPost}" scope="request" />
-                                    <jsp:include page="post.jsp" />     
-                                </div>
-
-                                <div id="choiceDiv">
-                                    <div>
-                                        <form id="confirmForm" action="bacheca.html" method="post">
-                                            <!-- AGGIUNGERE I FORM HIDDEN PER RIMANDARE I DATI DELLA NUOVO POST PER SALVARLO IN DB -->
-                                            <input type="hidden" name="owner" value="${owner.id}">
-                                            <input type="hidden" name="ownerType" value="${ownerType}">
-                                            <input type="hidden" name="action" value="confirmNewPost">
-                                            <div>
-                                                <button type="submit" form="confirmForm">Conferma</button>
-                                            </div>
-                                        </form>
-                                        <form id="cancelForm" action="bacheca.html" method="post"> 
-                                            <input type="hidden" name="owner" value="${owner.id}">
-                                            <input type="hidden" name="ownerType" value="${ownerType}">
-                                            <input type="hidden" name="action" value="cancelNewPost">
-                                            <div>
-                                                <button type="submit" form="cancelForm">Annulla</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>        
-                        </c:when>                      
-                    </c:choose>  
-
-                    <div id="posts"> <!-- Sezione dei post -->
-                        <c:forEach var="postTmp" items="${listaPost}">
-                            <c:set var="post" value="${postTmp}" scope="request" />
-                            <jsp:include page="post.jsp" />                      
-                        </c:forEach>
-                    </div> <!-- Chiusura sezione dei post -->
-                    
+                            
+                        <c:otherwise>
+                            <c:choose>
+                                <c:when test="${isSubscribed!=null}">
+                                    <form id="newSubscriptionForm" action="bacheca.html" method="POST">
+                                        <input type="hidden" name="action" value="registerSubscription">
+                                        <input type="hidden" name="owner" value="${owner.id}">
+                                        <input type="hidden" name="ownerType" value="${ownerType}">
+                                        <button type="submit" form="newSubscriptionForm">Iscriviti al gruppo ${owner.nome}</button>
+                                    </form>
+                                </c:when>
+                                <c:when test="${isFriend!=null}">
+                                    <form id="newFriendshipForm" action="bacheca.html" method="POST">
+                                        <input type="hidden" name="action" value="registerFriendship">
+                                        <input type="hidden" name="owner" value="${owner.id}">
+                                        <input type="hidden" name="ownerType" value="${ownerType}">
+                                        <button type="submit" form="newFriendshipForm">Richiedi amicizia a ${owner.nome} ${owner.cognome}</button>
+                                    </form>
+                                </c:when>
+                            </c:choose>
+                        </c:otherwise>
+                        
+                        </c:choose>
                 </c:when>
-                    
+                                       
                 <c:otherwise>
                     <c:set var="notificationType" value="accessDenied" scope="request" />
                     <c:set var="notificationValue" value="accessDenied" scope="request" />

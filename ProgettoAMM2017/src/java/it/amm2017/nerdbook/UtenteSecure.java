@@ -27,8 +27,7 @@ public class UtenteSecure
         this.dataNascita="";
         this.urlFotoProfilo="";
         this.frasePresentazione="";
-    }   
-    
+    }     
     public UtenteSecure(Utente utente)
     {
         this.id = utente.getId();
@@ -38,8 +37,7 @@ public class UtenteSecure
         this.dataNascita = utente.getDataNascita();
         this.urlFotoProfilo = utente.getUrlFotoProfilo();
         this.frasePresentazione = utente.getFrasePresentazione();                
-    }
-    
+    }   
     public UtenteSecure(int id, String nome, String cognome, String email, String dataNascita, String urlFotoProfilo, String frasePresentazione)
     {
         this.id = id;
@@ -49,8 +47,7 @@ public class UtenteSecure
         this.dataNascita = dataNascita;
         this.urlFotoProfilo = urlFotoProfilo;
         this.frasePresentazione = frasePresentazione;
-    }
-    
+    }  
     public boolean equals(Object obj)
     {
         if(obj==null)
@@ -67,102 +64,18 @@ public class UtenteSecure
 	return false;
     }
 
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    /**
-     * @return the nome
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @param nome the nome to set
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * @return the cognome
-     */
-    public String getCognome() {
-        return cognome;
-    }
-
-    /**
-     * @param cognome the cognome to set
-     */
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
-
-    /**
-     * @return the email
-     */
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * @param email the email to set
-     */
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @return the dataNascita
-     */
-    public String getDataNascita() {
-        return dataNascita;
-    }
-
-    /**
-     * @param dataNascita the dataNascita to set
-     */
-    public void setDataNascita(String dataNascita) {
-        this.dataNascita = dataNascita;
-    }
-
-    /**
-     * @return the urlFotoProfilo
-     */
-    public String getUrlFotoProfilo() {
-        return urlFotoProfilo;
-    }
-
-    /**
-     * @param urlFotoProfilo the urlFotoProfilo to set
-     */
-    public void setUrlFotoProfilo(String urlFotoProfilo) {
-        this.urlFotoProfilo = urlFotoProfilo;
-    }
-
-    /**
-     * @return the frasePresentazione
-     */
-    public String getFrasePresentazione() {
-        return frasePresentazione;
-    }
-
-    /**
-     * @param frasePresentazione the frasePresentazione to set
-     */
-    public void setFrasePresentazione(String frasePresentazione) {
-        this.frasePresentazione = frasePresentazione;
-    }
-    
+    public int getId() { return id; }
+    public void setId(int id) { this.id = id; }
+    public String getNome() { return nome; }
+    public void setNome(String nome) { this.nome = nome; }
+    public String getCognome() { return cognome; }
+    public void setCognome(String cognome) { this.cognome = cognome; }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getDataNascita() { return dataNascita; }
+    public void setDataNascita(String dataNascita) { this.dataNascita = dataNascita; }
+    public String getUrlFotoProfilo() { return urlFotoProfilo; }
+    public void setUrlFotoProfilo(String urlFotoProfilo) { this.urlFotoProfilo = urlFotoProfilo; }
+    public String getFrasePresentazione() { return frasePresentazione; }
+    public void setFrasePresentazione(String frasePresentazione) { this.frasePresentazione = frasePresentazione; } 
 }

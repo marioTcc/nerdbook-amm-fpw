@@ -4,6 +4,7 @@ package it.amm2017.nerdbook;
 import java.util.ArrayList;
 
 import java.io.IOException;
+import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,13 +40,10 @@ public class Bacheca extends HttpServlet {
                 UtenteSecure tmp = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
                 request.setAttribute("user", tmp);
                 request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
-                request.setAttribute("users", UtenteFactory.getInstance().getAllUsers());
+                request.setAttribute("users", UtenteFactory.getInstance().getAllUsers(new ArrayList<Integer>(Arrays.asList(tmp.getId()))));
                 
                 
-                if(request.getParameter("action") == null)
-                {
-                    this.loadView(request);
-                }
+                if(request.getParameter("action") == null) { this.loadView(request); }
                 else
                 {
                     switch (request.getParameter("action")) 
@@ -60,6 +58,14 @@ public class Bacheca extends HttpServlet {
                             this.confirmNewPost(request);
                             break;
                         case "cancelNewPost":
+                            this.loadView(request);
+                            break;
+                        case "registerSubscription":
+                            GruppoFactory.getInstance().registerSubscription(tmp.getId(), Integer.parseInt(request.getParameter("owner")));
+                            this.loadView(request);
+                            break;
+                        case "registerFriendship":
+                            UtenteFactory.getInstance().registerFriendship(tmp.getId(), Integer.parseInt(request.getParameter("owner")));
                             this.loadView(request);
                             break;
                     }
@@ -77,28 +83,47 @@ public class Bacheca extends HttpServlet {
         {
             UtenteSecure us;
 
-            if(request.getParameter("owner")!=null)
-                us = UtenteFactory.getInstance().getUtenteById(Integer.parseInt(request.getParameter("owner")));
-            else 
-                us = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
+            if(request.getParameter("owner")!=null) us = UtenteFactory.getInstance().getUtenteById(Integer.parseInt(request.getParameter("owner")));
+            else  us = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
 
-            ArrayList<Post> listaPost = PostFactory.getInstance().getPostList(us);
+            if( us.getId() == (int)request.getSession(false).getAttribute("user")
+                || UtenteFactory.getInstance().checkFriendship((int)request.getSession(false).getAttribute("user"), us.getId()))
+            { 
+                ArrayList<Post> listaPost = PostFactory.getInstance().getPostList(us);
 
-            request.setAttribute("owner", us);
-            request.setAttribute("ownerType", "user");
-            request.setAttribute("listaPost", listaPost); 
+                request.setAttribute("owner", us);
+                request.setAttribute("ownerType", "user");
+                request.setAttribute("isFriend", true);
+                request.setAttribute("listaPost", listaPost); 
+            }
+            else
+            {
+                request.setAttribute("owner", us);
+                request.setAttribute("ownerType", "user");
+                request.setAttribute("isFriend", false);               
+            }               
         }
         else
         {
             Gruppo gruppo;
         
             gruppo = GruppoFactory.getInstance().getGruppoById(Integer.parseInt(request.getParameter("owner")));
+            
+            if(GruppoFactory.getInstance().checkSubscription((int)request.getSession(false).getAttribute("user"), gruppo.getId()))
+            {             
+                ArrayList<Post> listaPost = PostFactory.getInstance().getPostList(gruppo);
 
-            ArrayList<Post> listaPost = PostFactory.getInstance().getPostList(gruppo);
-
-            request.setAttribute("owner", gruppo);
-            request.setAttribute("ownerType", "group");
-            request.setAttribute("listaPost", listaPost);            
+                request.setAttribute("owner", gruppo);
+                request.setAttribute("ownerType", "group");
+                request.setAttribute("isSubscribed", true);
+                request.setAttribute("listaPost", listaPost);     
+            }
+            else
+            {
+                request.setAttribute("isSubscribed", false);               
+                request.setAttribute("owner", gruppo);
+                request.setAttribute("ownerType", "group");                
+            }
         }     
     }
     
@@ -111,10 +136,8 @@ public class Bacheca extends HttpServlet {
         Post.PostType tmpType = Post.PostType.TESTO;
         
         
-        if(request.getParameter("ownerType").equals("user"))          
-            tmpDestType = Post.DestinationType.BACHECA;
-        else
-            tmpDestType = Post.DestinationType.GRUPPO;
+        if(request.getParameter("ownerType").equals("user")) tmpDestType = Post.DestinationType.BACHECA;
+        else tmpDestType = Post.DestinationType.GRUPPO;
         
         
         if(request.getParameter("postType")!=null)

@@ -14,48 +14,20 @@ import java.util.logging.Logger;
  * @author Mario Taccori
  */
 
-public class GruppoFactory {
+public class GruppoFactory
+{
     
     private static GruppoFactory singleton;
     private String connectionString;
     
-    private GruppoFactory()
-    {
-        
-    }
-
+    private GruppoFactory(){}
     public static GruppoFactory getInstance()
     {
-        if (singleton == null)
-            singleton = new GruppoFactory();
-        
+        if (singleton == null) singleton = new GruppoFactory();     
         return singleton;
-    }
-    
-    public void setConnectionString(String s)
-    {
-	this.connectionString = s;
-    }
-    
-    public String getConnectionString()
-    {
-	return this.connectionString;
-    }
-    
-    public ArrayList<Gruppo> getSubscribedGroups(UtenteSecure utente)
-    {/*
-        ArrayList<Gruppo> subscribedGroups=new ArrayList<>();
-        
-        for(Gruppo tmp : this.listaGruppi)
-        {
-            if(tmp.getIscritti().contains(utente))
-                subscribedGroups.add(tmp);
-        }
-        
-        return subscribedGroups;*/
-        return null;
-    }
-       
+    }   
+    public void setConnectionString(String s) { this.connectionString = s; } 
+    public String getConnectionString() { return this.connectionString; }
     public Gruppo getGruppoById(int id)
     {
         Gruppo tmp = null;
@@ -78,14 +50,10 @@ public class GruppoFactory {
             conn.close();
             
         }
-        catch (SQLException ex)
-        {
-            Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }
         
         return tmp;
-    }
-    
+    }    
     public ArrayList<Gruppo> getAllGroups()
     {
         
@@ -112,11 +80,67 @@ public class GruppoFactory {
             conn.close();
             
         }
-        catch (SQLException ex)
-        {
-            Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }
             
         return tmp;       
     }    
+    public boolean checkSubscription(int idUtente, int idGruppo)
+    {
+        String query = "SELECT * FROM iscrizioniGruppi"+
+                " WHERE idUtente="+idUtente+" AND idGruppo="+idGruppo;
+        
+        ResultSet set = null;
+        int resultCount = 0;
+        
+        try
+        {
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
+            Statement stmt = conn.createStatement();
+            
+            set = stmt.executeQuery(query);
+            
+            while(set.next())
+            {
+                resultCount++;                
+            }
+            
+            stmt.close();
+            conn.close();
+            
+        }
+        catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }
+        
+        if(resultCount>0)
+            return true;
+        else return false;
+        
+    }
+    public void registerSubscription(int userId, int groupId)
+    {
+        String query = "INSERT INTO iscrizioniGruppi (idUtente, idGruppo) VALUES ("+userId+", "+groupId+")";
+        
+        try
+        {
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
+            Statement stmt = conn.createStatement();
+            
+            stmt.executeUpdate(query);        
+            
+            stmt.close();
+            conn.close();
+            
+        }
+        catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }       
+    }
+    
+ 
+    
+    // SERVONO?
+    public ArrayList<Gruppo> getSubscribedGroups(UtenteSecure utente)
+    {
+        // SERVE?
+        return null;
+    }
+       
+    
 }
