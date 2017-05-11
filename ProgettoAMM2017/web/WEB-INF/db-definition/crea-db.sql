@@ -22,7 +22,7 @@ CREATE TABLE utenti (
     cognome VARCHAR(32),
     email VARCHAR(32) UNIQUE,
     dataNascita DATE,
-    urlFotoProfilo VARCHAR(500),
+    urlFotoProfilo VARCHAR(500) NOT NULL,
     frasePresentazione VARCHAR(500),
 
     tipoUtente INTEGER NOT NULL,
@@ -116,7 +116,7 @@ VALUES ( default, 'Djanni', 'Gatto', 'djannigatto@gmail.com', '2010-10-10',
 
 INSERT INTO utenti ( id, nome, cognome, email, dataNascita, urlFotoProfilo, frasePresentazione, tipoUtente, username, password )
 VALUES ( default, 'Heavy', 'Breathing', 'cholansia@gmail.com', '2010-10-11',
-        null, 'ciao, sono Heavy Breathing',
+        '', 'ciao, sono Heavy Breathing',
         2, 'HeavyBreathing', '123' );
 
 INSERT INTO utenti ( id, nome, cognome, email, dataNascita, urlFotoProfilo, frasePresentazione, tipoUtente, username, password )
@@ -126,12 +126,12 @@ VALUES ( default, 'Gym', 'WorkOut', 'doIt@gmail.com', '2010-10-12',
 
 INSERT INTO utenti ( id, nome, cognome, email, dataNascita, urlFotoProfilo, frasePresentazione, tipoUtente, username, password )
 VALUES ( default, 'Chao', 'Povery', 'r1tchb1tch@gmail.com', '2010-10-13',
-        null, 'ciao, sono Chao Povery',
+        '', 'ciao, sono Chao Povery',
         2, 'ChaoPovery', '123' );
 
 INSERT INTO utenti ( id, nome, cognome, email, dataNascita, urlFotoProfilo, frasePresentazione, tipoUtente, username, password )
 VALUES ( default, 'Incompleto', 'Orrù', 'incompleto@gmail.com', '2010-10-14',
-        null, 'ciao, sono incompleto; completami!',
+        '', 'ciao, sono incompleto; completami!',
         2, 'incompleto', 'sonoincompleto' );
 
 

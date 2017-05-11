@@ -53,7 +53,7 @@
 
                                 <div> <!-- Data di nascita -->
                                     <label for="bDate">Data di nascita:</label>
-                                    <input type="date" name="bDate" id="bDate" <c:if test="${dataNascita != null}">value="${dataNascita}"</c:if>>
+                                    <input type="date" name="bDate" id="bDate" <c:if test="${dataNascitaString != null}">value="${dataNascitaString}"</c:if>>
                                 </div>
 
                                 <div> <!-- Password -->

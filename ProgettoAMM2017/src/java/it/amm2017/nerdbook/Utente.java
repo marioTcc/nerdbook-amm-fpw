@@ -1,6 +1,9 @@
 
 package it.amm2017.nerdbook;
 
+import java.time.LocalDate;
+import java.util.Date;
+
 /**
  * @author Mario Taccori
  */
@@ -20,7 +23,7 @@ public class Utente extends UtenteSecure
         this.password = ""; 
         this.tipoUtente = TipoUtente.INVALID;
     }    
-    public Utente(int id, String nome, String cognome, String email, String dataNascita, String urlFotoProfilo, String frasePresentazione, String username, String password, String tipoUtente)
+    public Utente(int id, String nome, String cognome, String email, LocalDate dataNascita, String urlFotoProfilo, String frasePresentazione, String username, String password, String tipoUtente)
     {
         super(id, nome, cognome, email, dataNascita, urlFotoProfilo, frasePresentazione);
         this.username = username;
@@ -44,4 +47,6 @@ public class Utente extends UtenteSecure
     public void setUsername(String username) { this.username = username; }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
+    public TipoUtente getTipoUtente() { return tipoUtente; }
+    public void setTipoUtente(TipoUtente tipoUtente) { this.tipoUtente = tipoUtente; }
 }

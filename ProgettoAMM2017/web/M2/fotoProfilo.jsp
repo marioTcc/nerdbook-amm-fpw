@@ -12,7 +12,7 @@
         <img alt="foto profilo" src=
                         <c:choose>
                             <c:when test="${requestScope.user.urlFotoProfilo != null && requestScope.user.urlFotoProfilo != ''}">
-                               "${requestScope.user.urlFotoProfilo}"
+                                "${requestScope.user.urlFotoProfilo}" width="150px" height="150px"
                             </c:when>
 
                             <c:otherwise>
@@ -26,7 +26,7 @@
         <img alt="foto profilo" src=
                 <c:choose>
                     <c:when test="${post.autorePost.urlFotoProfilo !=null && post.autorePost.urlFotoProfilo != ''}">
-                       "${post.autorePost.urlFotoProfilo}"
+                       "${post.autorePost.urlFotoProfilo}" class="defaultPic"
                     </c:when>
 
                     <c:otherwise>

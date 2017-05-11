@@ -586,8 +586,7 @@ div#notificaNuovoPost
 }
 
 #posts div.profilePic img.defaultPic
-{
-    
+{  
     height: 80px; 
     width: 80px;
     margin-right: 20px;   

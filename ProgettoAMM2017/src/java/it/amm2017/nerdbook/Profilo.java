@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import javax.servlet.annotation.WebServlet;
 
@@ -36,51 +38,56 @@ public class Profilo extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         
         if(session!=null && session.getAttribute("loggedIn").equals(true))
-        {            
-            UtenteSecure _old = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
-            request.setAttribute("user", _old);
-            request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
-            request.setAttribute("users", UtenteFactory.getInstance().getAllUsers(new ArrayList<Integer>(Arrays.asList(_old.getId()))));
-                
+        {                                
             if(request.getParameter("action")==null)
             {                
-                try{ loadData(request); }
-                catch(Exception ex){}
+                try{ loadData(request); } catch(Exception ex){}
             }
             else if(request.getParameter("action").equals("updateInfo"))
             {
-                UtenteSecure _new = new UtenteSecure(_old.getId(), request.getParameter("userName"),
-                                                    request.getParameter("userSurname"), _old.getEmail(),
-                                                    request.getParameter("bDate"), request.getParameter("profilePicURL"),
-                                                    request.getParameter("presentazione"));
-                
                 try
                 {
-                    ArrayList<String> campiModificati = updateUserInfo(request, _old, _new);
+                    Utente _oldComplete = UtenteFactory.getInstance().getUtenteCompleteById((int)session.getAttribute("user"));
                     
-                    if(campiModificati.isEmpty())
-                        request.setAttribute("campiModificati", "none");
-                    else
-                        request.setAttribute("campiModificati", campiModificati);
+                    Utente _new = new Utente(_oldComplete.getId(), request.getParameter("userName"),
+                                                        request.getParameter("userSurname"), _oldComplete.getEmail(),
+                                                        LocalDate.parse(request.getParameter("bDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                                                        request.getParameter("profilePicURL"),
+                                                        request.getParameter("presentazione"), _oldComplete.getUsername(),
+                                                        request.getParameter("password"), _oldComplete.getTipoUtente().toString());
+        
+                    
+                    ArrayList<String> campiModificati = updateUserInfo(request, _oldComplete, _new);
+                    
+                    if(campiModificati.isEmpty()) request.setAttribute("campiModificati", "none");
+                    else request.setAttribute("campiModificati", campiModificati);
                     
                     loadData(request);
                 }
-                catch(Exception ex){}         
+                catch(Exception ex){}
+                
             }
             
             try
             {
                 if(UtenteFactory.checkCompletion(UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"))))
                     request.setAttribute("isUserInfoComplete", true);
-                else 
-                    request.setAttribute("isUserInfoComplete", false);
-            }catch(Exception ex){}
+                else request.setAttribute("isUserInfoComplete", false);
+                
+            } catch(Exception ex){}
+            
+            UtenteSecure tmp = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
+            request.setAttribute("user", tmp);
+            request.setAttribute("dataNascitaString", tmp.getDataNascita().getYear()+"-"+tmp.getDataNascita().getMonthValue()+"-"+tmp.getDataNascita().getDayOfMonth());
+            request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
+            request.setAttribute("users", UtenteFactory.getInstance().getAllUsers(new ArrayList<Integer>(Arrays.asList(tmp.getId()))));
+            
+            
             
             request.getRequestDispatcher("M2/profilo.jsp").forward(request, response);
         }
         else response.sendRedirect("login.html");
-    }
-    
+    }   
     public void loadData(HttpServletRequest request) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
     {
         UtenteSecure utente = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
@@ -95,23 +102,26 @@ public class Profilo extends HttpServlet {
                 request.setAttribute(tmp.getName(), tmpGetter.invoke(utente).toString());
             }        
         }   
-    }
-    
-    public ArrayList<String> updateUserInfo(HttpServletRequest request, UtenteSecure _old, UtenteSecure _new) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException
+    }  
+    public ArrayList<String> updateUserInfo(HttpServletRequest request, Utente _old, Utente _new) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException
     {
         ArrayList<String> campiModificati = new ArrayList<>();
-        Field [] classFields = _old.getClass().getDeclaredFields();
-        Method [] classMethods = _old.getClass().getDeclaredMethods();
-        Method tmpGetter, tmpSetter;
         
+        ArrayList<Field> classFields = new ArrayList<>(Arrays.asList(_old.getClass().getDeclaredFields()));
+        for(Field tmp : _old.getClass().getSuperclass().getDeclaredFields())
+            classFields.add(tmp);
         
-        // PER ORA NON CONTROLLA LA PASSWORD
+        Method tmpGetter = null, tmpSetter = null;
+              
         for(Field tmp : classFields)
         {
             if(tmp.getType() == String.class)
-            {    
-                tmpGetter = UtenteSecure.class.getMethod("get"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1));
-                tmpSetter = UtenteSecure.class.getMethod("set"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1), String.class);
+            {   
+                try { tmpGetter = _old.getClass().getDeclaredMethod("get"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1)); }
+                catch(Exception ex) { tmpGetter = _old.getClass().getSuperclass().getDeclaredMethod("get"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1)); }
+                
+                try { tmpSetter = _old.getClass().getMethod("set"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1), String.class); }
+                catch(Exception ex) { tmpSetter = _old.getClass().getSuperclass().getMethod("set"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1), String.class); }
                 
                 if(tmpGetter.invoke(_new).toString()!= null
                    && !tmpGetter.invoke(_new).toString().equals("")
@@ -121,10 +131,27 @@ public class Profilo extends HttpServlet {
                     tmpSetter.invoke(_old, tmpGetter.invoke(_new));
                 }
             }
+            else if(tmp.getType() == LocalDate.class)
+            {
+                try { tmpGetter = _old.getClass().getDeclaredMethod("get"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1)); }
+                catch(Exception ex) { tmpGetter = _old.getClass().getSuperclass().getDeclaredMethod("get"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1)); }
+                
+                try { tmpSetter = _old.getClass().getMethod("set"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1), LocalDate.class); }
+                catch(Exception ex) { tmpSetter = _old.getClass().getSuperclass().getMethod("set"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1), LocalDate.class); }
+                
+                if(tmpGetter.invoke(_new) != null
+                   && !tmpGetter.invoke(_new).toString().equals("")
+                   && !tmpGetter.invoke(_new).equals(tmpGetter.invoke(_old)))
+                {
+                    campiModificati.add(tmp.getName());
+                    tmpSetter.invoke(_old, tmpGetter.invoke(_new));
+                }
+            }
         }
         
-        request.getSession(false).setAttribute("user", _old);
-        //SCRIVERE NEL DB QUI
+        try { UtenteFactory.getInstance().updateUserInfo(_old); }
+        catch(Exception ex){}
+        
         return campiModificati;                
     }
     

@@ -72,7 +72,7 @@ public class UtenteFactory
             if(set.next())
             {
                 tmp = new UtenteSecure(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
-                        set.getString("email"), set.getDate("dataNascita").toString(), set.getString("urlFotoProfilo"), set.getString("frasePresentazione")
+                        set.getString("email"), set.getDate("dataNascita").toLocalDate(), set.getString("urlFotoProfilo"), set.getString("frasePresentazione")
                         );
             }
             
@@ -85,6 +85,35 @@ public class UtenteFactory
         
         return tmp;
     }   
+    public Utente getUtenteCompleteById(int id) 
+    {
+        Utente tmp = null;
+        String query = "SELECT utenti.*, tipiUtente.nomeTipoUtente FROM utenti JOIN tipiUtente ON utenti.tipoUtente = tipiUtente.ID WHERE utenti.id="+id;
+        ResultSet set = null;
+        
+        try
+        {
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
+            Statement stmt = conn.createStatement();
+            
+            set = stmt.executeQuery(query);
+             
+            if(set.next())
+            {
+                tmp = new Utente(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
+                        set.getString("email"), set.getDate("dataNascita").toLocalDate(), set.getString("urlFotoProfilo"), set.getString("frasePresentazione"),
+                        set.getString("username"), set.getString("password"), set.getString("nomeTipoUtente"));
+            }
+            
+            stmt.close();
+            conn.close();
+            
+        }
+        catch (SQLException ex) { Logger.getLogger(UtenteFactory.class.getName()).log(Level.SEVERE, null, ex); }
+            
+        
+        return tmp;
+    }  
     public Utente getUtenteByUsername(String username) 
     {
         Utente tmp = null;      
@@ -103,7 +132,7 @@ public class UtenteFactory
             if(set.next())
             {
                 tmp = new Utente(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
-                        set.getString("email"), set.getDate("dataNascita").toString(), set.getString("urlFotoProfilo"), set.getString("frasePresentazione"),
+                        set.getString("email"), set.getDate("dataNascita").toLocalDate(), set.getString("urlFotoProfilo"), set.getString("frasePresentazione"),
                         set.getString("username"), set.getString("password"), set.getString("nomeTipoUtente"));
             }
             
@@ -132,7 +161,7 @@ public class UtenteFactory
             while(set.next())
             {
                 tmpUtente = new UtenteSecure(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
-                        set.getString("email"), set.getDate("dataNascita").toString(), set.getString("urlFotoProfilo"), set.getString("frasePresentazione")
+                        set.getString("email"), set.getDate("dataNascita").toLocalDate(), set.getString("urlFotoProfilo"), set.getString("frasePresentazione")
                         );
                 
                 if(!excludeListId.contains(tmpUtente.getId()))
@@ -239,7 +268,28 @@ public class UtenteFactory
         }
         catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }       
     }
-    
+    public void updateUserInfo(Utente _new) throws java.text.ParseException
+    {
+        
+        String query = "UPDATE utenti SET nome='"+_new.getNome()+"', cognome='"+_new.getCognome()+
+                    "', urlFotoProfilo='"+_new.getUrlFotoProfilo()+"', frasePresentazione='"+_new.getFrasePresentazione()+
+                    "', password='"+_new.getPassword()+"', dataNascita='"+_new.getDataNascita().getYear()+"-"+_new.getDataNascita().getMonthValue()+"-"+_new.getDataNascita().getDayOfMonth()+
+                    "' WHERE id="+_new.getId();        
+        
+        try
+        {
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
+            Statement stmt = conn.createStatement();
+            
+            stmt.executeUpdate(query);    
+            
+            stmt.close();
+            conn.close();
+            
+        }
+        catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }    
+        
+    }
     
     
     

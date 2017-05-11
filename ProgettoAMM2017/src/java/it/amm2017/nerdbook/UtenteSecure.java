@@ -1,7 +1,7 @@
 
 package it.amm2017.nerdbook;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 
 /**
  * @author Mario Taccori
@@ -13,10 +13,9 @@ public class UtenteSecure
     private String nome;
     private String cognome;
     private String email;
-    private String dataNascita;
+    private LocalDate dataNascita;
     private String urlFotoProfilo;
     private String frasePresentazione;
-    private ArrayList<UtenteSecure> listaAmici = new ArrayList<>();
     
     public UtenteSecure()
     {
@@ -24,7 +23,7 @@ public class UtenteSecure
         this.nome= "";
         this.cognome="";
         this.email="";
-        this.dataNascita="";
+        this.dataNascita = LocalDate.of(1999, 01, 01);
         this.urlFotoProfilo="";
         this.frasePresentazione="";
     }     
@@ -38,7 +37,7 @@ public class UtenteSecure
         this.urlFotoProfilo = utente.getUrlFotoProfilo();
         this.frasePresentazione = utente.getFrasePresentazione();                
     }   
-    public UtenteSecure(int id, String nome, String cognome, String email, String dataNascita, String urlFotoProfilo, String frasePresentazione)
+    public UtenteSecure(int id, String nome, String cognome, String email, LocalDate dataNascita, String urlFotoProfilo, String frasePresentazione)
     {
         this.id = id;
         this.nome = nome;
@@ -72,8 +71,8 @@ public class UtenteSecure
     public void setCognome(String cognome) { this.cognome = cognome; }
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
-    public String getDataNascita() { return dataNascita; }
-    public void setDataNascita(String dataNascita) { this.dataNascita = dataNascita; }
+    public LocalDate getDataNascita() { return dataNascita; }
+    public void setDataNascita(LocalDate dataNascita) { this.dataNascita = dataNascita; }
     public String getUrlFotoProfilo() { return urlFotoProfilo; }
     public void setUrlFotoProfilo(String urlFotoProfilo) { this.urlFotoProfilo = urlFotoProfilo; }
     public String getFrasePresentazione() { return frasePresentazione; }
