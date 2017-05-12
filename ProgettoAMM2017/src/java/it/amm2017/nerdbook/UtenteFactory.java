@@ -317,6 +317,73 @@ public class UtenteFactory
         catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }    
         
     }
+    public boolean deleteAccount(int userId) throws SQLException
+    {
+        String query = "";
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        
+        try
+        {
+            conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
+            conn.setAutoCommit(false);
+            
+            // ELIMINA POST FATTI DA UTENTE
+            query = "DELETE FROM posts WHERE autore = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, userId);
+            
+            stmt.executeUpdate();
+            
+            // ELIMINA POST BACHECA UTENTE
+            query = "DELETE FROM posts WHERE idUtenteDest = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, userId);
+            
+            stmt.executeUpdate();
+            
+            // ELIMINA AMICIZIE
+            query = "DELETE FROM amici WHERE idUtente1 = ? OR idUtente2 = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, userId);
+            stmt.setInt(2, userId);
+            
+            stmt.executeUpdate();
+
+            // ELIMINA ISCRIZIONI GRUPPI 
+            query = "DELETE FROM iscrizioniGruppi WHERE idUtente = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, userId);
+            
+            stmt.executeUpdate();
+            
+            // ELIMINA UTENTE
+            query = "DELETE FROM utenti WHERE id = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, userId);
+            
+            stmt.executeUpdate();
+            
+            
+            //COMMITTA CHIUDI
+            conn.commit();            
+            
+            conn.setAutoCommit(true);
+            
+            stmt.close();
+            conn.close();  
+            return true;
+        }
+        catch(SQLException ex)
+        {
+            conn.rollback();           
+            conn.setAutoCommit(true);
+            
+            stmt.close();
+            conn.close();  
+            return false;
+        }
+    }
     
     public String getConnectionUsername() { return connectionUsername; }
     public void setConnectionUsername(String connectionUsername) { this.connectionUsername = connectionUsername; }

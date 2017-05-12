@@ -76,9 +76,12 @@ public class Profilo extends HttpServlet {
                         break;
                         
                     case "deleteAccount":
-                        if(this.deleteAccount(request))
-                            response.sendRedirect("login.html");
-                        else //AGGIUNGERE MSG ERRORE
+                        try
+                        {
+                            if(UtenteFactory.getInstance().deleteAccount((int)request.getSession(false).getAttribute("user")))
+                                response.sendRedirect("login.html?action=logout");
+                             //AGGIUNGERE MSG ERRORE
+                        } catch(Exception ex){}
                         return;
                        
                 }
@@ -180,12 +183,7 @@ public class Profilo extends HttpServlet {
         
         return campiModificati;                
     }
-    public boolean deleteAccount(HttpServletRequest request)
-    {
-        return false;
-        //TODO
-    }
-    
+
     
     
     
