@@ -43,31 +43,53 @@ public class Profilo extends HttpServlet {
             {                
                 try{ loadData(request); } catch(Exception ex){}
             }
-            else if(request.getParameter("action").equals("updateInfo"))
+            else
             {
-                try
+                switch(request.getParameter("action"))
                 {
-                    Utente _oldComplete = UtenteFactory.getInstance().getUtenteCompleteById((int)session.getAttribute("user"));
-                    
-                    Utente _new = new Utente(_oldComplete.getId(), request.getParameter("userName"),
-                                                        request.getParameter("userSurname"), _oldComplete.getEmail(),
-                                                        LocalDate.parse(request.getParameter("bDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
-                                                        request.getParameter("profilePicURL"),
-                                                        request.getParameter("presentazione"), _oldComplete.getUsername(),
-                                                        request.getParameter("password"), _oldComplete.getTipoUtente().toString());
-        
-                    
-                    ArrayList<String> campiModificati = updateUserInfo(request, _oldComplete, _new);
-                    
-                    if(campiModificati.isEmpty()) request.setAttribute("campiModificati", "none");
-                    else request.setAttribute("campiModificati", campiModificati);
-                    
-                    loadData(request);
+                    case "updateInfo":
+                        try
+                        {
+                            Utente _oldComplete = UtenteFactory.getInstance().getUtenteCompleteById((int)session.getAttribute("user"));
+
+                            LocalDate newDate;
+                            if(request.getParameter("bDate").equals(""))
+                                newDate = null;
+                            else newDate = LocalDate.parse(request.getParameter("bDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+               
+                            Utente _new = new Utente(_oldComplete.getId(), request.getParameter("userName"),
+                                                                request.getParameter("userSurname"), _oldComplete.getEmail(),
+                                                                newDate,
+                                                                request.getParameter("profilePicURL"),
+                                                                request.getParameter("presentazione"), _oldComplete.getUsername(),
+                                                                request.getParameter("password"), _oldComplete.getTipoUtente().toString());
+
+
+                            ArrayList<String> campiModificati = updateUserInfo(request, _oldComplete, _new);
+
+                            if(campiModificati.isEmpty()) request.setAttribute("campiModificati", "none");
+                            else request.setAttribute("campiModificati", campiModificati);
+
+                            loadData(request);
+                        }
+                        catch(Exception ex){ request.getParameter("password"); }
+                        break;
+                        
+                    case "deleteAccount":
+                        if(this.deleteAccount(request))
+                            response.sendRedirect("login.html");
+                        else //AGGIUNGERE MSG ERRORE
+                        return;
+                       
                 }
-                catch(Exception ex){}
                 
             }
             
+            
+            
+            
+            
+            //DA FARE IN OGNI CASO
             try
             {
                 if(UtenteFactory.checkCompletion(UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"))))
@@ -75,18 +97,20 @@ public class Profilo extends HttpServlet {
                 else request.setAttribute("isUserInfoComplete", false);
                 
             } catch(Exception ex){}
-            
+                                 
+
             UtenteSecure tmp = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
             request.setAttribute("user", tmp);
-            request.setAttribute("dataNascitaString", tmp.getDataNascita().getYear()+"-"+tmp.getDataNascita().getMonthValue()+"-"+tmp.getDataNascita().getDayOfMonth());
             request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
             request.setAttribute("users", UtenteFactory.getInstance().getAllUsers(new ArrayList<Integer>(Arrays.asList(tmp.getId()))));
             
-            
+            if(UtenteFactory.getInstance().getTipoUtente(tmp) == Utente.TipoUtente.ADMIN)
+                request.setAttribute("isAdmin", true);
             
             request.getRequestDispatcher("M2/profilo.jsp").forward(request, response);
         }
-        else response.sendRedirect("login.html");
+        else request.getRequestDispatcher("M2/profilo.jsp").forward(request, response);
+        
     }   
     public void loadData(HttpServletRequest request) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
     {
@@ -96,11 +120,13 @@ public class Profilo extends HttpServlet {
         
         for(Field tmp : classFields)
         {
-            if(tmp.getType() == String.class)
-            {    
-                tmpGetter = UtenteSecure.class.getMethod("get"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1));
-                request.setAttribute(tmp.getName(), tmpGetter.invoke(utente).toString());
-            }        
+            tmpGetter = UtenteSecure.class.getMethod("get"+tmp.getName().substring(0, 1).toUpperCase() + tmp.getName().substring(1));
+            
+            if(tmp.getType() == String.class) 
+                request.setAttribute(tmp.getName(), tmpGetter.invoke(utente).toString());   
+            else if(tmp.getType() == LocalDate.class)
+                request.setAttribute(tmp.getName()+"String", tmpGetter.invoke(utente).toString());  
+
         }   
     }  
     public ArrayList<String> updateUserInfo(HttpServletRequest request, Utente _old, Utente _new) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException
@@ -153,6 +179,11 @@ public class Profilo extends HttpServlet {
         catch(Exception ex){}
         
         return campiModificati;                
+    }
+    public boolean deleteAccount(HttpServletRequest request)
+    {
+        return false;
+        //TODO
     }
     
     

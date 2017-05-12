@@ -3,6 +3,7 @@ package it.amm2017.nerdbook;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,6 +20,8 @@ public class GruppoFactory
     
     private static GruppoFactory singleton;
     private String connectionString;
+    private String connectionUsername;
+    private String connectionPassword;
     
     private GruppoFactory(){}
     public static GruppoFactory getInstance()
@@ -31,20 +34,20 @@ public class GruppoFactory
     public Gruppo getGruppoById(int id)
     {
         Gruppo tmp = null;
-        String query = "select * from gruppi where id="+id;
+        String query = "select * from gruppi where id = ?"; //id
         ResultSet set = null;
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             
-            set = stmt.executeQuery(query);
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, id);
+            
+            set = stmt.executeQuery();
             
             if(set.next())
-            {
                 tmp = new Gruppo(set.getInt("id"), set.getString("nome"), set.getString("urlIcona"));
-            }
             
             stmt.close();
             conn.close();
@@ -64,7 +67,7 @@ public class GruppoFactory
                 
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             Statement stmt = conn.createStatement();
             
             set = stmt.executeQuery(query);
@@ -87,22 +90,23 @@ public class GruppoFactory
     public boolean checkSubscription(int idUtente, int idGruppo)
     {
         String query = "SELECT * FROM iscrizioniGruppi"+
-                " WHERE idUtente="+idUtente+" AND idGruppo="+idGruppo;
+                " WHERE idUtente = ?"+ //idUtente
+                " AND idGruppo = ?"; //idGruppo
         
         ResultSet set = null;
         int resultCount = 0;
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             
-            set = stmt.executeQuery(query);
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, idUtente);
+            stmt.setInt(2, idGruppo);
             
-            while(set.next())
-            {
-                resultCount++;                
-            }
+            set = stmt.executeQuery();
+            
+            while(set.next()) { resultCount++; }
             
             stmt.close();
             conn.close();
@@ -110,21 +114,23 @@ public class GruppoFactory
         }
         catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }
         
-        if(resultCount>0)
-            return true;
+        if(resultCount>0) return true;
         else return false;
         
     }
     public void registerSubscription(int userId, int groupId)
     {
-        String query = "INSERT INTO iscrizioniGruppi (idUtente, idGruppo) VALUES ("+userId+", "+groupId+")";
+        String query = "INSERT INTO iscrizioniGruppi (idUtente, idGruppo) VALUES (?, ?)"; //userId, groupId
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             
-            stmt.executeUpdate(query);        
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, userId);
+            stmt.setInt(2, groupId);
+            
+            stmt.executeUpdate();        
             
             stmt.close();
             conn.close();
@@ -133,7 +139,11 @@ public class GruppoFactory
         catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }       
     }
     
- 
+    public String getConnectionUsername() { return connectionUsername; }
+    public void setConnectionUsername(String connectionUsername) { this.connectionUsername = connectionUsername; }
+    public String getConnectionPassword() { return connectionPassword; }
+    public void setConnectionPassword(String connectionPassword) { this.connectionPassword = connectionPassword; }
+    
     
     // SERVONO?
     public ArrayList<Gruppo> getSubscribedGroups(UtenteSecure utente)
@@ -141,6 +151,6 @@ public class GruppoFactory
         // SERVE?
         return null;
     }
-       
-    
+
+     
 }

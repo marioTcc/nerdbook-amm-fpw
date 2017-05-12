@@ -22,7 +22,7 @@
         />
     </c:when>
     
-    <c:when test="${picSubject=='postAuthor'}">
+    <c:when test="${picSubject == 'postAuthor'}">
         <img alt="foto profilo" src=
                 <c:choose>
                     <c:when test="${post.autorePost.urlFotoProfilo !=null && post.autorePost.urlFotoProfilo != ''}">
@@ -31,6 +31,20 @@
 
                     <c:otherwise>
                        "Assets/ICONS/noProfilePic_icona.svg" class="defaultPic"
+                    </c:otherwise>
+               </c:choose>
+        />
+    </c:when>
+        
+    <c:when test="${picSubject == 'selfPresentazione'}">
+        <img alt="foto profilo" src=
+                <c:choose>
+                    <c:when test="${owner.urlFotoProfilo !=null && owner.urlFotoProfilo != ''}">
+                       "${owner.urlFotoProfilo}" class="picPresentazione"
+                    </c:when>
+
+                    <c:otherwise>
+                       "Assets/ICONS/noProfilePic_icona.svg" class="picPresentazione"
                     </c:otherwise>
                </c:choose>
         />

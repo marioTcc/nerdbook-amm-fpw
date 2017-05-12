@@ -39,8 +39,9 @@
                 |                   |                |                      |
                 +-------------------+                +----------------------+
 
-                /////// DA RIVEDERE ///////
-                Utente è in relazione uno a molti con posts
-                Posts è in relazione uno a uno con tipi post e tipo destinazione
-                Utente è in relazione uno a molti con amici e iscrizioniGruppi
-                Posts è in relazione uno a uno con gruppi
+                ///// DA RIVEDERE //////
+                Utente è in relazione uno a molti con posts (come autore)
+                Posts è in relazione uno a uno con tipipost e tipidestinazione
+                Utente è in relazione uno a molti con iscrizioniGruppi
+                Utente è in relazione molti a molti con amici
+                Posts è in relazione molti a uno con gruppi

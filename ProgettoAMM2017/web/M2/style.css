@@ -103,13 +103,14 @@ div#nuovoPostDiv form#formNuovoPost
     margin-bottom: 10px;
 }
 
-div#nuovoPostDiv #confirmForm, div#nuovoPostDiv #cancelForm
+div#nuovoPostDiv #newPostForm
 {
     display: inline-block;
 }
 
-div#nuovoPostDiv #confirmForm button, div#nuovoPostDiv #cancelForm button
+div#nuovoPostDiv #newPostForm button, #formDatiProfilo button
 {
+    display: inline-block;
     margin: 0px;
     padding: 0px;
     height: 30px;
@@ -117,6 +118,7 @@ div#nuovoPostDiv #confirmForm button, div#nuovoPostDiv #cancelForm button
     font-weight: bold;
     color: #BBBBBB;
     background-color: #3a506b;
+    margin-bottom: 10px;
 }
 
 div#nuovoPostDiv #riepilogoDiv, div#nuovoPostDiv #previewPostDiv
@@ -214,6 +216,16 @@ div#nuovoPostDiv #previewPostDiv > div
 div#nuovoPostDiv #previewPostDiv .allegatoPost
 {
     word-wrap: break-word;
+}
+
+.picPresentazione
+{
+    display: inline-block;
+    height: 60px; 
+    width: 60px;
+    margin: 0px;
+    margin-left: 20px; 
+    margin-right: 20px;
 }
 
 #divForm
@@ -625,11 +637,21 @@ div#presentazione
     margin-bottom: 20px;
     width: 99.5%;
     border: solid 1px black;
+    height: 60px;
 }
 
-div#presentazione p
+div#presentazione div
 {
-    margin-left: 10px;    
+    display: inline-block;
+    height: 20px;
+    vertical-align: 110%;
+}
+
+div#presentazione div p
+{
+    display: inline-block;
+    margin: 0px;
+    margin-left: 10px;  
 }
 
 #divBody div#profilePic

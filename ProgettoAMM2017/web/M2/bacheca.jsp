@@ -25,7 +25,9 @@
                         <c:when test="${(isFriend != null && isFriend == true) || (isSubscribed != null && isSubscribed == true) }">
                             <c:if test="${ownerType!='group' && owner.frasePresentazione!=null}">
                                 <div id="presentazione">
-                                    <p>${owner.frasePresentazione}</p>
+                                    <c:set var="picSubject" value="selfPresentazione" scope="request" />
+                                    <jsp:include page="fotoProfilo.jsp" />
+                                    <div><p>${owner.frasePresentazione}</p></div>
                                 </div>
                             </c:if>
 
@@ -108,24 +110,17 @@
 
                                         <div id="choiceDiv">
                                             <div>
-                                                <form id="confirmForm" action="bacheca.html" method="post">
-                                                    <!-- AGGIUNGERE I FORM HIDDEN PER RIMANDARE I DATI DEL NUOVO POST PER SALVARLO IN DB -->
+                                                <form id="newPostForm" action="bacheca.html" method="post">
+                                                    <!-- (FATTO) AGGIUNGERE I FORM HIDDEN PER RIMANDARE I DATI DEL NUOVO POST PER SALVARLO IN DB -->
                                                     <input type="hidden" name="contenuto" value="${previewPost.contenuto}">
                                                     <input type="hidden" name="allegato" value="${previewPost.attachedUrl}">
                                                     <input type="hidden" name="postType" value="${previewPost.tipoPost}">
                                                     <input type="hidden" name="owner" value="${owner.id}">
                                                     <input type="hidden" name="ownerType" value="${ownerType}">
-                                                    <input type="hidden" name="action" value="confirmNewPost">
+                                                 
                                                     <div>
-                                                        <button type="submit" form="confirmForm">Conferma</button>
-                                                    </div>
-                                                </form>
-                                                <form id="cancelForm" action="bacheca.html" method="post"> 
-                                                    <input type="hidden" name="owner" value="${owner.id}">
-                                                    <input type="hidden" name="ownerType" value="${ownerType}">
-                                                    <input type="hidden" name="action" value="cancelNewPost">
-                                                    <div>
-                                                        <button type="submit" form="cancelForm">Annulla</button>
+                                                        <button type="submit" form="newPostForm" name="action" value="confirmNewPost">Conferma</button>
+                                                        <button type="submit" form="newPostForm" name="action" value="cancelNewPost">Annulla</button>
                                                     </div>
                                                 </form>
                                             </div>

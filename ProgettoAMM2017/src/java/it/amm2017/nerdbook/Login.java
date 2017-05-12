@@ -38,8 +38,7 @@ public class Login extends HttpServlet {
             this.login(request, response);
         else if(request.getParameter("action").equals("logout"))
             this.logout(request, response); 
-    }
-    
+    }   
     public void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         HttpSession session = request.getSession();
@@ -93,8 +92,7 @@ public class Login extends HttpServlet {
             session.setAttribute("loggedIn", false);
             request.getRequestDispatcher("M2/login.jsp").forward(request, response);                
         }        
-    }
-    
+    }   
     public void chooseDestination(UtenteSecure tmp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IllegalAccessException, IOException, InvocationTargetException
     {
         request.getSession(false).setAttribute("user", tmp.getId());
@@ -103,8 +101,7 @@ public class Login extends HttpServlet {
             response.sendRedirect("bacheca.html?ownerType=user");
         else
             response.sendRedirect("profilo.html?isUserInfoComplete=false");
-    }
-    
+    }   
     public void logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
     {
         request.getSession(false).invalidate(); 
@@ -128,6 +125,14 @@ public class Login extends HttpServlet {
         UtenteFactory.getInstance().setConnectionString(dbConnection);
         PostFactory.getInstance().setConnectionString(dbConnection);
         GruppoFactory.getInstance().setConnectionString(dbConnection);
+        
+        UtenteFactory.getInstance().setConnectionUsername("ali_baba");
+        PostFactory.getInstance().setConnectionUsername("ali_baba");
+        GruppoFactory.getInstance().setConnectionUsername("ali_baba");
+        
+        UtenteFactory.getInstance().setConnectionPassword("apriti sesamo");
+        PostFactory.getInstance().setConnectionPassword("apriti sesamo");
+        GruppoFactory.getInstance().setConnectionPassword("apriti sesamo");
    }
     
     

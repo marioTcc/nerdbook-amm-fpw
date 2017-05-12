@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -20,6 +21,8 @@ public class UtenteFactory
 {   
     private static UtenteFactory singleton;
     private String connectionString;
+    private String connectionUsername;
+    private String connectionPassword;
     
     private UtenteFactory(){}
     public static UtenteFactory getInstance()
@@ -49,25 +52,21 @@ public class UtenteFactory
             }
         }      
         return true;
-    }
-    
-    public boolean updateUserInfo(UtenteSecure _new)
-    {
-        //TODO
-        return false;
-    }      
+    }         
     public UtenteSecure getUtenteById(int id) 
     {
         UtenteSecure tmp = null;
-        String query = "select * from utenti where id="+id;
+        String query = "select * from utenti where id = ?"; //id
         ResultSet set = null;
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             
-            set = stmt.executeQuery(query);
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, id);
+            
+            set = stmt.executeQuery();
              
             if(set.next())
             {
@@ -88,15 +87,16 @@ public class UtenteFactory
     public Utente getUtenteCompleteById(int id) 
     {
         Utente tmp = null;
-        String query = "SELECT utenti.*, tipiUtente.nomeTipoUtente FROM utenti JOIN tipiUtente ON utenti.tipoUtente = tipiUtente.ID WHERE utenti.id="+id;
+        String query = "SELECT utenti.*, tipiUtente.nomeTipoUtente FROM utenti JOIN tipiUtente ON utenti.tipoUtente = tipiUtente.ID WHERE utenti.id = ?"; //id
         ResultSet set = null;
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, id);
             
-            set = stmt.executeQuery(query);
+            set = stmt.executeQuery();
              
             if(set.next())
             {
@@ -119,15 +119,16 @@ public class UtenteFactory
         Utente tmp = null;      
         String query = "SELECT * FROM utenti"+
                 " JOIN tipiUtente ON utenti.tipoUtente = tipiUtente.ID"+
-                " where username='"+username+"'";
+                " WHERE username = ?"; //username
         ResultSet set = null;
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, username);
             
-            set = stmt.executeQuery(query);
+            set = stmt.executeQuery();
              
             if(set.next())
             {
@@ -153,7 +154,7 @@ public class UtenteFactory
 
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             Statement stmt = conn.createStatement();
             
             set = stmt.executeQuery(query);
@@ -181,17 +182,19 @@ public class UtenteFactory
     {
         String query = "SELECT nomeTipoUtente FROM utenti"+
                 " JOIN tipiUtente ON utenti.tipoUtente = tipiUtente.ID"+
-                " WHERE utenti.id="+utente.getId();
+                " WHERE utenti.id = ?"; //utente.getId()
         
         ResultSet set = null;
         Utente.TipoUtente tipo = Utente.TipoUtente.INVALID;
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             
-            set = stmt.executeQuery(query);
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, utente.getId());
+            
+            set = stmt.executeQuery();
             
             if(set.next())
             {
@@ -220,18 +223,26 @@ public class UtenteFactory
     public boolean checkFriendship(int id1, int id2)
     {
         String query = "SELECT * FROM amici"+
-                " WHERE (idUtente1="+id1+" OR idUtente1="+id2+" )"+
-                " AND (idUtente2="+id1+" OR idUtente2="+id2+" )";
+                " WHERE (idUtente1 = ?"+ //id1
+                " OR idUtente1 = ?"+ //id2
+                " )"+
+                " AND (idUtente2 = ?"+ //id1
+                " OR idUtente2 = ?)"; //id2
         
         ResultSet set = null;
         int resultCount = 0;
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             
-            set = stmt.executeQuery(query);
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, id1);
+            stmt.setInt(2, id2);
+            stmt.setInt(3, id1);
+            stmt.setInt(4, id2);
+            
+            set = stmt.executeQuery();
             
             while(set.next())
             {
@@ -251,16 +262,21 @@ public class UtenteFactory
     }
     public void registerFriendship(int userId1, int userId2)
     {
-        String query = "INSERT INTO amici (idUtente1, idUtente2) VALUES ("+userId1+", "+userId2+")";
-        String query2 = "INSERT INTO amici (idUtente1, idUtente2) VALUES ("+userId2+", "+userId1+")";        
+        String query = "INSERT INTO amici (idUtente1, idUtente2) VALUES (?, ?)"; //userId1, userId2
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             
-            stmt.executeUpdate(query);    
-            stmt.executeUpdate(query2);  
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, userId1);
+            stmt.setInt(2, userId2);
+            
+            stmt.executeUpdate();    
+            
+            stmt.setInt(1, userId2);
+            stmt.setInt(2, userId1);
+            stmt.executeUpdate();  
             
             stmt.close();
             conn.close();
@@ -271,17 +287,28 @@ public class UtenteFactory
     public void updateUserInfo(Utente _new) throws java.text.ParseException
     {
         
-        String query = "UPDATE utenti SET nome='"+_new.getNome()+"', cognome='"+_new.getCognome()+
-                    "', urlFotoProfilo='"+_new.getUrlFotoProfilo()+"', frasePresentazione='"+_new.getFrasePresentazione()+
-                    "', password='"+_new.getPassword()+"', dataNascita='"+_new.getDataNascita().getYear()+"-"+_new.getDataNascita().getMonthValue()+"-"+_new.getDataNascita().getDayOfMonth()+
-                    "' WHERE id="+_new.getId();        
+        String query = "UPDATE utenti SET nome = ?"+ //_new.getNome()
+                ", cognome = ?"+ //_new.getCognome()
+                ", urlFotoProfilo = ?"+ //_new.getUrlFotoProfilo()
+                ", frasePresentazione = ?"+ //_new.getFrasePresentazione()
+                ", password = ?"+ //_new.getPassword()
+                ", dataNascita = ?"+ //_new.getDataNascita()
+                " WHERE id = ?"; //_new.getId()
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
+           
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, _new.getNome());
+            stmt.setString(2, _new.getCognome());
+            stmt.setString(3, _new.getUrlFotoProfilo());
+            stmt.setString(4, _new.getFrasePresentazione());
+            stmt.setString(5, _new.getPassword());
+            stmt.setDate(6, java.sql.Date.valueOf(_new.getDataNascita()));
+            stmt.setInt(7, _new.getId());
             
-            stmt.executeUpdate(query);    
+            stmt.executeUpdate();    
             
             stmt.close();
             conn.close();
@@ -291,7 +318,10 @@ public class UtenteFactory
         
     }
     
-    
+    public String getConnectionUsername() { return connectionUsername; }
+    public void setConnectionUsername(String connectionUsername) { this.connectionUsername = connectionUsername; }
+    public String getConnectionPassword() { return connectionPassword; }
+    public void setConnectionPassword(String connectionPassword) { this.connectionPassword = connectionPassword; }
     
  
     // SERVONO ?

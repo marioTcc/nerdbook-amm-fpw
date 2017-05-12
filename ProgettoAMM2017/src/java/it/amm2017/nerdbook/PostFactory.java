@@ -2,15 +2,17 @@
 package it.amm2017.nerdbook;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.logging.Level;
@@ -24,6 +26,8 @@ public class PostFactory {
     
     private static PostFactory singleton;
     private String connectionString;
+    private String connectionUsername;
+    private String connectionPassword;
     
     private PostFactory(){}
     public static PostFactory getInstance()
@@ -31,35 +35,10 @@ public class PostFactory {
         if (singleton == null) singleton = new PostFactory();       
         return singleton;
     }
-    public void setConnectionString(String s) { this.connectionString = s; }
-    public String getConnectionString() { return this.connectionString; }       
-    public Post getPostById(int id) //DA RIVEDERE
+   
+    public Post getPostById(int id) //DA RIVEDERE, SERVE?
     {
-        Post tmp = null;
-        String query = "SELECT * FROM posts JOIN tipiPost ON posts.tipoPost = tipiPost.ID where id='"+id+"'";
-        ResultSet set = null;
-        
-        try
-        {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
-            
-            set = stmt.executeQuery(query);
-            
-            if(set.next())
-            {
-                tmp = new Post(set.getInt("id"), UtenteFactory.getInstance().getUtenteById(set.getInt("autore")),
-                        set.getString("contenuto"), set.getString("nomeTipoPost"), set.getString("attachedUrl"), set.getString("tipoDestinazione"),
-                        set.getInt("idDestinazione"), set.getDate("dataPost").toLocalDate(), set.getTime("oraPost").toLocalTime());
-            }
-            
-            stmt.close();
-            conn.close();
-            
-        }
-        catch (SQLException ex) { Logger.getLogger(PostFactory.class.getName()).log(Level.SEVERE, null, ex); }
-
-
+        Post tmp = null;        
         return tmp;
     }        
     public Post getFakePost(UtenteSecure autore, String contenuto, Post.PostType tipoPost, String attachedUrl, Post.DestinationType tipoDestinazione)
@@ -81,16 +60,18 @@ public class PostFactory {
         String query = "SELECT * FROM posts"+
                 " JOIN tipiPost ON posts.tipoPost = tipiPost.ID"+
                 " JOIN tipiDestinazione ON posts.tipoDestinazione = tipiDestinazione.ID"+
-                " where idUtenteDest="+utente.getId();
+                " where idUtenteDest = ? ";//utente.getId()
         ResultSet set = null;
         UtenteSecure autore = null;
 
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             
-            set = stmt.executeQuery(query);
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, utente.getId());
+            
+            set = stmt.executeQuery();
                        
             while(set.next())
             {
@@ -116,16 +97,18 @@ public class PostFactory {
         
         
         
-        String query2 = "SELECT * FROM iscrizioniGruppi WHERE idUtente="+utente.getId();
+        String query2 = "SELECT * FROM iscrizioniGruppi WHERE idUtente = ?"; //utente.getId()
         set = null;
         autore = null;
 
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
+           
+            PreparedStatement stmt = conn.prepareStatement(query2);
+            stmt.setInt(1, utente.getId());
             
-            set = stmt.executeQuery(query2);
+            set = stmt.executeQuery();
                        
             while(set.next())
             {
@@ -148,7 +131,7 @@ public class PostFactory {
         String query = "SELECT * FROM posts"+
                 " JOIN tipiPost ON posts.tipoPost = tipiPost.ID"+
                 " JOIN tipiDestinazione ON posts.tipoDestinazione = tipiDestinazione.ID"+
-                " WHERE idGruppoDest="+gruppo.getId()+
+                " WHERE idGruppoDest = ?"+ //gruppo.getId()
                 " ORDER BY dataPost DESC, oraPost DESC";
         
         ResultSet set = null;
@@ -156,10 +139,12 @@ public class PostFactory {
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             
-            set = stmt.executeQuery(query);
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, gruppo.getId());
+            
+            set = stmt.executeQuery();
             
             while(set.next())
             {
@@ -189,37 +174,64 @@ public class PostFactory {
         
         
         String query = "INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, dataPost, oraPost, idUtenteDest, idGruppoDest)" +
-            " VALUES ( default, "+newPost.getAutorePost().getId()+", '"+newPost.getContenuto()+"', "+idTipoPost+", '"+
-            newPost.getAttachedUrl()+"', "+idTipoDestinazione+", '"+LocalDate.now()+"', '"+LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))+"'";
+            " VALUES ( default, ?,"+ //newPost.getAutorePost().getId()
+                " ?,"+ //newPost.getContenuto()
+                " ?,"+ //idTipoPost
+                " ?,"+ //newPost.getAttachedUrl()
+                " ?,"+ //idTipoDestinazione
+                " ?,"+ //LocalDate.now()
+                " ?,"+ //LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))
+                " ?,"+ //idUtenteDest
+                " ?)"; //idGruppoDest
         
-        if(newPost.getTipoDestinazione()==Post.DestinationType.BACHECA) query += ", "+newPost.getIdDestinazione()+", NULL)";
-        else query += ", NULL, "+newPost.getIdDestinazione()+")";
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             
-            stmt.executeUpdate(query);    
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, newPost.getAutorePost().getId());
+            stmt.setString(2, newPost.getContenuto());
+            stmt.setInt(3, idTipoPost);
+            stmt.setString(4, newPost.getAttachedUrl());
+            stmt.setInt(5, idTipoDestinazione);
+            stmt.setDate(6, Date.valueOf(LocalDate.now()));
+            stmt.setTime(7, Time.valueOf(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss"))));
+            
+            if(newPost.getTipoDestinazione()==Post.DestinationType.BACHECA) 
+            {
+                stmt.setInt(8, newPost.getIdDestinazione());
+                stmt.setNull(9, java.sql.Types.INTEGER);
+            }
+            else
+            {
+                stmt.setNull(8, java.sql.Types.INTEGER);
+                stmt.setInt(9, newPost.getIdDestinazione());
+            }
+            
+            
+            stmt.executeUpdate();    
             
             stmt.close();
             conn.close();
             
         }
-        catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }  
+        catch (SQLException ex) { Logger.getLogger(PostFactory.class.getName()).log(Level.SEVERE, null, ex); }  
     }   
     public int getPostTypeId(Post.PostType type)
     {
-        String query = "SELECT * FROM tipiPost WHERE nomeTipoPost='"+type.toString()+"'";
+        String query = "SELECT * FROM tipiPost WHERE nomeTipoPost = ?"; //type.toString()
         ResultSet set = null;
         int id = -1;
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             
-            set = stmt.executeQuery(query);  
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, type.toString());
+            
+            set = stmt.executeQuery();  
             
             if(set.next())
                 id = set.getInt("id");
@@ -228,22 +240,24 @@ public class PostFactory {
             conn.close();
             
         }
-        catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }
+        catch (SQLException ex) { Logger.getLogger(PostFactory.class.getName()).log(Level.SEVERE, null, ex); }
         
         return id;
     }  
     public int getDestinationTypeId(Post.DestinationType type)
     {
-        String query = "SELECT * FROM tipiDestinazione WHERE nomeTipoDestinazione='"+type.toString()+"'";
+        String query = "SELECT * FROM tipiDestinazione WHERE nomeTipoDestinazione = ?"; //type.toString()
         ResultSet set = null;
         int id = -1;
         
         try
         {
-            Connection conn = DriverManager.getConnection(this.getConnectionString(), "ali_baba", "apriti sesamo");
-            Statement stmt = conn.createStatement();
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             
-            set = stmt.executeQuery(query);  
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setString(1, type.toString());
+            
+            set = stmt.executeQuery();  
             
             if(set.next())
                 id = set.getInt("id");
@@ -252,8 +266,40 @@ public class PostFactory {
             conn.close();
             
         }
-        catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }
+        catch (SQLException ex) { Logger.getLogger(PostFactory.class.getName()).log(Level.SEVERE, null, ex); }
         
         return id;
     }
+    public void deletePostList(ArrayList<Integer> idDeleteList) //FUNZIONA?
+    {
+        String query;
+        
+        for(Integer tmpPostId : idDeleteList)
+        {       
+            query = "DELETE FROM posts WHERE id = ?"; //tmpPostId
+            
+            try
+            {
+                Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
+                
+                PreparedStatement stmt = conn.prepareStatement(query);
+                stmt.setInt(1, tmpPostId);
+
+                stmt.executeUpdate();  
+
+                stmt.close();
+                conn.close();
+
+            }
+            catch (SQLException ex) { Logger.getLogger(PostFactory.class.getName()).log(Level.SEVERE, null, ex); }
+            
+        }        
+    }
+    
+    public void setConnectionString(String s) { this.connectionString = s; }
+    public String getConnectionString() { return this.connectionString; }            
+    public String getConnectionUsername() { return connectionUsername; }
+    public void setConnectionUsername(String connectionUsername) { this.connectionUsername = connectionUsername; }
+    public String getConnectionPassword() { return connectionPassword; }
+    public void setConnectionPassword(String connectionPassword) { this.connectionPassword = connectionPassword; }
 }

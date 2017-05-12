@@ -44,6 +44,8 @@ public class Bacheca extends HttpServlet {
                 request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
                 request.setAttribute("users", UtenteFactory.getInstance().getAllUsers(new ArrayList<Integer>(Arrays.asList(tmp.getId()))));
                 
+                if(UtenteFactory.getInstance().getTipoUtente(tmp) == Utente.TipoUtente.ADMIN)
+                    request.setAttribute("isAdmin", true);
                 
                 if(request.getParameter("action") == null) { this.loadView(request); }
                 else
@@ -126,8 +128,7 @@ public class Bacheca extends HttpServlet {
                 request.setAttribute("ownerType", "group");                
             }
         }     
-    }  
-    
+    }    
     public void loadNewPost(HttpServletRequest request)
     {
         this.loadView(request);
@@ -166,8 +167,7 @@ public class Bacheca extends HttpServlet {
        
         request.setAttribute("ownerType", request.getParameter("ownerType"));
         request.setAttribute("previewPost", previewPost);
-    }   
-    
+    }     
     public void confirmNewPost(HttpServletRequest request)
     {  
         Post.DestinationType tmpDestType = Post.DestinationType.INVALID;
