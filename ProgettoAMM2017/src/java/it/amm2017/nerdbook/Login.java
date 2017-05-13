@@ -34,7 +34,7 @@ public class Login extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {     
-        if(request.getParameter("action")==null || request.getParameter("action").equals("login"))
+        if(request.getParameter("action") == null || request.getParameter("action").equals("login"))
             this.login(request, response);
         else if(request.getParameter("action").equals("logout"))
             this.logout(request, response); 

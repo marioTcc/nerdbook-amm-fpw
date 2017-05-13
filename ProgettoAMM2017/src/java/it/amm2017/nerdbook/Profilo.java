@@ -37,7 +37,7 @@ public class Profilo extends HttpServlet {
         HttpSession session = request.getSession(false);
         response.setContentType("text/html;charset=UTF-8");
         
-        if(session!=null && session.getAttribute("loggedIn").equals(true))
+        if(session != null && session.getAttribute("loggedIn") != null && session.getAttribute("loggedIn").equals(true))
         {                                
             if(request.getParameter("action")==null)
             {                
