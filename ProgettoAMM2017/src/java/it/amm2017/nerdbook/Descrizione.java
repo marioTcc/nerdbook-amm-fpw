@@ -36,9 +36,7 @@ public class Descrizione extends HttpServlet {
         if(session!=null && session.getAttribute("loggedIn")!=null && session.getAttribute("loggedIn").equals(true))
         {
             UtenteSecure tmp = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
-            request.setAttribute("user", tmp);
-            request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
-            request.setAttribute("users", UtenteFactory.getInstance().getAllUsers(new ArrayList<Integer>(Arrays.asList(tmp.getId()))));
+            UtenteFactory.getInstance().loadUserData(request, tmp);              
         }
         
         

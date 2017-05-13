@@ -621,6 +621,16 @@ div#notificaNuovoPost
     word-wrap: break-word;
 }
 
+/* TODO SERVE? */
+#posts .postTimeStamp
+{
+    float: right;
+    font-size: 14px;
+    font-style: italic;
+    margin-right: 5px;
+    margin-top: 10px;
+}
+
 #posts > div
 {
     width: 90%;

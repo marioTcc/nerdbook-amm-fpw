@@ -10,8 +10,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Mario Taccori
@@ -384,6 +386,18 @@ public class UtenteFactory
             return false;
         }
     }
+    public void loadUserData(HttpServletRequest request, UtenteSecure utente)
+    {
+        request.setAttribute("user", utente);
+        request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
+        
+        //TODO GESTIRE FOUNDER
+        request.setAttribute("users", UtenteFactory.getInstance().getAllUsers(new ArrayList<>(Arrays.asList(utente.getId()))));
+
+        if(UtenteFactory.getInstance().getTipoUtente(utente) == Utente.TipoUtente.ADMIN)
+            request.setAttribute("isAdmin", true);   
+    }
+    
     
     public String getConnectionUsername() { return connectionUsername; }
     public void setConnectionUsername(String connectionUsername) { this.connectionUsername = connectionUsername; }

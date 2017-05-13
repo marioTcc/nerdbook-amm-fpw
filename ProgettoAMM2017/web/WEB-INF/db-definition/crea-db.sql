@@ -47,7 +47,7 @@ CREATE TABLE gruppi (
     nome VARCHAR(30) UNIQUE NOT NULL,
     urlIcona VARCHAR(500),
     fondatore INTEGER,
-    FOREIGN KEY (fondatore) REFERENCES utenti(id)
+    FOREIGN KEY (fondatore) REFERENCES utenti(id) ON DELETE SET NULL
 );
 
 
@@ -142,6 +142,20 @@ VALUES ( default, 'Molgonfieristi', 'Assets/ICONS/molgonfieristi_icona.svg', 1 )
 
 INSERT INTO gruppi ( id, nome, urlIcona, fondatore)
 VALUES ( default, 'Ritardatari', 'Assets/ICONS/ritardatari_icona.svg', 1 );
+
+/* ????????????? PER DEBUG TODO*/
+INSERT INTO gruppi ( id, nome, urlIcona, fondatore)
+VALUES ( default, 'fittizio1', 'Assets/ICONS/ritardatari_icona.svg', 3 );
+INSERT INTO gruppi ( id, nome, urlIcona, fondatore)
+VALUES ( default, 'fittizio2', 'Assets/ICONS/ritardatari_icona.svg', 3 );
+INSERT INTO gruppi ( id, nome, urlIcona, fondatore)
+VALUES ( default, 'fittizio3', 'Assets/ICONS/ritardatari_icona.svg', 3 );
+INSERT INTO gruppi ( id, nome, urlIcona, fondatore)
+VALUES ( default, 'fittizio4', 'Assets/ICONS/ritardatari_icona.svg', 3 );
+INSERT INTO gruppi ( id, nome, urlIcona, fondatore)
+VALUES ( default, 'fittizio5', 'Assets/ICONS/ritardatari_icona.svg', 3 );
+/* ------------------------------------------ */
+
 
 INSERT INTO iscrizioniGruppi ( idUtente, idGruppo)
 VALUES ( 1, 1);

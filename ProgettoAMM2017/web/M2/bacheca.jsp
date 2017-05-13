@@ -30,12 +30,20 @@
                                     <div><p>${owner.frasePresentazione}</p></div>
                                 </div>
                             </c:if>
-
-                            <c:if test="${postState!=null && postState=='created'}">
-                                <div id="notificaNuovoPost">
-                                    <p>Hai scritto sulla bacheca di ${owner.nome} <c:if test="${ownerType!='group'}">${owner.cognome}!</c:if></p>
-                                </div>                            
-                            </c:if>
+                            
+                            <c:choose>
+                                <c:when test="${postState != null && postState == 'created'}">
+                                    <c:set var="notificationType" value="newPostCreation" scope="request" />
+                                    <c:set var="notificationValue" value="newPostCreationOk" scope="request" />
+                                    <jsp:include page="notifications.jsp" />
+                                </c:when>
+                                
+                                <c:when test="${postState != null && postState == 'error'}">
+                                    <c:set var="notificationType" value="newPostCreation" scope="request" />
+                                    <c:set var="notificationValue" value="newPostCreationError" scope="request" />
+                                    <jsp:include page="notifications.jsp" />
+                                </c:when>
+                            </c:choose>
 
                             <c:choose>
                                 <c:when test="${confirmRequired==null || confirmRequired==false}">

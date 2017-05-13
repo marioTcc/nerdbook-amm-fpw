@@ -40,12 +40,7 @@ public class Bacheca extends HttpServlet {
             if(session.getAttribute("loggedIn")!=null && session.getAttribute("loggedIn").equals(true))
             {
                 UtenteSecure tmp = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
-                request.setAttribute("user", tmp);
-                request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
-                request.setAttribute("users", UtenteFactory.getInstance().getAllUsers(new ArrayList<Integer>(Arrays.asList(tmp.getId()))));
-                
-                if(UtenteFactory.getInstance().getTipoUtente(tmp) == Utente.TipoUtente.ADMIN)
-                    request.setAttribute("isAdmin", true);
+                UtenteFactory.getInstance().loadUserData(request, tmp);
                 
                 if(request.getParameter("action") == null) { this.loadView(request); }
                 else
@@ -71,7 +66,7 @@ public class Bacheca extends HttpServlet {
                         case "registerFriendship":
                             UtenteFactory.getInstance().registerFriendship(tmp.getId(), Integer.parseInt(request.getParameter("owner")));
                             this.loadView(request);
-                            break;
+                            break;                         
                     }
                 }
             }
@@ -206,11 +201,15 @@ public class Bacheca extends HttpServlet {
         newPost.setDataPost(LocalDate.now());
         newPost.setOraPost(LocalTime.now());
         
-        PostFactory.getInstance().registerNewPost(newPost);
-        request.setAttribute("postState", "created");
+        if( Integer.parseInt(request.getParameter("owner")) == (int)request.getSession(false).getAttribute("user") ||
+            UtenteFactory.getInstance().checkFriendship((int)request.getSession(false).getAttribute("user"), Integer.parseInt(request.getParameter("owner"))))
+        {
+            PostFactory.getInstance().registerNewPost(newPost);
+            request.setAttribute("postState", "created");
+        }
+        else request.setAttribute("postState", "error");
+        
         this.loadView(request);
-        //request.setAttribute("ownerType", request.getParameter("ownerType"));
-
     }
     
     

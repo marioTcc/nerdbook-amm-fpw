@@ -11,36 +11,45 @@
     <div id="searchBar">
         <input type="text" value="Cerca">
     </div>
+    
+    <c:if test="${users != null}">
 
-    <div id="elencoPersone">
-        <h4>Persone:</h4>
-        <ul>
-            <c:forEach var="userTmp" items="${users}">
-                <li>
-                    <a href="bacheca.html?action=view&owner=${userTmp.id}&ownerType=user">
-                        <c:set var="friendPicUrl" value="${userTmp.urlFotoProfilo}" scope="request" />
-                        <c:set var="picSubject" value="friend" scope="request" />
-                        <jsp:include page="fotoProfilo.jsp" />
-                        ${userTmp.nome} ${userTmp.cognome}
-                    </a>
-                </li>
-            </c:forEach>
-        </ul>
-    </div>
-
-    <div id="elencoGruppi">
-        <h4>Gruppi:</h4>
-        <ul>
-            <c:forEach var="gruppoTmp" items="${groups}">
-                <li>
-                    <a href="bacheca.html?action=view&owner=${gruppoTmp.id}&ownerType=group">
-                        <c:set var="groupPicUrl" value="${gruppoTmp.groupIconUrl}" scope="request" />
-                        <c:set var="picSubject" value="groupIcon" scope="request" />
-                        <jsp:include page="fotoProfilo.jsp" />
-                        ${gruppoTmp.nome}
-                    </a>
-                </li>
-            </c:forEach>
-        </ul>
-    </div>
+        <div id="elencoPersone">
+            <h4>Persone:</h4>
+            <ul>
+                <c:forEach var="userTmp" items="${users}">
+                    <li>
+                        <a href="bacheca.html?action=view&owner=${userTmp.id}&ownerType=user">
+                            <c:set var="friendPicUrl" value="${userTmp.urlFotoProfilo}" scope="request" />
+                            <c:set var="picSubject" value="friend" scope="request" />
+                            <jsp:include page="fotoProfilo.jsp" />
+                            ${userTmp.nome} ${userTmp.cognome}
+                        </a>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+        
+    </c:if>
+    
+    <c:if test="${groups != null}">
+        <div id="elencoGruppi">
+            <h4>Gruppi:</h4>
+            <ul>
+                <c:forEach var="gruppoTmp" items="${groups}">
+                    <li>
+                        <a href="bacheca.html?action=view&owner=${gruppoTmp.id}&ownerType=group">
+                            <c:set var="groupPicUrl" value="${gruppoTmp.groupIconUrl}" scope="request" />
+                            <c:set var="picSubject" value="groupIcon" scope="request" />
+                            <jsp:include page="fotoProfilo.jsp" />
+                            ${gruppoTmp.nome}
+                        </a>
+                        <c:if test="${(isAdmin != null && isAdmin == true) || (isFounder != null && isFounder == true)}">
+                            <a href="delete?action=deleteGroup&groupId=${gruppoTmp.id}<c:if test="${owner != null && ownerType != null}">&owner=${owner.id}&ownerType=${ownerType}</c:if>">X</a>
+                        </c:if>
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+    </c:if>
 </div>

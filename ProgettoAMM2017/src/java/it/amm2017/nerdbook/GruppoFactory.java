@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -137,6 +138,84 @@ public class GruppoFactory
             
         }
         catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }       
+    }
+    public int getGroupFounderId(int groupId)
+    {
+        String query = "SELECT fondatore FROM gruppi WHERE id = ?"; //groupId
+        ResultSet set = null;
+        int returnValue = -1;
+        
+        try
+        {
+            Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
+            
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, groupId);
+            
+            set = stmt.executeQuery();
+            
+            if(set.next())
+                returnValue = set.getInt("fondatore");                
+            
+            stmt.close();
+            conn.close();
+            
+        }
+        catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }  
+        
+        return returnValue;        
+    }
+    public boolean deleteGroupById(int groupId) throws SQLException //TODO DA CONTROLLARE
+    {
+        String query = "";
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        
+        try
+        {
+            conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
+            conn.setAutoCommit(false);
+            
+            // ELIMINA POST GRUPPO
+            query = "DELETE FROM posts WHERE idGruppoDest = ?"; //groupId
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, groupId);
+            
+            stmt.executeUpdate();
+            
+            // ELIMINA ISCRIZIONI
+            query = "DELETE FROM iscrizioniGruppi WHERE idGruppo = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, groupId);
+            
+            stmt.executeUpdate();
+            
+            // ELIMINA GRUPPO
+            query = "DELETE FROM gruppi WHERE id = ?";
+            stmt = conn.prepareStatement(query);
+            stmt.setInt(1, groupId);
+            
+            stmt.executeUpdate();
+            
+            
+            //COMMITTA CHIUDI
+            conn.commit();            
+            
+            conn.setAutoCommit(true);
+            
+            stmt.close();
+            conn.close();  
+            return true;
+        }
+        catch(SQLException ex)
+        {
+            conn.rollback();           
+            conn.setAutoCommit(true);
+            
+            stmt.close();
+            conn.close();  
+            return false;
+        }
     }
     
     public String getConnectionUsername() { return connectionUsername; }

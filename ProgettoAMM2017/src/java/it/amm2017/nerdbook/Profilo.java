@@ -48,6 +48,7 @@ public class Profilo extends HttpServlet {
                 switch(request.getParameter("action"))
                 {
                     case "updateInfo":
+                        // TODO CONTROLLO PASS E CONFERMA PASS
                         try
                         {
                             Utente _oldComplete = UtenteFactory.getInstance().getUtenteCompleteById((int)session.getAttribute("user"));
@@ -73,17 +74,11 @@ public class Profilo extends HttpServlet {
                             loadData(request);
                         }
                         catch(Exception ex){ request.getParameter("password"); }
-                        break;
-                        
+                    break;
+                    
                     case "deleteAccount":
-                        try
-                        {
-                            if(UtenteFactory.getInstance().deleteAccount((int)request.getSession(false).getAttribute("user")))
-                                response.sendRedirect("login.html?action=logout");
-                             //AGGIUNGERE MSG ERRORE
-                        } catch(Exception ex){}
-                        return;
-                       
+                        response.sendRedirect("delete?action=deleteAccount");
+                        return;                      
                 }
                 
             }
@@ -92,7 +87,7 @@ public class Profilo extends HttpServlet {
             
             
             
-            //DA FARE IN OGNI CASO
+         
             try
             {
                 if(UtenteFactory.checkCompletion(UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"))))
@@ -103,12 +98,7 @@ public class Profilo extends HttpServlet {
                                  
 
             UtenteSecure tmp = UtenteFactory.getInstance().getUtenteById((int)request.getSession(false).getAttribute("user"));
-            request.setAttribute("user", tmp);
-            request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
-            request.setAttribute("users", UtenteFactory.getInstance().getAllUsers(new ArrayList<Integer>(Arrays.asList(tmp.getId()))));
-            
-            if(UtenteFactory.getInstance().getTipoUtente(tmp) == Utente.TipoUtente.ADMIN)
-                request.setAttribute("isAdmin", true);
+            UtenteFactory.getInstance().loadUserData(request, tmp);
             
             request.getRequestDispatcher("M2/profilo.jsp").forward(request, response);
         }

@@ -1,5 +1,5 @@
 <%-- 
-    Document   : errors
+    Document   : notifications
     Created on : 23-apr-2017, 18.43.06
     Author     : Mario Taccori
 --%>
@@ -48,4 +48,28 @@
             </ul>
         </div>
     </c:when>
+    
+    <c:when test="${notificationType == 'accountDeletion' && notificationValue=='accountDeletionError'}">
+        <div class="notificationDiv">
+            <p>Si è verificato un errore, riprova.</p>
+        </div>
+    </c:when>
+    
+    <c:when test="${notificationType == 'newPostCreation' && notificationValue == 'newPostCreationOk'}">
+        <div id="notificaNuovoPost">
+            <p>Hai scritto sulla bacheca di ${owner.nome} <c:if test="${ownerType!='group'}">${owner.cognome}!</c:if></p>
+        </div>
+    </c:when>
+    
+    <c:when test="${notificationType == 'newPostCreation' && notificationValue == 'newPostCreationError'}">
+        <div class="notificationDiv">
+            <p>Si è verificato un errore, riprova.</p>
+        </div>
+    </c:when>
+    
+    
+    
+    
+    
+    
 </c:choose>

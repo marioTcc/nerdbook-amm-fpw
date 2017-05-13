@@ -84,6 +84,12 @@
                                 <c:set var="extraParameters" value="${campiModificati}" scope="request" />
                                 <jsp:include page="notifications.jsp" />
                             </c:if>
+                                
+                            <c:if test="${deletionError != null && deletionError == true}">
+                                <c:set var="notificationType" value="accountDeletion" scope="request" />
+                                <c:set var="notificationValue" value="accountDeletionError" scope="request" />
+                                <jsp:include page="notifications.jsp" />
+                            </c:if>
                         </div> <!-- Fine form login -->
                     </div>          
                 </c:when>

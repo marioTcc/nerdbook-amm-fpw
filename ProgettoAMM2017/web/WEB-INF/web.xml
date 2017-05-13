@@ -16,6 +16,10 @@
         <servlet-name>Bacheca</servlet-name>
         <servlet-class>it.amm2017.nerdbook.Bacheca</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteData</servlet-name>
+        <servlet-class>it.amm2017.nerdbook.DeleteData</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/login.html</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>Bacheca</servlet-name>
         <url-pattern>/bacheca.html</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteData</servlet-name>
+        <url-pattern>/delete</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -50,9 +50,9 @@ public class Login extends HttpServlet {
             {
                 if(request.getParameter("username")!=null && request.getParameter("password")!=null)
                 {
-                    if(request.getParameter("username").toString().length()>0 && request.getParameter("password").toString().length()>0)
+                    if(request.getParameter("username").length()>0 && request.getParameter("password").length()>0)
                     {
-                        Utente tmp = UtenteFactory.getInstance().getUtenteByUsername(request.getParameter("username").toString());
+                        Utente tmp = UtenteFactory.getInstance().getUtenteByUsername(request.getParameter("username"));
 
                         if(tmp!=null && tmp.getPassword().equals(request.getParameter("password")))
                         {
@@ -113,14 +113,8 @@ public class Login extends HttpServlet {
     {
         String dbConnection = "jdbc:derby:" + this.getServletContext().getRealPath("/") + DB_CLEAN_PATH;
         
-        try 
-        {
-            Class.forName(JDBC_DRIVER);
-        }
-        catch (ClassNotFoundException ex)
-        {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        try { Class.forName(JDBC_DRIVER); }
+        catch (ClassNotFoundException ex) { Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex); }
         
         UtenteFactory.getInstance().setConnectionString(dbConnection);
         PostFactory.getInstance().setConnectionString(dbConnection);
