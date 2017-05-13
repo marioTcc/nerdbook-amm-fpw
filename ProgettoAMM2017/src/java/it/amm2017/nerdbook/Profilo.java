@@ -51,29 +51,33 @@ public class Profilo extends HttpServlet {
                         // TODO CONTROLLO PASS E CONFERMA PASS
                         try
                         {
-                            Utente _oldComplete = UtenteFactory.getInstance().getUtenteCompleteById((int)session.getAttribute("user"));
+                            if(request.getParameter("password").equals(request.getParameter("passwordConfirm")))
+                            {
+                                Utente _oldComplete = UtenteFactory.getInstance().getUtenteCompleteById((int)session.getAttribute("user"));
 
-                            LocalDate newDate;
-                            if(request.getParameter("bDate").equals(""))
-                                newDate = null;
-                            else newDate = LocalDate.parse(request.getParameter("bDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
-               
-                            Utente _new = new Utente(_oldComplete.getId(), request.getParameter("userName"),
-                                                                request.getParameter("userSurname"), _oldComplete.getEmail(),
-                                                                newDate,
-                                                                request.getParameter("profilePicURL"),
-                                                                request.getParameter("presentazione"), _oldComplete.getUsername(),
-                                                                request.getParameter("password"), _oldComplete.getTipoUtente().toString());
+                                LocalDate newDate;
+                                if(request.getParameter("bDate").equals(""))
+                                    newDate = null;
+                                else newDate = LocalDate.parse(request.getParameter("bDate"), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+                                Utente _new = new Utente(_oldComplete.getId(), request.getParameter("userName"),
+                                                                    request.getParameter("userSurname"), _oldComplete.getEmail(),
+                                                                    newDate,
+                                                                    request.getParameter("profilePicURL"),
+                                                                    request.getParameter("presentazione"), _oldComplete.getUsername(),
+                                                                    request.getParameter("password"), _oldComplete.getTipoUtente().toString());
 
 
-                            ArrayList<String> campiModificati = updateUserInfo(request, _oldComplete, _new);
+                                ArrayList<String> campiModificati = updateUserInfo(request, _oldComplete, _new);
 
-                            if(campiModificati.isEmpty()) request.setAttribute("campiModificati", "none");
-                            else request.setAttribute("campiModificati", campiModificati);
+                                if(campiModificati.isEmpty()) request.setAttribute("campiModificati", "none");
+                                else request.setAttribute("campiModificati", campiModificati);
+                            }
+                            else request.setAttribute("passwordMissmatchError", true);
 
                             loadData(request);
                         }
-                        catch(Exception ex){ request.getParameter("password"); }
+                        catch(Exception ex){}
                     break;
                     
                     case "deleteAccount":

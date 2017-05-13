@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package it.amm2017.nerdbook;
 
 import java.io.IOException;
@@ -17,8 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- *
- * @author User1
+ * @author Mario Taccori
  */
 public class DeleteData extends HttpServlet {
 

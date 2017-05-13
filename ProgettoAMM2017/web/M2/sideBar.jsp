@@ -44,7 +44,7 @@
                             <jsp:include page="fotoProfilo.jsp" />
                             ${gruppoTmp.nome}
                         </a>
-                        <c:if test="${(isAdmin != null && isAdmin == true) || (isFounder != null && isFounder == true)}">
+                        <c:if test="${(isAdmin != null && isAdmin == true) || (gruppoTmp.fondatore != null && gruppoTmp.fondatore == sessionScope.user)}">
                             <a href="delete?action=deleteGroup&groupId=${gruppoTmp.id}<c:if test="${owner != null && ownerType != null}">&owner=${owner.id}&ownerType=${ownerType}</c:if>">X</a>
                         </c:if>
                     </li>

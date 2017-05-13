@@ -48,7 +48,7 @@ public class GruppoFactory
             set = stmt.executeQuery();
             
             if(set.next())
-                tmp = new Gruppo(set.getInt("id"), set.getString("nome"), set.getString("urlIcona"));
+                tmp = new Gruppo(set.getInt("id"), set.getString("nome"), set.getString("urlIcona"), this.getGroupFounderId(set.getInt("id")));
             
             stmt.close();
             conn.close();
@@ -75,7 +75,7 @@ public class GruppoFactory
             
             while(set.next())
             {
-                tmpGruppo = new Gruppo(set.getInt("id"), set.getString("nome"), set.getString("urlIcona"));
+                tmpGruppo = new Gruppo(set.getInt("id"), set.getString("nome"), set.getString("urlIcona"), this.getGroupFounderId(set.getInt("id")));
 
                 tmp.add(tmpGruppo);
             }

@@ -67,9 +67,10 @@
         </div>
     </c:when>
     
-    
-    
-    
-    
-    
+    <c:when test="${notificationType == 'passwordMissmatchError' && notificationValue == 'passwordMissmatch'}">
+        <div class="notificationDiv">
+            <p>Il campo password e conferma password non corrispondono, riprova.</p>
+        </div>
+    </c:when>
+ 
 </c:choose>

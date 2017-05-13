@@ -78,6 +78,12 @@
                                 <jsp:include page="notifications.jsp" />
                             </c:if>
                                 
+                            <c:if test="${passwordMissmatchError != null && passwordMissmatchError == true}">
+                                <c:set var="notificationType" value="passwordMissmatchError" scope="request" />
+                                <c:set var="notificationValue" value="passwordMissmatch" scope="request" />
+                                <jsp:include page="notifications.jsp" />
+                            </c:if>
+                                
                             <c:if test="${campiModificati != null}">
                                 <c:set var="notificationType" value="profileInfo" scope="request" />
                                 <c:set var="notificationValue" value="updatedProfileInfo" scope="request" />

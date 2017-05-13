@@ -12,18 +12,21 @@ public class Gruppo {
     private int id;
     private String nome;
     private String groupIconUrl;
+    private int fondatore;
     
     public Gruppo()
     {
         this.nome = "";
         this.id = -1;
         this.groupIconUrl = "";
+        this.fondatore = -1;
     }    
-    public Gruppo(int id, String nome, String iconUrl)
+    public Gruppo(int id, String nome, String iconUrl, int fondatore)
     {
         this.id = id;
         this.nome = nome;
         this.groupIconUrl = iconUrl;
+        this.fondatore = fondatore;
     }          
     public boolean equals(Object obj)
     {
@@ -47,4 +50,6 @@ public class Gruppo {
     public void setNome(String nome) { this.nome = nome; }
     public String getGroupIconUrl() { return groupIconUrl; }
     public void setGroupIconUrl(String groupIconUrl) { this.groupIconUrl = groupIconUrl; }   
+    public int getFondatore() { return fondatore; }
+    public void setFondatore(int fondatore) { this.fondatore = fondatore; }
 }
