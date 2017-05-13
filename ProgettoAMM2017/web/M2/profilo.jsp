@@ -17,8 +17,7 @@
         <jsp:include page="headerBar.jsp"/>                
         <jsp:include page="sideBar.jsp"/>
                   
-        <div id="divBody">
-            
+        <div id="divBody">          
             <c:choose>
                 <c:when test="${sessionScope.loggedIn==true}">
                     <div>

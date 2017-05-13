@@ -45,7 +45,9 @@
                             ${gruppoTmp.nome}
                         </a>
                         <c:if test="${(isAdmin != null && isAdmin == true) || (gruppoTmp.fondatore != null && gruppoTmp.fondatore == sessionScope.user)}">
-                            <a href="delete?action=deleteGroup&groupId=${gruppoTmp.id}<c:if test="${owner != null && ownerType != null}">&owner=${owner.id}&ownerType=${ownerType}</c:if>">X</a>
+                            <a class="deleteLink" href="delete?action=deleteGroup&groupId=${gruppoTmp.id}<c:if test="${owner != null && ownerType != null}">&owner=${owner.id}&ownerType=${ownerType}</c:if>">
+                                <img src="Assets/ICONS/delete_icona.svg" class="deleteIcon">
+                            </a>
                         </c:if>
                     </li>
                 </c:forEach>

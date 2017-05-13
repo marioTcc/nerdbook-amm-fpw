@@ -157,9 +157,9 @@ public class UtenteFactory
         try
         {
             Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
-            Statement stmt = conn.createStatement();
+            PreparedStatement stmt = conn.prepareStatement(query);
             
-            set = stmt.executeQuery(query);
+            set = stmt.executeQuery();
                        
             while(set.next())
             {
@@ -390,8 +390,6 @@ public class UtenteFactory
     {
         request.setAttribute("user", utente);
         request.setAttribute("groups", GruppoFactory.getInstance().getAllGroups());
-        
-        //TODO GESTIRE FOUNDER
         request.setAttribute("users", UtenteFactory.getInstance().getAllUsers(new ArrayList<>(Arrays.asList(utente.getId()))));
 
         if(UtenteFactory.getInstance().getTipoUtente(utente) == Utente.TipoUtente.ADMIN)
@@ -411,9 +409,4 @@ public class UtenteFactory
         //SERVE?
         return null;       
     }   
-    public ArrayList<UtenteSecure> getFriends(UtenteSecure utente)
-    {      
-        //SERVE?
-        return null; 
-    }
 }

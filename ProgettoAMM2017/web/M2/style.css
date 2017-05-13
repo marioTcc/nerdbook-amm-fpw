@@ -280,6 +280,8 @@ div#nuovoPostDiv #previewPostDiv .allegatoPost
     border-right: solid 2px #7d84b2;
     border-bottom: solid 2px #7d84b2; 
     padding-bottom: 20px;
+    
+    overflow: scroll;
 }
 
 #sidebar1 div:first-child
@@ -325,14 +327,6 @@ div#nuovoPostDiv #previewPostDiv .allegatoPost
 {
     height: 30px;
     box-sizing: border-box;
-}
-
-#sidebar1 ul li a
-{
-    font-size: 16px;
-    text-decoration: none;
-    color: black;
-    overflow-x: hidden;
 }
 
 #sidebar1 ul li a:hover
@@ -621,7 +615,6 @@ div#notificaNuovoPost
     word-wrap: break-word;
 }
 
-/* TODO SERVE? */
 #posts .postTimeStamp
 {
     float: right;
@@ -629,6 +622,28 @@ div#notificaNuovoPost
     font-style: italic;
     margin-right: 5px;
     margin-top: 10px;
+    display: block;
+    width: 150px;
+}
+
+img.deleteIcon
+{
+    width: 15px;
+    height: 15px;
+    margin-left: 5px;
+    vertical-align: -15%;
+}
+
+a.deleteLink
+{
+    display: inline-block;
+    float: right;
+}
+
+a.deleteLink:after
+{
+    content: "\A";
+    white-space: pre;
 }
 
 #posts > div
@@ -868,6 +883,14 @@ div#presentazione div p
         margin-right: 5%;
     }
     
+    #sidebar1 ul li a
+    {
+        font-size: 16px;
+        text-decoration: none;
+        color: black;
+    }
+
+    
 } /* FINE 1024min */
 
 @media only screen and (min-width: 481px) and (max-width: 1023px)
@@ -1040,6 +1063,15 @@ div#presentazione div p
     {
         margin-right: 5%;
     }
+    
+    #sidebar1 ul li a
+    {
+        font-size: 12px;
+        text-decoration: none;
+        color: black;
+       
+    }
+
     
     
 } /* FINE dim intermedie */

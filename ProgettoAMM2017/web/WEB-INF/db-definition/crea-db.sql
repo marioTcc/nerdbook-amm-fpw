@@ -145,15 +145,15 @@ VALUES ( default, 'Ritardatari', 'Assets/ICONS/ritardatari_icona.svg', 1 );
 
 /* ????????????? PER DEBUG TODO*/
 INSERT INTO gruppi ( id, nome, urlIcona, fondatore)
-VALUES ( default, 'fittizio1', 'Assets/ICONS/ritardatari_icona.svg', 3 );
+VALUES ( default, 'fittizio1', '', 3 );
 INSERT INTO gruppi ( id, nome, urlIcona, fondatore)
-VALUES ( default, 'fittizio2', 'Assets/ICONS/ritardatari_icona.svg', 3 );
+VALUES ( default, 'fittizio2', '', 2 );
 INSERT INTO gruppi ( id, nome, urlIcona, fondatore)
-VALUES ( default, 'fittizio3', 'Assets/ICONS/ritardatari_icona.svg', 3 );
+VALUES ( default, 'fittizio3', '', 3 );
 INSERT INTO gruppi ( id, nome, urlIcona, fondatore)
-VALUES ( default, 'fittizio4', 'Assets/ICONS/ritardatari_icona.svg', 3 );
+VALUES ( default, 'fittizio4', '', 3 );
 INSERT INTO gruppi ( id, nome, urlIcona, fondatore)
-VALUES ( default, 'fittizio5', 'Assets/ICONS/ritardatari_icona.svg', 3 );
+VALUES ( default, 'fittizio5', '', 3 );
 /* ------------------------------------------ */
 
 

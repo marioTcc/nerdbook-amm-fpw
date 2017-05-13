@@ -47,7 +47,7 @@ public class DeleteData extends HttpServlet {
                     response.sendRedirect("bacheca.html?owner="+request.getParameter("owner")+"&ownerType="+request.getParameter("ownerType"));
                     return;
 
-                case "deleteGroup": //TODO VA QUI?
+                case "deleteGroup":
                     if(UtenteFactory.getInstance().getTipoUtente(tmp) == Utente.TipoUtente.ADMIN
                       || GruppoFactory.getInstance().getGroupFounderId(Integer.parseInt(request.getParameter("groupId"))) == (int)session.getAttribute("user"))
                     {

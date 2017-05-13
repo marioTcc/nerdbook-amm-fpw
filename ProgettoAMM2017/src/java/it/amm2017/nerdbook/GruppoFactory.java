@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Types;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,9 +68,9 @@ public class GruppoFactory
         try
         {
             Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
-            Statement stmt = conn.createStatement();
+            PreparedStatement stmt = conn.prepareStatement(query);
             
-            set = stmt.executeQuery(query);
+            set = stmt.executeQuery();
             
             while(set.next())
             {
@@ -165,7 +164,7 @@ public class GruppoFactory
         
         return returnValue;        
     }
-    public boolean deleteGroupById(int groupId) throws SQLException //TODO DA CONTROLLARE
+    public boolean deleteGroupById(int groupId) throws SQLException
     {
         String query = "";
         Connection conn = null;
@@ -221,15 +220,5 @@ public class GruppoFactory
     public String getConnectionUsername() { return connectionUsername; }
     public void setConnectionUsername(String connectionUsername) { this.connectionUsername = connectionUsername; }
     public String getConnectionPassword() { return connectionPassword; }
-    public void setConnectionPassword(String connectionPassword) { this.connectionPassword = connectionPassword; }
-    
-    
-    // SERVONO?
-    public ArrayList<Gruppo> getSubscribedGroups(UtenteSecure utente)
-    {
-        // SERVE?
-        return null;
-    }
-
-     
+    public void setConnectionPassword(String connectionPassword) { this.connectionPassword = connectionPassword; }  
 }

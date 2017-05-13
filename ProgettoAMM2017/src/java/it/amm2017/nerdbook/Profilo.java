@@ -48,7 +48,7 @@ public class Profilo extends HttpServlet {
                 switch(request.getParameter("action"))
                 {
                     case "updateInfo":
-                        // TODO CONTROLLO PASS E CONFERMA PASS
+                       
                         try
                         {
                             if(request.getParameter("password").equals(request.getParameter("passwordConfirm")))

@@ -21,11 +21,12 @@
         <c:if test="${post.id != null && post.id != -1}">        
             <div class="postTimeStamp">
                  <c:if test="${isAdmin != null && isAdmin == true}">
-                    <!-- PER DEBUG, LASCIARLO? TODO IMMAGINE ELIMINA POST-->
-                    <a href="delete?action=deletePost&postId=${post.id}&owner=${owner.id}&ownerType=${ownerType}" class="deletePostButton">X</a>                
+                    <a class="deleteLink" href="delete?action=deletePost&postId=${post.id}&owner=${owner.id}&ownerType=${ownerType}" class="deletePostButton">
+                        <img src="Assets/ICONS/delete_icona.svg" class="deleteIcon">
+                    </a>                
                 </c:if>
                 <c:if test="${post.dataPost != null && post.oraPost != null}">
-                    ${post.dataPost}, ${post.oraPost}
+                    <div>${post.dataPost}, ${post.oraPost}</div>
                 </c:if>
             </div>
         </c:if>

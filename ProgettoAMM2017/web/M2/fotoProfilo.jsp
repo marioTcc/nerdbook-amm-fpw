@@ -72,7 +72,7 @@
                     </c:when>
 
                     <c:otherwise>
-                       "Assets/ICONS/noProfilePic_icona.svg"
+                       "Assets/ICONS/noGroupIcon_icona.svg"
                     </c:otherwise>
                </c:choose>
         />
