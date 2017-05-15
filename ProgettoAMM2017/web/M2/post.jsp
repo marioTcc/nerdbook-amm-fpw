@@ -21,7 +21,7 @@
         <c:if test="${post.id != null && post.id != -1}">        
             <div class="postTimeStamp">
                  <c:if test="${isAdmin != null && isAdmin == true}">
-                    <a class="deleteLink" href="delete?action=deletePost&postId=${post.id}&owner=${owner.id}&ownerType=${ownerType}" class="deletePostButton">
+                    <a title="Elimina il post" class="deleteLink" href="delete?action=deletePost&postId=${post.id}&owner=${owner.id}&ownerType=${ownerType}" class="deletePostButton">
                         <img src="Assets/ICONS/delete_icona.svg" class="deleteIcon">
                     </a>                
                 </c:if>

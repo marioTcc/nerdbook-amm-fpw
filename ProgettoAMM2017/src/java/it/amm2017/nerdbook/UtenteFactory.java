@@ -1,7 +1,6 @@
 
 package it.amm2017.nerdbook;
 
-import java.sql.Statement;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.Connection;
@@ -47,8 +46,8 @@ public class UtenteFactory
                 if(m.getName().endsWith("Nome") || m.getName().endsWith("Cognome") 
                         || m.getName().endsWith("FrasePresentazione") || m.getName().endsWith("UrlFotoProfilo") )
                 {
-                    tmp=(String)m.invoke(utente);
-                    if(tmp==null || tmp.equals(""))
+                    tmp = (String)m.invoke(utente);
+                    if(tmp == null || tmp.equals(""))
                         return false;
                 }
             }
@@ -57,9 +56,7 @@ public class UtenteFactory
     }         
     public UtenteSecure getUtenteById(int id) 
     {
-        UtenteSecure tmp = null;
         String query = "select * from utenti where id = ?"; //id
-        ResultSet set = null;
         
         try
         {
@@ -68,13 +65,17 @@ public class UtenteFactory
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, id);
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
              
             if(set.next())
             {
-                tmp = new UtenteSecure(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
+                UtenteSecure tmp = new UtenteSecure(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
                         set.getString("email"), set.getDate("dataNascita").toLocalDate(), set.getString("urlFotoProfilo"), set.getString("frasePresentazione")
                         );
+                
+                stmt.close();
+                conn.close();
+                return tmp;
             }
             
             stmt.close();
@@ -82,15 +83,12 @@ public class UtenteFactory
             
         }
         catch (SQLException ex) { Logger.getLogger(UtenteFactory.class.getName()).log(Level.SEVERE, null, ex); }
-            
-        
-        return tmp;
+                   
+        return null;
     }   
     public Utente getUtenteCompleteById(int id) 
     {
-        Utente tmp = null;
         String query = "SELECT utenti.*, tipiUtente.nomeTipoUtente FROM utenti JOIN tipiUtente ON utenti.tipoUtente = tipiUtente.ID WHERE utenti.id = ?"; //id
-        ResultSet set = null;
         
         try
         {
@@ -98,13 +96,17 @@ public class UtenteFactory
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, id);
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
              
             if(set.next())
             {
-                tmp = new Utente(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
+                Utente tmp = new Utente(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
                         set.getString("email"), set.getDate("dataNascita").toLocalDate(), set.getString("urlFotoProfilo"), set.getString("frasePresentazione"),
                         set.getString("username"), set.getString("password"), set.getString("nomeTipoUtente"));
+                
+                stmt.close();
+                conn.close();
+                return tmp;
             }
             
             stmt.close();
@@ -112,17 +114,14 @@ public class UtenteFactory
             
         }
         catch (SQLException ex) { Logger.getLogger(UtenteFactory.class.getName()).log(Level.SEVERE, null, ex); }
-            
-        
-        return tmp;
+                  
+        return null;
     }  
     public Utente getUtenteByUsername(String username) 
-    {
-        Utente tmp = null;      
+    {     
         String query = "SELECT * FROM utenti"+
                 " JOIN tipiUtente ON utenti.tipoUtente = tipiUtente.ID"+
                 " WHERE username = ?"; //username
-        ResultSet set = null;
         
         try
         {
@@ -130,13 +129,17 @@ public class UtenteFactory
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, username);
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
              
             if(set.next())
             {
-                tmp = new Utente(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
+                Utente tmp = new Utente(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
                         set.getString("email"), set.getDate("dataNascita").toLocalDate(), set.getString("urlFotoProfilo"), set.getString("frasePresentazione"),
                         set.getString("username"), set.getString("password"), set.getString("nomeTipoUtente"));
+                
+                stmt.close();
+                conn.close();
+                return tmp;
             }
             
             stmt.close();
@@ -145,25 +148,23 @@ public class UtenteFactory
         }
         catch (SQLException ex) { Logger.getLogger(UtenteFactory.class.getName()).log(Level.SEVERE, null, ex); }
             
-        return tmp;
+        return null;
     }  
     public ArrayList<UtenteSecure> getAllUsers(ArrayList<Integer> excludeListId)
     {      
         ArrayList<UtenteSecure> tmp = new ArrayList<>();
-        UtenteSecure tmpUtente = null;
         String query = "SELECT * FROM utenti";
-        ResultSet set = null;
 
         try
         {
             Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             PreparedStatement stmt = conn.prepareStatement(query);
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
                        
             while(set.next())
             {
-                tmpUtente = new UtenteSecure(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
+                UtenteSecure tmpUtente = new UtenteSecure(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
                         set.getString("email"), set.getDate("dataNascita").toLocalDate(), set.getString("urlFotoProfilo"), set.getString("frasePresentazione")
                         );
                 
@@ -186,7 +187,6 @@ public class UtenteFactory
                 " JOIN tipiUtente ON utenti.tipoUtente = tipiUtente.ID"+
                 " WHERE utenti.id = ?"; //utente.getId()
         
-        ResultSet set = null;
         Utente.TipoUtente tipo = Utente.TipoUtente.INVALID;
         
         try
@@ -196,7 +196,7 @@ public class UtenteFactory
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, utente.getId());
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
             
             if(set.next())
             {
@@ -231,7 +231,6 @@ public class UtenteFactory
                 " AND (idUtente2 = ?"+ //id1
                 " OR idUtente2 = ?)"; //id2
         
-        ResultSet set = null;
         int resultCount = 0;
         
         try
@@ -244,12 +243,10 @@ public class UtenteFactory
             stmt.setInt(3, id1);
             stmt.setInt(4, id2);
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
             
             while(set.next())
-            {
                 resultCount++;                
-            }
             
             stmt.close();
             conn.close();
@@ -257,7 +254,7 @@ public class UtenteFactory
         }
         catch (SQLException ex) { Logger.getLogger(UtenteFactory.class.getName()).log(Level.SEVERE, null, ex); }
         
-        if(resultCount>0)
+        if(resultCount > 0)
             return true;
         else return false;
         

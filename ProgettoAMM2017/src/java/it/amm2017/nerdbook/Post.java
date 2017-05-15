@@ -69,7 +69,19 @@ public class Post implements Comparable<Post>
                 this.tipoDestinazione = DestinationType.INVALID;
                 break;
         }
-    }         
+    }   
+    public Post(int id, UtenteSecure autorePost, String contenuto, PostType tipoPost, String attachedUrl, DestinationType tipoDestinazione, int idDestinazione, LocalDate dataPost, LocalTime oraPost)
+    {
+        this.id = id;
+        this.autorePost = autorePost;
+        this.contenuto = contenuto;
+        this.attachedUrl = attachedUrl;
+        this.idDestinazione = idDestinazione;
+        this.dataPost = dataPost;
+        this.oraPost = oraPost;
+        this.tipoPost = tipoPost;
+        this.tipoDestinazione = tipoDestinazione;
+    }  
     public boolean equals(Object obj)
     {
         if(obj==null)

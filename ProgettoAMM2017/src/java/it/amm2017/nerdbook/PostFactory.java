@@ -34,34 +34,18 @@ public class PostFactory {
         if (singleton == null) singleton = new PostFactory();       
         return singleton;
     }
-   
-    public Post getPostById(int id) //DA RIVEDERE, SERVE?
-    {
-        Post tmp = null;        
-        return tmp;
-    }        
+    
     public Post getFakePost(UtenteSecure autore, String contenuto, Post.PostType tipoPost, String attachedUrl, Post.DestinationType tipoDestinazione)
     {
-        Post tmp = new Post();
-        
-        tmp.setAutorePost(autore);
-        tmp.setContenuto(contenuto);
-        tmp.setTipoPost(tipoPost);
-        tmp.setAttachedUrl(attachedUrl);
-        tmp.setTipoDestinazione(tipoDestinazione);       
-        
-        return tmp;
+        return new Post(-1, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, -1, LocalDate.of(1999, 01, 01), LocalTime.of(00,00));
     }      
     public ArrayList<Post> getPostList(UtenteSecure utente)
     {
         Set<Post> tmp = new TreeSet<>();
-        Post tmpPost = null;
         String query = "SELECT * FROM posts"+
                 " JOIN tipiPost ON posts.tipoPost = tipiPost.ID"+
                 " JOIN tipiDestinazione ON posts.tipoDestinazione = tipiDestinazione.ID"+
                 " where idUtenteDest = ? ";//utente.getId()
-        ResultSet set = null;
-        UtenteSecure autore = null;
 
         try
         {
@@ -70,13 +54,13 @@ public class PostFactory {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, utente.getId());
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
                        
             while(set.next())
             {
-                autore = UtenteFactory.getInstance().getUtenteById(set.getInt("autore"));
+                UtenteSecure autore = UtenteFactory.getInstance().getUtenteById(set.getInt("autore"));
                 
-                tmpPost = new Post(set.getInt("id"), autore,
+                Post tmpPost = new Post(set.getInt("id"), autore,
                         set.getString("contenuto"), set.getString("nomeTipoPost"), set.getString("attachedUrl"), set.getString("nomeTipoDestinazione"),
                         utente.getId(), set.getDate("dataPost").toLocalDate(), set.getTime("oraPost").toLocalTime());
                 
@@ -97,8 +81,6 @@ public class PostFactory {
         
         
         String query2 = "SELECT * FROM iscrizioniGruppi WHERE idUtente = ?"; //utente.getId()
-        set = null;
-        autore = null;
 
         try
         {
@@ -107,7 +89,7 @@ public class PostFactory {
             PreparedStatement stmt = conn.prepareStatement(query2);
             stmt.setInt(1, utente.getId());
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
                        
             while(set.next())
             {
@@ -126,15 +108,11 @@ public class PostFactory {
     public ArrayList<Post> getPostList(Gruppo gruppo)
     {
         ArrayList<Post> tmp = new ArrayList<>();
-        Post tmpPost = null;
         String query = "SELECT * FROM posts"+
                 " JOIN tipiPost ON posts.tipoPost = tipiPost.ID"+
                 " JOIN tipiDestinazione ON posts.tipoDestinazione = tipiDestinazione.ID"+
                 " WHERE idGruppoDest = ?"+ //gruppo.getId()
                 " ORDER BY dataPost DESC, oraPost DESC";
-        
-        ResultSet set = null;
-        UtenteSecure autore = null;
         
         try
         {
@@ -143,13 +121,13 @@ public class PostFactory {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, gruppo.getId());
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
             
             while(set.next())
             {
-                autore = UtenteFactory.getInstance().getUtenteById(set.getInt("autore"));
+               UtenteSecure autore = UtenteFactory.getInstance().getUtenteById(set.getInt("autore"));
                 
-                tmpPost = new Post(set.getInt("id"), autore,
+                Post tmpPost = new Post(set.getInt("id"), autore,
                         set.getString("contenuto"), set.getString("nomeTipoPost"), set.getString("attachedUrl"), set.getString("nomeTipoDestinazione"),
                         -1, set.getDate("dataPost").toLocalDate(), set.getTime("oraPost").toLocalTime());
                 
@@ -220,7 +198,7 @@ public class PostFactory {
     public int getPostTypeId(Post.PostType type)
     {
         String query = "SELECT * FROM tipiPost WHERE nomeTipoPost = ?"; //type.toString()
-        ResultSet set = null;
+
         int id = -1;
         
         try
@@ -230,7 +208,7 @@ public class PostFactory {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, type.toString());
             
-            set = stmt.executeQuery();  
+            ResultSet set = stmt.executeQuery();  
             
             if(set.next())
                 id = set.getInt("id");
@@ -246,7 +224,7 @@ public class PostFactory {
     public int getDestinationTypeId(Post.DestinationType type)
     {
         String query = "SELECT * FROM tipiDestinazione WHERE nomeTipoDestinazione = ?"; //type.toString()
-        ResultSet set = null;
+
         int id = -1;
         
         try
@@ -256,7 +234,7 @@ public class PostFactory {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, type.toString());
             
-            set = stmt.executeQuery();  
+            ResultSet set = stmt.executeQuery();  
             
             if(set.next())
                 id = set.getInt("id");
@@ -301,4 +279,10 @@ public class PostFactory {
     public void setConnectionUsername(String connectionUsername) { this.connectionUsername = connectionUsername; }
     public String getConnectionPassword() { return connectionPassword; }
     public void setConnectionPassword(String connectionPassword) { this.connectionPassword = connectionPassword; }
+    
+    //SERVONO?
+    public Post getPostById(int id) //DA RIVEDERE, SERVE?
+    {        
+        return null;
+    }    
 }

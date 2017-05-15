@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,9 +32,7 @@ public class GruppoFactory
     public String getConnectionString() { return this.connectionString; }
     public Gruppo getGruppoById(int id)
     {
-        Gruppo tmp = null;
         String query = "select * from gruppi where id = ?"; //id
-        ResultSet set = null;
         
         try
         {
@@ -44,38 +41,39 @@ public class GruppoFactory
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, id);
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
             
             if(set.next())
-                tmp = new Gruppo(set.getInt("id"), set.getString("nome"), set.getString("urlIcona"), this.getGroupFounderId(set.getInt("id")));
+            {
+                Gruppo tmp = new Gruppo(set.getInt("id"), set.getString("nome"), set.getString("urlIcona"), this.getGroupFounderId(set.getInt("id")));                          
+                stmt.close();
+                conn.close();                
+                return tmp;
+            }
             
             stmt.close();
             conn.close();
-            
         }
         catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }
         
-        return tmp;
+        return null;
     }    
     public ArrayList<Gruppo> getAllGroups()
     {
         
         ArrayList<Gruppo> tmp = new ArrayList<>();
-        Gruppo tmpGruppo = null;
         String query = "SELECT * FROM gruppi";
-        ResultSet set = null;
                 
         try
         {
             Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
             PreparedStatement stmt = conn.prepareStatement(query);
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
             
             while(set.next())
             {
-                tmpGruppo = new Gruppo(set.getInt("id"), set.getString("nome"), set.getString("urlIcona"), this.getGroupFounderId(set.getInt("id")));
-
+                Gruppo tmpGruppo = new Gruppo(set.getInt("id"), set.getString("nome"), set.getString("urlIcona"), this.getGroupFounderId(set.getInt("id")));
                 tmp.add(tmpGruppo);
             }
             
@@ -93,7 +91,6 @@ public class GruppoFactory
                 " WHERE idUtente = ?"+ //idUtente
                 " AND idGruppo = ?"; //idGruppo
         
-        ResultSet set = null;
         int resultCount = 0;
         
         try
@@ -104,7 +101,7 @@ public class GruppoFactory
             stmt.setInt(1, idUtente);
             stmt.setInt(2, idGruppo);
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
             
             while(set.next()) { resultCount++; }
             
@@ -114,7 +111,7 @@ public class GruppoFactory
         }
         catch (SQLException ex) { Logger.getLogger(GruppoFactory.class.getName()).log(Level.SEVERE, null, ex); }
         
-        if(resultCount>0) return true;
+        if(resultCount > 0) return true;
         else return false;
         
     }
@@ -141,7 +138,6 @@ public class GruppoFactory
     public int getGroupFounderId(int groupId)
     {
         String query = "SELECT fondatore FROM gruppi WHERE id = ?"; //groupId
-        ResultSet set = null;
         int returnValue = -1;
         
         try
@@ -151,7 +147,7 @@ public class GruppoFactory
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, groupId);
             
-            set = stmt.executeQuery();
+            ResultSet set = stmt.executeQuery();
             
             if(set.next())
                 returnValue = set.getInt("fondatore");                

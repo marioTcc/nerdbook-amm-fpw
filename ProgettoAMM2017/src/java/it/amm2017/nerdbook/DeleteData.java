@@ -65,7 +65,10 @@ public class DeleteData extends HttpServlet {
                         switch(m.group(0))
                         {
                             case "/bacheca.html":
-                                response.sendRedirect("bacheca.html?action=view&ownerType="+request.getParameter("ownerType")+"&owner="+request.getParameter("owner"));
+                                if(request.getParameter("groupId").equals(request.getParameter("owner")))
+                                    response.sendRedirect("bacheca.html?action=view&ownerType=user&owner="+request.getSession(false).getAttribute("user"));
+                                else
+                                    response.sendRedirect("bacheca.html?action=view&ownerType="+request.getParameter("ownerType")+"&owner="+request.getParameter("owner"));
                                 return;
                                 
                             case "/profilo.html":
@@ -81,6 +84,7 @@ public class DeleteData extends HttpServlet {
                                 return;
                         }
                     }
+                    else response.sendRedirect("bacheca.html?action=view&ownerType=user&owner="+request.getSession(false).getAttribute("user"));
                     return; 
 
 

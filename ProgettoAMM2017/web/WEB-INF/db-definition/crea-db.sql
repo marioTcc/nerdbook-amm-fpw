@@ -159,10 +159,18 @@ VALUES ( default, 'fittizio5', '', 3 );
 
 INSERT INTO iscrizioniGruppi ( idUtente, idGruppo)
 VALUES ( 1, 1);
-
 INSERT INTO iscrizioniGruppi ( idUtente, idGruppo)
 VALUES ( 1, 2);
-
+INSERT INTO iscrizioniGruppi ( idUtente, idGruppo)
+VALUES ( 3, 3);
+INSERT INTO iscrizioniGruppi ( idUtente, idGruppo)
+VALUES ( 2, 4);
+INSERT INTO iscrizioniGruppi ( idUtente, idGruppo)
+VALUES ( 3, 5);
+INSERT INTO iscrizioniGruppi ( idUtente, idGruppo)
+VALUES ( 3, 6);
+INSERT INTO iscrizioniGruppi ( idUtente, idGruppo)
+VALUES ( 3, 7);
 
 
 INSERT INTO posts ( id, autore, contenuto, tipoPost, attachedUrl, tipoDestinazione, idUtenteDest, idGruppoDest, dataPost, oraPost)

@@ -39,9 +39,9 @@
                 |                   |                |                      |
                 +-------------------+                +----------------------+
 
-                ///// DA RIVEDERE //////
-                Utente è in relazione uno a molti con posts (come autore)
-                Posts è in relazione uno a uno con tipipost e tipidestinazione
-                Utente è in relazione uno a molti con iscrizioniGruppi
-                Utente è in relazione molti a molti con amici
-                Posts è in relazione molti a uno con gruppi
+                
+
+        Utenti è in relazione molti a molti con utenti (amici: un utente può essere amico di molti utenti, un utente può avere molti amici)
+        Utenti è in relazione uno a molti con posts (un utente può scrivere molti post, un post ha un solo autore)
+        Utenti è un relazione molti a molti con gruppi (un utente può essere iscritto a molti gruppi, a un gruppo possono essere iscritti molti utenti)
+        posts è in relazione uno a molti con gruppi (un post appartiene a un solo gruppo, un gruppo può contenere molti post)
