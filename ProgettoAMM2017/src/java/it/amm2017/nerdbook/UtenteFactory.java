@@ -1,4 +1,3 @@
-
 package it.amm2017.nerdbook;
 
 import java.lang.reflect.Method;
@@ -19,8 +18,7 @@ import java.util.*;
 /**
  * @author Mario Taccori
  */
-
-public class UtenteFactory
+public final class UtenteFactory
 {   
     private static UtenteFactory singleton;
     private String connectionString;
@@ -33,8 +31,7 @@ public class UtenteFactory
         if (singleton == null) singleton = new UtenteFactory();      
         return singleton;
     }   
-    public void setConnectionString(String s) { this.connectionString = s; }    
-    public String getConnectionString() { return this.connectionString; }      
+  
     public static boolean checkCompletion(UtenteSecure utente) throws IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
         String tmp="";
@@ -393,8 +390,7 @@ public class UtenteFactory
 
         if(UtenteFactory.getInstance().getTipoUtente(utente) == Utente.TipoUtente.ADMIN)
             request.setAttribute("isAdmin", true);   
-    }
-    
+    }   
     public List<UtenteSecureEssential> searchUsers(String value) //TODO funziona?
     {
         List<UtenteSecureEssential> listaUtentiTrovati = new ArrayList<>();
@@ -424,18 +420,11 @@ public class UtenteFactory
         
         return listaUtentiTrovati;
     }
-    
-    
+      
     public String getConnectionUsername() { return connectionUsername; }
     public void setConnectionUsername(String connectionUsername) { this.connectionUsername = connectionUsername; }
     public String getConnectionPassword() { return connectionPassword; }
-    public void setConnectionPassword(String connectionPassword) { this.connectionPassword = connectionPassword; }
-    
- 
-    // SERVONO ?
-    public ArrayList<UtenteSecure> cercaUtente(String nome, String cognome)
-    {
-        //SERVE?
-        return null;       
-    }   
+    public void setConnectionPassword(String connectionPassword) { this.connectionPassword = connectionPassword; }  
+    public void setConnectionString(String s) { this.connectionString = s; }    
+    public String getConnectionString() { return this.connectionString; }    
 }

@@ -1,4 +1,3 @@
-
 package it.amm2017.nerdbook;
 
 import java.time.LocalDate;
@@ -7,7 +6,6 @@ import java.time.LocalTime;
 /**
  * @author Mario Taccori
  */
-
 public class Post implements Comparable<Post>
 {
     public enum PostType { TESTO, IMMAGINE, LINK };
@@ -117,6 +115,7 @@ public class Post implements Comparable<Post>
     public LocalTime getOraPost() { return oraPost; }
     public void setOraPost(LocalTime oraPost) { this.oraPost = oraPost; }
     
+    @Override
     public int compareTo(Post b)
     {
         if(this.dataPost.compareTo(b.getDataPost())!=0) return -this.dataPost.compareTo(b.getDataPost());

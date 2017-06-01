@@ -1,4 +1,3 @@
-
 package it.amm2017.nerdbook;
 
 import java.util.ArrayList;
@@ -50,10 +49,12 @@ public class Bacheca extends HttpServlet {
                             this.loadView(request);
                             break;
                         case "newPost":
+                            this.loadView(request);
                             this.loadNewPost(request);
                             break;
                         case "confirmNewPost":
                             this.confirmNewPost(request);
+                            this.loadView(request);
                             break;
                         case "cancelNewPost":
                             this.loadView(request);
@@ -125,7 +126,6 @@ public class Bacheca extends HttpServlet {
     }    
     public void loadNewPost(HttpServletRequest request)
     {
-        this.loadView(request);
         request.setAttribute("confirmRequired", true);
         
         Post.DestinationType tmpDestType = Post.DestinationType.INVALID;
@@ -207,8 +207,6 @@ public class Bacheca extends HttpServlet {
             request.setAttribute("postState", "created");
         }
         else request.setAttribute("postState", "error");
-        
-        this.loadView(request);
     }
     
     

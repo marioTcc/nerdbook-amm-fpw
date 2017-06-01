@@ -1,14 +1,11 @@
-
 package it.amm2017.nerdbook;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 /**
  * @author Mario Taccori
  */
-
-public class Utente extends UtenteSecure
+public final class Utente extends UtenteSecure
 {
     public enum TipoUtente { INVALID, ADMIN, USER; };
         

@@ -1,4 +1,3 @@
-
 package it.amm2017.nerdbook;
 
 import java.sql.Connection;
@@ -13,10 +12,8 @@ import java.util.logging.Logger;
 /**
  * @author Mario Taccori
  */
-
-public class GruppoFactory
-{
-    
+public final class GruppoFactory
+{ 
     private static GruppoFactory singleton;
     private String connectionString;
     private String connectionUsername;
@@ -28,8 +25,7 @@ public class GruppoFactory
         if (singleton == null) singleton = new GruppoFactory();     
         return singleton;
     }   
-    public void setConnectionString(String s) { this.connectionString = s; } 
-    public String getConnectionString() { return this.connectionString; }
+
     public Gruppo getGruppoById(int id)
     {
         String query = "select * from gruppi where id = ?"; //id
@@ -217,4 +213,6 @@ public class GruppoFactory
     public void setConnectionUsername(String connectionUsername) { this.connectionUsername = connectionUsername; }
     public String getConnectionPassword() { return connectionPassword; }
     public void setConnectionPassword(String connectionPassword) { this.connectionPassword = connectionPassword; }  
+    public void setConnectionString(String s) { this.connectionString = s; } 
+    public String getConnectionString() { return this.connectionString; }
 }

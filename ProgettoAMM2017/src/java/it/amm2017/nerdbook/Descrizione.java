@@ -2,8 +2,6 @@
 package it.amm2017.nerdbook;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,6 +41,15 @@ public class Descrizione extends HttpServlet {
         request.getRequestDispatcher("M2/descrizione.jsp").forward(request, response);
     }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

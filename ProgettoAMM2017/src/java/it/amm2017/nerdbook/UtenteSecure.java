@@ -6,7 +6,6 @@ import java.time.LocalDate;
 /**
  * @author Mario Taccori
  */
-
 public class UtenteSecure
 {
     private int id;
@@ -49,15 +48,15 @@ public class UtenteSecure
     }  
     public boolean equals(Object obj)
     {
-        if(obj==null)
+        if(obj == null)
             return false;
-	if(obj==this)
+	if(obj == this)
             return true;
 
 	if(!(obj instanceof UtenteSecure))
             return false;
 
-	if(this.id==((UtenteSecure) obj).getId())
+	if(this.id == ((UtenteSecure)obj).getId())
             return true;
 
 	return false;
@@ -76,7 +75,6 @@ public class UtenteSecure
     public String getUrlFotoProfilo() { return urlFotoProfilo; }
     public void setUrlFotoProfilo(String urlFotoProfilo) { this.urlFotoProfilo = urlFotoProfilo; }
     public String getFrasePresentazione() { return frasePresentazione; }
-    public void setFrasePresentazione(String frasePresentazione) { this.frasePresentazione = frasePresentazione; } 
-    
+    public void setFrasePresentazione(String frasePresentazione) { this.frasePresentazione = frasePresentazione; }   
     public UtenteSecureEssential getEssentials(){ return new UtenteSecureEssential(this.nome, this.cognome, this.urlFotoProfilo, this.id); }   
 }

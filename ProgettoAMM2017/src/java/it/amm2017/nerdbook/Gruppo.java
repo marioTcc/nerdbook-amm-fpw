@@ -1,12 +1,8 @@
-
 package it.amm2017.nerdbook;
-
-import java.util.ArrayList;
 
 /**
  * @author Mario Taccori
  */
-
 public class Gruppo {
     
     private int id;
@@ -27,7 +23,9 @@ public class Gruppo {
         this.nome = nome;
         this.groupIconUrl = iconUrl;
         this.fondatore = fondatore;
-    }          
+    }         
+    
+    @Override
     public boolean equals(Object obj)
     {
         if(obj==null)

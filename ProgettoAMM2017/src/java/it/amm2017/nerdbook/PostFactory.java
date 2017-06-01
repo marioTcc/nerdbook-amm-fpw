@@ -1,4 +1,3 @@
-
 package it.amm2017.nerdbook;
 
 import java.sql.Connection;
@@ -21,7 +20,7 @@ import java.util.logging.Logger;
  * @author Mario Taccori
  */
 
-public class PostFactory {
+public final class PostFactory {
     
     private static PostFactory singleton;
     private String connectionString;
@@ -279,10 +278,4 @@ public class PostFactory {
     public void setConnectionUsername(String connectionUsername) { this.connectionUsername = connectionUsername; }
     public String getConnectionPassword() { return connectionPassword; }
     public void setConnectionPassword(String connectionPassword) { this.connectionPassword = connectionPassword; }
-    
-    //SERVONO?
-    public Post getPostById(int id) //DA RIVEDERE, SERVE?
-    {        
-        return null;
-    }    
 }
