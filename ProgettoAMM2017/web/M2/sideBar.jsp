@@ -10,7 +10,7 @@
 <div id="sidebar1">
     <c:if test="${sessionScope.loggedIn == true}">
         <div id="searchBar">
-            <input type="text" id="searchUsersText" value="">
+            <input type="text" id="searchUsersText" value="" onkeyup=updateList()>
             <input type="button" id="searchUsersButton" value="Cerca">
         </div>
 

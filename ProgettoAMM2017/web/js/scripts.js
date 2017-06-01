@@ -55,3 +55,23 @@ function createElement(user)
     
     return $("<li>").append(a);
 }
+
+function updateList()
+{
+
+    $.ajax({
+        url: "filter.json",
+        data:{
+            action:"search",
+            q: $("#searchUsersText")[0].value
+        },
+        dataType:"json",
+        success: function(data, state){
+            stateSuccess(data);
+        },
+        error: function(data, state){
+            stateFailure(data, state);
+        }
+    });
+
+}
