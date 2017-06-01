@@ -112,7 +112,7 @@ Inserite le meta-informazioni sulla pagina e validatela.
 
 
 ### Task 7 ###
-Eseguite il commit finale su GitHub per la consegna, utilizzando come messaggio “consegna M1”
+Eseguite il commit finale sul repository per la consegna, utilizzando come messaggio “consegna M1”
 
 
 -----------------------------------------------------------------------------------------------
@@ -195,7 +195,7 @@ Create un layout responsive, da utilizzare per tutte le pagine. In particolare c
 
 ### Task 7 ###
 
-Eseguite il commit finale su GitHub per la consegna, utilizzando come messaggio “consegna M2”
+Eseguite il commit finale sul repository per la consegna, utilizzando come messaggio “consegna M2”
 
 
 -----------------------------------------------------------------------------------------------
@@ -275,7 +275,7 @@ Suggerimenti: Fate attenzione all'utilizzo della sessione. Deve essere possibile
 
 ### Task 7 ###
 
-Eseguite il commit finale su Git Hub per la consegna, utilizzando come messaggio “consegna M3”
+Eseguite il commit finale sul repository per la consegna, utilizzando come messaggio “consegna M3”
 
 
 -------------------------------------------------------------------------------------------
@@ -380,7 +380,40 @@ Nel caso di cancellazione, deve essere mostrata semplicemente la pagina di login
  
 ### Task 7 ###
 
-Eseguite il commit finale su GitHub per la consegna, utilizzando come messaggio “consegna M4”
+Eseguite il commit finale sul repository per la consegna, utilizzando come messaggio “consegna M4”
 
 
--------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+
+## Milestone 5: Programmazione Client-Side ##
+ 
+Per questa milestone dovrete implementare una semplice funzionalità ajax per il vostro sito.
+
+
+### Task 1 ###
+
+Nella bacheca, dove è presente la lista degli amici, aggiungete un campo di testo ed un pulsante per effettuare una ricerca. Quanto l’utente scrive nel campo di testo, ad ogni pressione di un tasto, la pagina deve inviare una richiesta ajax all'indirizzo filter.json, passando un parametro con chiave q e come valore la stringa inserita dall'utente.
+
+Inserite il codice javascript in un file separato, da mettere all’interno della cartella web/js del progetto. Inserite in questa cartella anche la libreria jQuery nel caso vi serva. 
+
+
+### Task 2 ###
+
+Creare una servlet di nome Filter e mapparla sulla URL filter.json. Quando riceve una richiesta da parte di un utente autenticato, deve produrre un elenco di utenti presenti nel sistema che abbiano la stringa passata tramite il parametro q all’interno o del campo nome o del campo cognome. In particolare deve restituire questo elenco in formato json, tramite un array di oggetti aventi come proprietà gli stessi campi che vengono visualizzati nell'elenco contenuto nella barra sinistra (nome cognome e, se necessario, il link alla pagina del profilo).
+ 
+N.B. Fate attenzione al pattern MVC.
+
+
+### Task 3 ###
+
+Scrivete il codice che, a partire dal json ricevuto da filter.json, popoli dinamicamente la lista degli amici visualizzata a lato della bacheca, senza ricaricare la pagina. In particolare:
+
+* I collegamenti alla bacheca degli utenti visualizzati deve funzionare
+* Nel caso il filtro non restituisca nessun utente, mostrate un messaggio appropriato. 
+
+
+### Task 4 ###
+Eseguite il commit finale sul repository per la consegna, utilizzando come messaggio “consegna M5”.
+
+------------------------------------------------------------------------------------------
