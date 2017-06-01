@@ -280,8 +280,6 @@ div#nuovoPostDiv #previewPostDiv .allegatoPost
     border-right: solid 2px #7d84b2;
     border-bottom: solid 2px #7d84b2; 
     padding-bottom: 20px;
-    
-    overflow: scroll;
 }
 
 #sidebar1 div:first-child
@@ -354,6 +352,18 @@ div#nuovoPostDiv #previewPostDiv .allegatoPost
     padding: 0px;
     margin-left: auto;
     margin-right: auto;
+}
+
+#sidebar1 div#elencoPersone
+{
+    height: 300px;
+    overflow: scroll;
+}
+
+#sidebar1 div#elencoGruppi
+{
+    height: 300px;
+    overflow: scroll;
 }
 
 #sidebar1 #elencoGruppi h4::after

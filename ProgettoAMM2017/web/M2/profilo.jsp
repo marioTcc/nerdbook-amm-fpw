@@ -10,6 +10,9 @@
         <meta name="author" content="Mario Taccori">
         <meta name="keywords" content="NerdBook profilo social network">
         <link rel="stylesheet" type="text/css" href="M2/style.css" media="screen">
+        
+        <script src="js/jquery-3.2.1.min.js"></script>
+        <script src="js/scripts.js"></script>
     </head>
     <body>
         

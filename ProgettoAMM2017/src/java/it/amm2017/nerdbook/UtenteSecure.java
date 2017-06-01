@@ -77,4 +77,6 @@ public class UtenteSecure
     public void setUrlFotoProfilo(String urlFotoProfilo) { this.urlFotoProfilo = urlFotoProfilo; }
     public String getFrasePresentazione() { return frasePresentazione; }
     public void setFrasePresentazione(String frasePresentazione) { this.frasePresentazione = frasePresentazione; } 
+    
+    public UtenteSecureEssential getEssentials(){ return new UtenteSecureEssential(this.nome, this.cognome, this.urlFotoProfilo, this.id); }   
 }

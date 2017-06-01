@@ -58,6 +58,7 @@ public class Login extends HttpServlet {
                         {
                             request.setAttribute("loginError", "none");
                             session.setAttribute("loggedIn", true);
+                            request.getSession(false).setAttribute("user", tmp.getId());
                             
                             try { chooseDestination(new UtenteSecure(tmp), request, response); }
                             catch(Exception ex){}
@@ -95,8 +96,6 @@ public class Login extends HttpServlet {
     }   
     public void chooseDestination(UtenteSecure tmp, HttpServletRequest request, HttpServletResponse response) throws ServletException, IllegalAccessException, IOException, InvocationTargetException
     {
-        request.getSession(false).setAttribute("user", tmp.getId());
-
         if(UtenteFactory.checkCompletion(tmp))   
             response.sendRedirect("bacheca.html?ownerType=user");
         else

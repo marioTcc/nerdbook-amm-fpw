@@ -14,6 +14,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
+import java.util.*;
+
 /**
  * @author Mario Taccori
  */
@@ -391,6 +393,36 @@ public class UtenteFactory
 
         if(UtenteFactory.getInstance().getTipoUtente(utente) == Utente.TipoUtente.ADMIN)
             request.setAttribute("isAdmin", true);   
+    }
+    
+    public List<UtenteSecureEssential> searchUsers(String value) //TODO funziona?
+    {
+        List<UtenteSecureEssential> listaUtentiTrovati = new ArrayList<>();
+        
+        String query = "SELECT * FROM utenti WHERE nome LIKE ? OR cognome LIKE ?";
+
+
+        try(Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
+            PreparedStatement stmt = conn.prepareStatement(query)
+            )
+        {
+            stmt.setString(1, "%"+value+"%");
+            stmt.setString(2, "%"+value+"%");
+       
+            ResultSet set = stmt.executeQuery();
+                       
+            while(set.next())
+            {
+                 UtenteSecure tmp = new UtenteSecure(set.getInt("id"), set.getString("nome"), set.getString("cognome"),
+                        set.getString("email"), set.getDate("dataNascita").toLocalDate(), set.getString("urlFotoProfilo"), set.getString("frasePresentazione")
+                        );
+                               
+                listaUtentiTrovati.add(tmp.getEssentials());
+            }            
+        }
+        catch (SQLException ex) { Logger.getLogger(UtenteFactory.class.getName()).log(Level.SEVERE, null, ex); }
+        
+        return listaUtentiTrovati;
     }
     
     
