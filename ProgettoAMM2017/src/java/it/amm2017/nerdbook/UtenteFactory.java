@@ -391,11 +391,11 @@ public final class UtenteFactory
         if(UtenteFactory.getInstance().getTipoUtente(utente) == Utente.TipoUtente.ADMIN)
             request.setAttribute("isAdmin", true);   
     }   
-    public List<UtenteSecureEssential> searchUsers(String value) //TODO funziona?
+    public List<UtenteSecureEssential> searchUsers(String value)
     {
         List<UtenteSecureEssential> listaUtentiTrovati = new ArrayList<>();
         
-        String query = "SELECT * FROM utenti WHERE nome LIKE ? OR cognome LIKE ?";
+        String query = "SELECT * FROM utenti WHERE nome || ' ' || cognome LIKE ?";
 
 
         try(Connection conn = DriverManager.getConnection(this.getConnectionString(), this.getConnectionUsername(), this.getConnectionPassword());
@@ -403,7 +403,6 @@ public final class UtenteFactory
             )
         {
             stmt.setString(1, "%"+value+"%");
-            stmt.setString(2, "%"+value+"%");
        
             ResultSet set = stmt.executeQuery();
                        
