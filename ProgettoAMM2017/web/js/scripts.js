@@ -1,8 +1,8 @@
 
 $(document).ready(function()
 {
-    $("#searchUsersButton").click(function() { updateList() });
-    $("#searchUsersText").keyup(function() { updateList() });
+    $("#searchUsersButton").click(function() { updateList(); });
+    $("#searchUsersText").keyup(function() { updateList(); });
 });
     
     
