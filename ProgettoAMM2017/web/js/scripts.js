@@ -1,14 +1,26 @@
 
 $(document).ready(function()
 {
-    $("#searchUsersButton").click(function() { updateList(); });
-    $("#searchUsersText").keyup(function() { updateList(); });
+    $("#searchUsersButton").click(function(e) { 
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                            updateList();
+                                            return false;
+                                            });
+    $("#searchUsersText").keyup(function(e) { 
+                                            e.stopPropagation();
+                                            e.preventDefault();
+                                            updateList();
+                                            return false;
+                                            });
+                                            
+
 });
     
     
 function stateSuccess(data)
 {    
-    console.log("success");
+    //console.log("success");
     $("#elencoPersone ul").empty();
     for(var instance in data){
         $("#elencoPersone ul").append(createElement(data[instance]));
@@ -17,7 +29,7 @@ function stateSuccess(data)
     
 function stateFailure()
 {
-    console.log("failure");
+    //console.log("failure");
     $("#elencoPersone ul").empty();    
     $("#elencoPersone ul").append($("<li>").append("Nessun utente trovato"));    
 }
@@ -28,7 +40,7 @@ function createElement(user)
             .attr("alt","foto profilo amico")
             .attr("class", "friendPic");
     
-    if(user.urlFotoProfilo == null || user.urlFotoProfilo === "")
+    if(user.urlFotoProfilo === null || user.urlFotoProfilo === "")
         img.attr("src", "Assets/ICONS/noProfilePic_icona.svg");     
     else img.attr("src", user.urlFotoProfilo);
     
@@ -42,7 +54,6 @@ function createElement(user)
 
 function updateList()
 {
-
     $.ajax({
         url: "filter.json",
         data:{
