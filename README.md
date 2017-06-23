@@ -1,5 +1,6 @@
 # Progetto creato per il corso di Amministrazione di sistema (fondamenti di programmazione web) dell'Università di Cagliari, a.a.2016/2017. #
 
+## Valutazione: 14/14 ##
 
 -----------------------------------------------------------------------------------------------
 
